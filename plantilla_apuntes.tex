@@ -1,6 +1,13 @@
 %!TEX program = xelatex
+% @fuente repo
 % =====================================================================
 %  PLANTILLA ESTÁNDAR DE APUNTES
+%  ---------------------------------------------------------------
+%  LIBRERÍA Y FUENTES: se leen del repo de GitHub (línea de arriba
+%  "% @fuente repo"). Cámbialo en la cabecera cuando quieras:
+%     % @fuente repo             -> del clon del repo de GitHub
+%     % @fuente local /ruta      -> de una carpeta local
+%     (sin la línea)             -> busca ./bibliotecas_latex; si no, el repo
 %  ---------------------------------------------------------------
 %  CÓMO USARLA:
 %   1) Guarda este archivo DONDE QUIERAS dentro de APUNTES
@@ -11,13 +18,7 @@
 %   3) Elige PALETA al inicio de cada sección:
 %        \paletaBosque  \paletaCoral  \paletaLavanda  \paletaOceano
 %   4) Elige TÍTULO: \tituloA ... \tituloQ (ver estilo.tex)
-%   5) FUENTES DE LA LIBRERÍA (opcional; pon solo lo que necesites):
-%        (nada)                   -> usa ./bibliotecas_latex si existe; si no, el repo
-%        % @fuente repo           -> lee estilo.tex y las fuentes del clon del repo
-%        % @fuente local /ruta    -> lee de una carpeta local (con estilo.tex y fonts/)
-%      NOTA: no se descarga nada al compilar; se leen los archivos ya presentes.
-%      Para actualizar el clon del repo: compilar.sh --actualizar archivo.tex
-%   6) SALIDA (opcional, pon solo lo que necesites en la cabecera):
+%   5) SALIDA (opcional, pon solo lo que necesites en la cabecera):
 %        % @salida /ruta/carpeta   -> copia el PDF a esa carpeta
 %        % @copiar-tex             -> copia también este .tex ahí
 %      O en VS Code: Ctrl+Shift+P -> "Tasks: Run Task" ->
