@@ -139,8 +139,10 @@ fi
 # =====================================================================
 #  3) COMPILAR
 # =====================================================================
-BUILD="$SRCDIR/build"
-mkdir -p "$BUILD"
+# Carpeta TEMPORAL fuera del proyecto: así NO aparece nada (ni .log, ni .aux,
+# ni build/) en tu carpeta. Se borra SIEMPRE al salir (trap), pase lo que pase.
+BUILD="$(mktemp -d "${TMPDIR:-/tmp}/apuntes-latex.XXXXXX")"
+trap 'rm -rf "$BUILD"' EXIT
 
 # Archivo que le dice a estilo.tex dónde está la librería
 printf '\\def\\bibliotecasDir{%s}\n' "$LIB" > "$BUILD/_fuente.tex"
@@ -149,6 +151,8 @@ printf '\\def\\bibliotecasDir{%s}\n' "$LIB" > "$BUILD/_fuente.tex"
 # La carpeta elegida va ANTES que "." para que la librería escogida gane
 # aunque exista una copia local suelta.
 export TEXINPUTS="$BUILD:$PARENT//:.:"
+export BIBINPUTS="$SRCDIR//:.:"
+export BSTINPUTS="$SRCDIR//:.:"
 
 cd "$SRCDIR" || exit 2
 echo "[apuntes] Compilando $BASE.tex con XeLaTeX (librería: $LIB)…"
@@ -157,12 +161,13 @@ latexmk -xelatex -synctex=1 -interaction=nonstopmode -file-line-error \
 STATUS=$?
 
 if [ $STATUS -ne 0 ]; then
-  echo "[apuntes] ❌ Error al compilar. Revisa: $BUILD/$BASE.log"
+  echo "[apuntes] ❌ Error al compilar:"
+  grep -nE '^!|:[0-9]+:|Emergency|Fatal error|LaTeX Error' "$BUILD/$BASE.log" 2>/dev/null | head -40
   exit $STATUS
 fi
 
 # =====================================================================
-#  4) COLOCAR EL PDF Y LIMPIAR
+#  4) COLOCAR EL PDF (los auxiliares se borran solos con el trap)
 # =====================================================================
 cp -f "$BUILD/$BASE.pdf" "$SRCDIR/$BASE.pdf"
 
@@ -176,5 +181,4 @@ if [ "$OUTDIR" != "$SRCDIR" ]; then
   fi
 fi
 
-rm -rf "$BUILD"
 echo "[apuntes] ✅ Listo: $SRCDIR/$BASE.pdf"
