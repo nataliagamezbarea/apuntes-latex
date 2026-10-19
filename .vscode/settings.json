@@ -6,10 +6,7 @@
     {
       "name": "compilar-apuntes",
       "command": "/home/natalia/Escritorio/APUNTES/compilar.sh",
-      "args": ["%DOC%"],
-      "env": {
-        "TEXINPUTS": ".:/home/natalia/Escritorio/APUNTES//:"
-      }
+      "args": ["%DOC%"]
     }
   ],
 
