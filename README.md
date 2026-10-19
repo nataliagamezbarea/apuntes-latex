@@ -30,24 +30,46 @@ Repo de GitHub: **https://github.com/nataliagamezbarea/apuntes-latex**
 
 ## ✍️ Modo fácil (escribes menos)
 
-No hace falta escribir `\begin{...}...\end{...}`. Los items se separan con **`|`**:
+No hace falta escribir `\begin{...}...\end{...}`. Los items se separan con **`|`**
+y la **negrita** se pone con **`**texto**`**:
 
 | Quieres... | Escribes |
 |---|---|
-| Título | `\titulo{TEMA 02}{Teoria de la Gestalt}` |
+| **Apartado** (separa y colorea todo lo de debajo) | `\titulo{TEMA 02}{Teoria de la Gestalt}` |
+| ...del mismo apartado pero en otro color | `\titulo[rojoA]{APARTADO 3}{Canvi}` |
 | Subtítulo de sección | `\seccion{Percebre no és rebre}` |
 | Párrafo con fondo | `\parrafo{Segons la psicologia...}` |
 | Lista con viñetas | `\lista{Buscar|Seleccionar|Relacionar}` |
+| Lista con negrita | `\lista{**Buscar**|Seleccionar|**Recordar**}` |
 | Lista de tareas | `\tareas{Leer el artículo|Resumir las técnicas}` |
 | Pasos numerados | `\pasos{Primero mirar|Luego escribir}` |
 | Ideas / estrellas | `\estrellas{Idea muy importante}` |
 | Avisos | `\alertas{Cuidado con esto}` |
 | Preguntas de repaso | `\preguntas{¿Qué es la Gestalt?}` |
 | Secuencia con flechas | `\flechas{Estímulo|Percepción|Interpretación}` |
-| Caja de información | `\caja{Texto de la caja.}` |
+| Caja de información | `\caja{**Idea clave:** texto.}` |
 | Nota lateral | `\nota{Para el examen}{Diferencia bien...}` |
 | Caja resumen | `\resumen{Resumen del tema...}` |
+| Definición (título + texto) | `\definicion{Gestalt}{Corrient psicològica...}` |
+| Dos definiciones juntas | `\definicionpar{A}{texto}{B}{texto}` |
+| Dato grande | `\dato{70\%}{Del examen}` |
 | Resaltar dentro del texto | `\hl{esto queda resaltado}` |
+
+### 🎨 Color por apartado
+
+`\titulo` (el apartado) **colorea todo lo que venga debajo**: secciones, cajas,
+notas, definiciones... hasta que pongas otro `\titulo` con otro color.
+
+```latex
+\titulo{TEMA 02}{Percebre}          % todo lo de aquí abajo: paleta actual
+\caja{Caja del color del tema}       % (secondary de la paleta)
+
+\titulo[rojoA]{APARTADO 3}{Canvi}   % cambio de color
+\caja{Ahora roja}                    % automática
+\nota{Examen}{Esto cae seguro}       % también roja
+
+\colorapartado{mentA}                % cambio a mitad de página
+```
 
 Los comandos "largos" (`\tituloE`, `\sectionheader`, `\infobox`, `\tipbox`,
 `\shadowbox`, `\begin{bulletlist}`...) siguen funcionando igual.

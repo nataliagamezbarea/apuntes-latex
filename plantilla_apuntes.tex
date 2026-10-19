@@ -28,31 +28,31 @@
 \begin{document}
 
 % ===================== PORTADA / TEMA 1 =====================
-\paletaOceano          % <- cambia aquí la paleta: Bosque / Coral / Lavanda / Oceano
+% \titulo[color]{ETIQUETA}{Título} = APARTADO. Cambia el color de todo lo que
+% venga debajo (secciones, cajas, notas...). Ponle color o déjalo sin color.
 \titulo{TEMA 01}{Introducción al neuromarketing}
 
-\usarfondo             % <- fondo sutil de cuaderno (franja + puntos)
+\usarfondo             % <- fondo sutil de cuaderno (puntos)
 
 \seccion{¿Qué es?}
 
 \parrafo{El \hl{neuromarketing} combina neurociencia y marketing para
 entender \emph{por qué} el cliente compra, no solo \emph{qué} compra.}
 
-\caja{\textbf{Idea clave:} las decisiones de compra son mayoritariamente
+% **texto** = negrita automática (sin escribir \textbf)
+\caja{**Idea clave:** las decisiones de compra son mayoritariamente
 \emph{inconscientes} y emocionales antes de ser racionales.}
 
 % ---- Dos tarjetas lado a lado ----
-\typecardpair
-  {Definición}
-  {Uso de técnicas de medición cerebral y conductual para estudiar al consumidor.}
-  {Objetivo}
-  {Predecir el comportamiento de compra y diseñar mejores experiencias.}
+\definicionpar{Definición}{Uso de técnicas de medición cerebral y conductual
+  para estudiar al consumidor.}
+  {Objetivo}{Predecir el comportamiento de compra y diseñar mejores experiencias.}
 
 \vspace{3mm}
 
-% ---- Listas: solo separa los items con | ----
-\lista{\textbf{Rama funcional:} estudia la activación cerebral ante estímulos.
-      |\textbf{Rama conductual:} observa lo que la gente hace.}
+% ---- Listas: solo separa los items con | y pone ** para negrita ----
+\lista{**Rama funcional:** estudia la activación cerebral ante estímulos.
+      |**Rama conductual:** observa lo que la gente hace.}
 
 \tareas{Leer el artículo base del curso.|Resumir las técnicas de medición.}
 
@@ -84,7 +84,7 @@ y \emph{conductual}; caen preguntas tipo test.}
 \end{tablaminimal}
 
 % ---- Caja resumen con sombra ----
-\resumen{\textbf{Resumen del tema:} el neuromarketing estudia los mecanismos
+\resumen{**Resumen del tema:** el neuromarketing estudia los mecanismos
 inconscientes de la decisión de compra.}
 
 % ---- Píldora + pie de página ----
