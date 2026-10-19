@@ -21,17 +21,16 @@
 \documentclass[10.5pt,a4paper]{extarticle}
 
 % ---------------------------------------------------------------------
-%  ¿DE DÓNDE SE LEE LA LIBRERÍA? Elige UNA de las dos opciones:
+%  ¿DE DÓNDE SE LEE LA LIBRERÍA? (estilo.tex + fonts/)
+%  Basta con poner AQUÍ la carpeta que contiene estilo.tex y fonts/;
+%  LaTeX ya sabe buscar todo dentro de ella (\bibliotecasDir/estilo y
+%  \bibliotecasDir/fonts/). No clona ni descarga nada al compilar.
 %
-%  OPCIÓN 1 · DESDE GITHUB (por defecto)
-%    Clona el repo UNA vez (no se descarga nada al compilar):
-%      git clone https://github.com/nataliagamezbarea/apuntes-latex.git ~/.cache/apuntes-latex/repo
-%    Y deja activa esta línea:
-\newcommand{\bibliotecasDir}{/home/natalia/.cache/apuntes-latex/repo/bibliotecas_latex}
+%  Es la carpeta del repo en tu equipo (la que subes a GitHub):
+\newcommand{\bibliotecasDir}{/home/natalia/Escritorio/APUNTES/bibliotecas_latex}
 %
-%  OPCIÓN 2 · DESDE UNA CARPETA LOCAL
-%    Comenta la línea de arriba y descomenta esta (la carpeta debe tener
-%    estilo.tex y fonts/):
+%  Si algún día quieres usar OTRA carpeta, comenta la línea de arriba y
+%  descomenta esta (debe contener estilo.tex y fonts/):
 % \newcommand{\bibliotecasDir}{/ruta/a/mi/bibliotecas_latex}
 % ---------------------------------------------------------------------
 

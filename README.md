@@ -29,28 +29,21 @@ con estilos bonitos, paletas de color y bloques listos para usar.
 ## 📚 De dónde salen la librería y las fuentes
 
 El propio `.tex` decide de qué carpeta lee `estilo.tex` y `fonts/` con la línea
-`\bibliotecasDir`, justo antes del `\input`:
+`\bibliotecasDir`, justo antes del `\input`. Basta con esa ruta: LaTeX ya busca
+todo dentro de ella.
 
 ```latex
-% Repo de GitHub (por defecto):
-\newcommand{\bibliotecasDir}{/home/natalia/.cache/apuntes-latex/repo/bibliotecas_latex}
+% La carpeta del repo (la que subes a GitHub):
+\newcommand{\bibliotecasDir}{/home/natalia/Escritorio/APUNTES/bibliotecas_latex}
 \input{\bibliotecasDir/estilo}
 
-% O una carpeta local (debe tener estilo.tex y fonts/):
+% U otra carpeta cualquiera (debe contener estilo.tex y fonts/):
 \newcommand{\bibliotecasDir}{/ruta/a/tu/carpeta}
 \input{\bibliotecasDir/estilo}
 ```
 
-> No se descarga nada al compilar: se leen los archivos que ya tengas.
-> Para clonar por primera vez (o actualizar) el repo:
-
-```bash
-# primera vez:
-git clone https://github.com/nataliagamezbarea/apuntes-latex.git ~/.cache/apuntes-latex/repo
-
-# actualizar:
-git -C ~/.cache/apuntes-latex/repo pull --ff-only
-```
+> No se clona ni se descarga nada al compilar: se leen los archivos que ya
+> tienes en el disco.
 
 ## 📝 Licencia de las fuentes
 
