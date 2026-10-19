@@ -1,34 +1,30 @@
 %!TEX program = xelatex
-% @fuente repo
 % =====================================================================
 %  PLANTILLA ESTÁNDAR DE APUNTES
 %  ---------------------------------------------------------------
-%  LIBRERÍA Y FUENTES: se leen del repo de GitHub (línea de arriba
-%  "% @fuente repo"). Cámbialo en la cabecera cuando quieras:
-%     % @fuente repo             -> del clon del repo de GitHub
-%     % @fuente local /ruta      -> de una carpeta local
-%     (sin la línea)             -> busca ./bibliotecas_latex; si no, el repo
+%  LIBRERÍA Y FUENTES: se leen de la carpeta que pongas en
+%  \bibliotecasDir (más abajo). Solo cambia ESA línea:
+%     - Repo de GitHub (por defecto):
+%         /home/natalia/.cache/apuntes-latex/repo/bibliotecas_latex
+%     - Ruta local:  la carpeta que quieras (debe tener estilo.tex y fonts/)
 %  ---------------------------------------------------------------
 %  CÓMO USARLA:
-%   1) Guarda este archivo DONDE QUIERAS dentro de APUNTES
-%      (por ejemplo APUNTES/temas/tema01.tex). El PDF saldrá siempre
-%      JUNTO al .tex (tema01.pdf) y los auxiliares se borran solos.
-%   2) En VS Code: Ctrl+Alt+B para compilar (o guarda el archivo y
-%      compila solo). El PDF se abre con doble clic en la pestaña.
+%   1) Guarda este archivo DONDE QUIERAS. El PDF sale JUNTO al .tex
+%      (tema01.pdf).
+%   2) En VS Code: Ctrl+Alt+B para compilar (o guarda y compila solo).
+%      El PDF se abre con doble clic en la pestaña.
 %   3) Elige PALETA al inicio de cada sección:
 %        \paletaBosque  \paletaCoral  \paletaLavanda  \paletaOceano
 %   4) Elige TÍTULO: \tituloA ... \tituloQ (ver estilo.tex)
-%   5) SALIDA (opcional, pon solo lo que necesites en la cabecera):
-%        % @salida /ruta/carpeta   -> copia el PDF a esa carpeta
-%        % @copiar-tex             -> copia también este .tex ahí
-%      O en VS Code: Ctrl+Shift+P -> "Tasks: Run Task" ->
-%        "Apuntes: compilar y elegir carpeta…"  (abre un selector)
 % =====================================================================
 \documentclass[10.5pt,a4paper]{extarticle}
 
+% >>> Carpeta que contiene estilo.tex y fonts/ (cámbiala si quieres) <<<
+\newcommand{\bibliotecasDir}{/home/natalia/.cache/apuntes-latex/repo/bibliotecas_latex}
+
 % La librería de estilos (va ANTES de \begin{document})
 % OJO: es un .tex, no un .sty, así que se usa \input (no \usepackage)
-\input{bibliotecas_latex/estilo}
+\input{\bibliotecasDir/estilo}
 
 % Español con acentos y ñ (XeLaTeX lo maneja directamente, babel por si acaso)
 \usepackage[spanish]{babel}

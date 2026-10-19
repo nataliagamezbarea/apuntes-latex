@@ -31,11 +31,10 @@
 
 % ---------------------------------------------------------------------
 %  ¿DE DÓNDE SALEN LA LIBRERÍA Y LAS FUENTES?
-%  El script compilar.sh genera _fuente.tex definiendo \bibliotecasDir
-%  (puede ser el repo de GitHub o una ruta local). Si no existe, se usa
-%  ./bibliotecas_latex.
+%  El propio .tex define \bibliotecasDir ANTES de cargar este archivo
+%  (puede ser el repo de GitHub o una ruta local). Si no lo define, se
+%  usa ./bibliotecas_latex (la carpeta que está al lado de este estilo).
 % ---------------------------------------------------------------------
-\IfFileExists{_fuente.tex}{\input{_fuente}}{}
 \providecommand{\bibliotecasDir}{./bibliotecas_latex}
 
 \usepackage{fontspec}
