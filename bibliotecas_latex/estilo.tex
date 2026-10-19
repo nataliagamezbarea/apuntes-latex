@@ -151,6 +151,9 @@
 \definecolor{cafeA}{HTML}{8A5A3C}\definecolor{cafeB}{HTML}{B98A66}\definecolor{cafeC}{HTML}{E4CDBA}\definecolor{cafeP}{HTML}{F7EDE4}\definecolor{cafeX}{HTML}{5A3520}\definecolor{cafeT}{HTML}{2A211B}
 \definecolor{arenaA}{HTML}{B79A6B}\definecolor{arenaB}{HTML}{D4BE97}\definecolor{arenaC}{HTML}{EDE2CC}\definecolor{arenaP}{HTML}{F8F3E9}\definecolor{arenaX}{HTML}{7A6234}\definecolor{arenaT}{HTML}{2B2620}
 \definecolor{grisA}{HTML}{4A4A4A}\definecolor{grisB}{HTML}{8A8A8A}\definecolor{grisC}{HTML}{D6D6D6}\definecolor{grisP}{HTML}{F2F2F2}\definecolor{grisX}{HTML}{1F1F1F}\definecolor{grisT}{HTML}{1A1A1A}
+% --- Colores pastel adicionales (para pool de secciones, sin rojo) ---
+\definecolor{past04}{HTML}{BF77D9}   % lila pastel suave
+\definecolor{past10}{HTML}{6B998A}  % turquesa pastel
 
 \newcommand{\paletaRosa}{\colorlet{primary}{rosaA}\colorlet{secondary}{rosaB}\colorlet{tertiary}{rosaC}\colorlet{pale}{rosaP}\colorlet{accent}{rosaX}\colorlet{ink}{rosaT}}
 \newcommand{\paletaLila}{\colorlet{primary}{lilaA}\colorlet{secondary}{lilaB}\colorlet{tertiary}{lilaC}\colorlet{pale}{lilaP}\colorlet{accent}{lilaX}\colorlet{ink}{lilaT}}
@@ -809,17 +812,21 @@
 \clist_new:N \g_facil_pool_cl
 \clist_gset:Nn \g_facil_pool_cl
   { azulA, celeA, turqA, mentA, oceA, limaA, bosqueA, olivA, amarA, naraA,
-    melcA, coralA, rojoA, burdA, fucsA, rosaA, ciruA, lilaA, lavA, cafeA }
-\int_new:N \g_facil_last_int
-\int_gset:Nn \g_facil_last_int { 0 }
-% elige un indice aleatorio distinto al anterior (suma 1..N-1 mod N)
+    melcA, coralA, arenaA, past04, fucsA, rosaA, ciruA, lilaA, lavA, past10 }
+% MAZO BARAJADO: se reparten los 20 colores SIN REPETIR.
+% Cuando se acaba el mazo, se vuelve a barajar (nunca seguidos).
+\seq_new:N \g_facil_bag_seq
+\cs_new_protected:Npn \facilbarajamazo
+  {
+    \seq_gset_from_clist:NN \g_facil_bag_seq \g_facil_pool_cl
+    \seq_shuffle:N \g_facil_bag_seq
+  }
+\facilbarajamazo
 \cs_new_protected:Npn \facilpickcolor #1
   {
-    \int_set:Nn \l_tmpa_int
-      { \int_mod:nn { \g_facil_last_int + \int_rand:nn {1}{ \clist_count:N \g_facil_pool_cl - 1 } }
-                    { \clist_count:N \g_facil_pool_cl } }
-    \int_gset_eq:NN \g_facil_last_int \l_tmpa_int
-    \tl_set:Nx #1 { \clist_item:Nn \g_facil_pool_cl { \l_tmpa_int + 1 } }
+    \seq_if_empty:NT \g_facil_bag_seq { \facilbarajamazo }
+    \seq_gpop_left:NN \g_facil_bag_seq \l_tmpa_tl
+    \tl_gset_eq:NN #1 \l_tmpa_tl
   }
 \ExplSyntaxOff
 \def\facilbullet#1{\item \facilnegrita{#1}}
@@ -909,11 +916,18 @@
   \facilpickcolor{\facilcoloracento}%
   \facilsetpale}
 
+% Color a mano: \seccion[rojoA]{...}  -> el acento se deriva solo (mas oscuro)
+\newcommand{\facilsetcolor}[1]{%
+  \gdef\facilcoloractual{#1}%
+  \colorlet{facilacento}{#1!55!black}%
+  \gdef\facilcoloracento{facilacento}%
+  \facilsetpale}
+
 \newcommand{\seccion}[2][]{%
-  \if\relax\detokenize{#1}\relax\facilsigseccion\else\gdef\facilcoloractual{#1}\facilsetpale\fi
+  \if\relax\detokenize{#1}\relax\facilsigseccion\else\facilsetcolor{#1}\fi
   \sectionheader[\facilcoloractual]{0.7cm}{#2}}
 \newcommand{\secciongrande}[2][]{%
-  \if\relax\detokenize{#1}\relax\facilsigseccion\else\gdef\facilcoloractual{#1}\facilsetpale\fi
+  \if\relax\detokenize{#1}\relax\facilsigseccion\else\facilsetcolor{#1}\fi
   \sectionheader[\facilcoloractual]{1.1cm}{#2}}
 \newcommand{\parrafo}[1]{\highlightpar[facilpale]{\facilnegrita{#1}}}
 \newcommand{\caja}[2][\facilcoloractual]{\infobox[#1]{\facilnegrita{#2}}}
