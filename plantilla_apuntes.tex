@@ -5,9 +5,8 @@
 % =====================================================================
 %  PLANTILLA ESTÁNDAR DE APUNTES
 %  ---------------------------------------------------------------
-%  LIBRERÍA Y FUENTES (estilo.tex + fonts/): se leen de la carpeta que
-%  pongas en \bibliotecasDir (más abajo). Por defecto es la carpeta del
-%  repo (la que subes a GitHub). Cambia ESA línea para usar otra carpeta.
+%  LIBRERÍA Y FUENTES (estilo.tex + fonts/): se descargan de GitHub la
+%  PRIMERA vez y se guardan en caché (ver más abajo). No hace falta clonar.
 %  ---------------------------------------------------------------
 %  CÓMO USARLA:
 %   1) Guarda este archivo DONDE QUIERAS. El PDF sale JUNTO al .tex
@@ -21,18 +20,18 @@
 \documentclass[10.5pt,a4paper]{extarticle}
 
 % ---------------------------------------------------------------------
-%  ¿DE DÓNDE SE LEE LA LIBRERÍA? (estilo.tex + fonts/)
-%  Basta con poner AQUÍ la carpeta que contiene estilo.tex y fonts/;
-%  LaTeX ya sabe buscar todo dentro de ella (\bibliotecasDir/estilo y
-%  \bibliotecasDir/fonts/). No clona ni descarga nada al compilar.
+%  LIBRERÍA Y FUENTES DESDE GITHUB
+%  https://github.com/nataliagamezbarea/apuntes-latex
 %
-%  /ruta_github es un enlace a la carpeta del repo de GitHub
-\newcommand{\bibliotecasDir}{/ruta_github/bibliotecas_latex} % https://github.com/nataliagamezbarea/apuntes-latex/tree/main/bibliotecas_latex
-%
-%  Si algún día quieres usar OTRA carpeta, comenta la línea de arriba y
-%  descomenta esta (debe contener estilo.tex y fonts/):
-% \newcommand{\bibliotecasDir}{/ruta/a/mi/bibliotecas_latex}
+%  La PRIMERA vez descarga estilo.tex + fonts/ desde GitHub y los guarda
+%  en caché; las siguientes veces reutiliza la caché (no vuelve a bajar).
+%  Funciona porque XeLaTeX compila con -shell-escape (ya activado).
+%  Para actualizar la librería: borra la carpeta de caché y recompila.
 % ---------------------------------------------------------------------
+\immediate\write18{mkdir -p /home/natalia/.cache/apuntes-latex && [ -f /home/natalia/.cache/apuntes-latex/bibliotecas_latex/estilo.tex ] || ( cd /home/natalia/.cache/apuntes-latex && curl -fsSL https://codeload.github.com/nataliagamezbarea/apuntes-latex/tar.gz/refs/heads/main | tar -xz --strip-components=1 )}
+
+% Carpeta con estilo.tex y fonts/ (lo descargado de GitHub)
+\newcommand{\bibliotecasDir}{/home/natalia/.cache/apuntes-latex/bibliotecas_latex}
 
 % La librería de estilos (va ANTES de \begin{document})
 % OJO: es un .tex, no un .sty, así que se usa \input (no \usepackage)

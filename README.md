@@ -30,23 +30,27 @@ Repo de GitHub: **https://github.com/nataliagamezbarea/apuntes-latex**
 
 ## 📚 De dónde salen la librería y las fuentes
 
-El propio `.tex` decide de qué carpeta lee `estilo.tex` y `fonts/` con la línea
-`\bibliotecasDir`, justo antes del `\input`. Basta con esa ruta: LaTeX ya busca
-todo dentro de ella.
+El propio `.tex` **descarga `estilo.tex` y `fonts/` desde GitHub** la primera
+vez y los guarda en caché (`~/.cache/apuntes-latex`). Las siguientes veces
+reutiliza la caché, sin volver a descargar. Solo necesita `-shell-escape`
+(ya está activado en la config de VS Code).
+
+Repo: **https://github.com/nataliagamezbarea/apuntes-latex**
 
 ```latex
-% La carpeta del repo de GitHub (https://github.com/nataliagamezbarea/apuntes-latex),
-% vía el enlace /ruta_github:
-\newcommand{\bibliotecasDir}{/ruta_github/bibliotecas_latex}
-\input{\bibliotecasDir/estilo}
+% Descarga la librería de GitHub si no está en caché:
+\immediate\write18{mkdir -p /home/natalia/.cache/apuntes-latex && \
+  [ -f /home/natalia/.cache/apuntes-latex/bibliotecas_latex/estilo.tex ] || \
+  ( cd /home/natalia/.cache/apuntes-latex && curl -fsSL \
+    https://codeload.github.com/nataliagamezbarea/apuntes-latex/tar.gz/refs/heads/main \
+    | tar -xz --strip-components=1 )}
 
-% U otra carpeta cualquiera (debe contener estilo.tex y fonts/):
-\newcommand{\bibliotecasDir}{/ruta/a/tu/carpeta}
+\newcommand{\bibliotecasDir}{/home/natalia/.cache/apuntes-latex/bibliotecas_latex}
 \input{\bibliotecasDir/estilo}
 ```
 
-> No se clona ni se descarga nada al compilar: se leen los archivos que ya
-> tienes en el disco.
+> La 1.ª vez **sí descarga** (necesita internet); después trabaja con la caché.
+> Para actualizar la librería: borra `~/.cache/apuntes-latex` y recompila.
 
 ## 📝 Licencia de las fuentes
 
