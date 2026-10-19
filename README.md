@@ -30,27 +30,34 @@ Repo de GitHub: **https://github.com/nataliagamezbarea/apuntes-latex**
 
 ## 📚 De dónde salen la librería y las fuentes
 
-El propio `.tex` **descarga `estilo.tex` y `fonts/` desde GitHub** la primera
-vez y los guarda en caché (`~/.cache/apuntes-latex`). Las siguientes veces
-reutiliza la caché, sin volver a descargar. Solo necesita `-shell-escape`
-(ya está activado en la config de VS Code).
+El propio `.tex` **descarga `estilo.tex` y `fonts/` desde GitHub en cada
+compilación**, a una carpeta temporal (`/tmp/apuntes-latex-lib-<nombre>`).
+La usa para compilar y, al terminar, **la borra sola**: no queda nada ni en
+el proyecto ni en tu equipo.
+
+Como se baja la última versión cada vez, **si cambias algo en GitHub, la
+próxima compilación ya lo coge** (no hay que borrar ninguna caché).
+Solo necesita `-shell-escape` (ya está activado en la config de VS Code)
+e internet.
 
 Repo: **https://github.com/nataliagamezbarea/apuntes-latex**
 
 ```latex
-% Descarga la librería de GitHub si no está en caché:
-\immediate\write18{mkdir -p /home/natalia/.cache/apuntes-latex && \
-  [ -f /home/natalia/.cache/apuntes-latex/bibliotecas_latex/estilo.tex ] || \
-  ( cd /home/natalia/.cache/apuntes-latex && curl -fsSL \
-    https://codeload.github.com/nataliagamezbarea/apuntes-latex/tar.gz/refs/heads/main \
-    | tar -xz --strip-components=1 )}
+% Descarga la librería de GitHub a una carpeta temporal...
+\immediate\write18{rm -rf "/tmp/apuntes-latex-lib-\jobname" && \
+  mkdir -p "/tmp/apuntes-latex-lib-\jobname" && \
+  curl -fsSL https://codeload.github.com/nataliagamezbarea/apuntes-latex/tar.gz/refs/heads/main \
+  | tar -xz -C "/tmp/apuntes-latex-lib-\jobname" --strip-components=1}
 
-\newcommand{\bibliotecasDir}{/home/natalia/.cache/apuntes-latex/bibliotecas_latex}
+% ...y al terminar de compilar, la borra (en 2º plano, tras generar el PDF)
+\AtEndDocument{\immediate\write18{(sleep 3; rm -rf "/tmp/apuntes-latex-lib-\jobname") >/dev/null 2>&1 &}}
+
+\newcommand{\bibliotecasDir}{/tmp/apuntes-latex-lib-\jobname/bibliotecas_latex}
 \input{\bibliotecasDir/estilo}
 ```
 
-> La 1.ª vez **sí descarga** (necesita internet); después trabaja con la caché.
-> Para actualizar la librería: borra `~/.cache/apuntes-latex` y recompila.
+> Cada compilación **necesita internet** (baja siempre la última versión).
+> No se guarda ninguna copia: lo descargado se elimina al terminar.
 
 ## 📝 Licencia de las fuentes
 

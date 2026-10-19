@@ -5,8 +5,9 @@
 % =====================================================================
 %  PLANTILLA ESTÁNDAR DE APUNTES
 %  ---------------------------------------------------------------
-%  LIBRERÍA Y FUENTES (estilo.tex + fonts/): se descargan de GitHub la
-%  PRIMERA vez y se guardan en caché (ver más abajo). No hace falta clonar.
+%  LIBRERÍA Y FUENTES (estilo.tex + fonts/): se descargan de GitHub en cada
+%  compilación, se usan y se borran al terminar (ver más abajo). No hace
+%  falta clonar nada.
 %  ---------------------------------------------------------------
 %  CÓMO USARLA:
 %   1) Guarda este archivo DONDE QUIERAS. El PDF sale JUNTO al .tex
@@ -20,18 +21,20 @@
 \documentclass[10.5pt,a4paper]{extarticle}
 
 % ---------------------------------------------------------------------
-%  LIBRERÍA Y FUENTES DESDE GITHUB
+%  LIBRERÍA Y FUENTES DESDE GITHUB (siempre la última versión)
 %  https://github.com/nataliagamezbarea/apuntes-latex
 %
-%  La PRIMERA vez descarga estilo.tex + fonts/ desde GitHub y los guarda
-%  en caché; las siguientes veces reutiliza la caché (no vuelve a bajar).
-%  Funciona porque XeLaTeX compila con -shell-escape (ya activado).
-%  Para actualizar la librería: borra la carpeta de caché y recompila.
+%  Al compilar: descarga estilo.tex + fonts/ de GitHub a una carpeta
+%  temporal, los usa, y al terminar la BORRA (no queda nada, ni en el
+%  proyecto ni en tu equipo). Si algo cambia en GitHub, la próxima
+%  compilación lo coge.
+%  Necesita -shell-escape (ya está activado en la config de VS Code).
 % ---------------------------------------------------------------------
-\immediate\write18{mkdir -p /home/natalia/.cache/apuntes-latex && [ -f /home/natalia/.cache/apuntes-latex/bibliotecas_latex/estilo.tex ] || ( cd /home/natalia/.cache/apuntes-latex && curl -fsSL https://codeload.github.com/nataliagamezbarea/apuntes-latex/tar.gz/refs/heads/main | tar -xz --strip-components=1 )}
+\immediate\write18{rm -rf "/tmp/apuntes-latex-lib-\jobname" && mkdir -p "/tmp/apuntes-latex-lib-\jobname" && curl -fsSL https://codeload.github.com/nataliagamezbarea/apuntes-latex/tar.gz/refs/heads/main | tar -xz -C "/tmp/apuntes-latex-lib-\jobname" --strip-components=1}
+\AtEndDocument{\immediate\write18{(sleep 3; rm -rf "/tmp/apuntes-latex-lib-\jobname") >/dev/null 2>&1 &}}
 
-% Carpeta con estilo.tex y fonts/ (lo descargado de GitHub)
-\newcommand{\bibliotecasDir}{/home/natalia/.cache/apuntes-latex/bibliotecas_latex}
+% Carpeta temporal con estilo.tex y fonts/ (se borra al terminar)
+\newcommand{\bibliotecasDir}{/tmp/apuntes-latex-lib-\jobname/bibliotecas_latex}
 
 % La librería de estilos (va ANTES de \begin{document})
 % OJO: es un .tex, no un .sty, así que se usa \input (no \usepackage)
