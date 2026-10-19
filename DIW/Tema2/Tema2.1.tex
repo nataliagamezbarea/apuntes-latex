@@ -1,0 +1,55 @@
+%!TEX program = xelatex
+
+\documentclass[11pt,a4paper]{extarticle}
+
+% ---------------------------------------------------------------------
+%  LIBRERÍA Y FUENTES DESDE GITHUB (siempre la última versión)
+%  https://github.com/nataliagamezbarea/apuntes-latex
+%
+%  Al compilar: descarga estilo.tex + fonts/ de GitHub a una carpeta
+%  temporal, los usa, y al terminar la BORRA (no queda nada).
+%  Necesita -shell-escape (ya está activado en la config de VS Code).
+% ---------------------------------------------------------------------
+\immediate\write18{rm -rf "/tmp/apuntes-latex-lib-\jobname" && mkdir -p "/tmp/apuntes-latex-lib-\jobname" && curl -fsSL https://codeload.github.com/nataliagamezbarea/apuntes-latex/tar.gz/refs/heads/main | tar -xz -C "/tmp/apuntes-latex-lib-\jobname" --strip-components=1}
+\AtEndDocument{\immediate\write18{(sleep 3; rm -rf "/tmp/apuntes-latex-lib-\jobname") >/dev/null 2>&1 &}}
+
+% Carpeta temporal con estilo.tex y fonts/ (se borra al terminar)
+\newcommand{\bibliotecasDir}{/tmp/apuntes-latex-lib-\jobname/bibliotecas_latex}
+
+% La librería de estilos (va ANTES de \begin{document})
+\input{\bibliotecasDir/estilo}
+
+\usepackage[spanish]{babel}
+
+\begin{document}
+
+\paletaOceano
+\titulo{TEMA 02}{Teoria de la Gestalt}
+\usarfondo
+
+% ===================== 1 =====================
+\secciongrande{Percebre no és rebre}
+
+\parrafo{Segons la psicologia de la Gestalt, la ment configura mitjançant
+certes lleis els elements que li arriben pels sentits (percepció) o per la
+memòria (pensament).}
+
+\lista{\textbf{Buscar}|\textbf{Seleccionar}|\textbf{Relacionar}|
+       \textbf{Establir connexions}|\textbf{Recordar}|
+       \textbf{Identificar}|\textbf{Jerarquitzar}|\textbf{Avaluar}|
+       \textbf{Aprendre}|\textbf{Interpretar}}
+
+% ===================== 2 =====================
+\secciongrande{El missatge visual}
+
+\parrafo{Dissenyar és construir un missatge amb una intenció concreta.}
+
+\lista{\textbf{Buscar}|\textbf{Seleccionar}|\textbf{Relacionar}|
+       \textbf{Establir connexions}|\textbf{Recordar}|
+       \textbf{Identificar}|\textbf{Jerarquitzar}|\textbf{Avaluar}|
+       \textbf{Aprendre}|\textbf{Interpretar}}
+
+% ---- Pie de página ----
+\pagefoot{Gestalt -- Tema 02}
+
+\end{document}
