@@ -24,9 +24,40 @@ Repo de GitHub: **https://github.com/nataliagamezbarea/apuntes-latex**
 
 1. Copia `plantilla_apuntes.tex` como base de cada tema nuevo.
 2. Elige paleta: `\paletaBosque`, `\paletaCoral`, `\paletaLavanda`, `\paletaOceano`.
-3. Elige título: `\tituloA` … `\tituloQ`.
+3. Elige título: `\titulo{TEMA 01}{Tu título}`.
 4. Compila con **Ctrl+Alt+B** (o guarda y compila solo con Ctrl+S).
    El PDF sale **junto al .tex** y los auxiliares (`.log` incluido) se borran solos.
+
+## ✍️ Modo fácil (escribes menos)
+
+No hace falta escribir `\begin{...}...\end{...}`. Los items se separan con **`|`**:
+
+| Quieres... | Escribes |
+|---|---|
+| Título | `\titulo{TEMA 02}{Teoria de la Gestalt}` |
+| Subtítulo de sección | `\seccion{Percebre no és rebre}` |
+| Párrafo con fondo | `\parrafo{Segons la psicologia...}` |
+| Lista con viñetas | `\lista{Buscar|Seleccionar|Relacionar}` |
+| Lista de tareas | `\tareas{Leer el artículo|Resumir las técnicas}` |
+| Pasos numerados | `\pasos{Primero mirar|Luego escribir}` |
+| Ideas / estrellas | `\estrellas{Idea muy importante}` |
+| Avisos | `\alertas{Cuidado con esto}` |
+| Preguntas de repaso | `\preguntas{¿Qué es la Gestalt?}` |
+| Secuencia con flechas | `\flechas{Estímulo|Percepción|Interpretación}` |
+| Caja de información | `\caja{Texto de la caja.}` |
+| Nota lateral | `\nota{Para el examen}{Diferencia bien...}` |
+| Caja resumen | `\resumen{Resumen del tema...}` |
+| Resaltar dentro del texto | `\hl{esto queda resaltado}` |
+
+Los comandos "largos" (`\tituloE`, `\sectionheader`, `\infobox`, `\tipbox`,
+`\shadowbox`, `\begin{bulletlist}`...) siguen funcionando igual.
+
+## 🌐 Emojis y símbolos
+
+Puedes escribir emojis directamente en el texto y **se ven solos**, sin envolver
+nada: `🌐 📚 ✅ ⚠️ ★ ♥ →`. La librería detecta el carácter y usa la fuente
+`Symbola.ttf` solo para ese glifo, volviendo a la fuente normal al instante.
+(Viene incluida en `bibliotecas_latex/fonts/`, no hay que instalar nada.)
 
 ## 📚 De dónde salen la librería y las fuentes
 

@@ -47,6 +47,27 @@
 \newfontfamily\cursivefont{Pacifico.ttf}[Path=\bibliotecasDir/fonts/]
 \newfontfamily\handfont{KalamBold.ttf}[Path=\bibliotecasDir/fonts/]
 
+% ---------------------------------------------------------------------
+%  EMOJIS Y SÍMBOLOS (🌐 ♥ ✓ → ★ ...)
+%  XeLaTeX no tiene "fallback" automático: si la fuente principal no
+%  tiene el glifo, ese carácter sale en blanco. Aquí se arregla SIN
+%  envolver el emoji a mano: ucharclasses detecta los bloques Unicode de
+%  emojis/símbolos y usa Symbola SOLO para ese carácter, volviendo
+%  automáticamente a la fuente normal justo después.
+% ---------------------------------------------------------------------
+\usepackage{ucharclasses}
+\newfontfamily\emojifont{Symbola.ttf}[Path=\bibliotecasDir/fonts/]
+\newfontfamily\cuerpofont{NunitoRegular.ttf}[Path=\bibliotecasDir/fonts/, BoldFont=NunitoBold.ttf, ItalicFont=NunitoRegular.ttf, ItalicFeatures={FakeSlant=0.2}, BoldItalicFont=NunitoBold.ttf, BoldItalicFeatures={FakeSlant=0.2}]
+\setDefaultTransitions{}{}
+\setTransitionsFor{Emoticons}{\emojifont}{\cuerpofont}
+\setTransitionsFor{MiscellaneousSymbolsAndPictographs}{\emojifont}{\cuerpofont}
+\setTransitionsFor{TransportAndMapSymbols}{\emojifont}{\cuerpofont}
+\setTransitionsFor{SupplementalSymbolsAndPictographs}{\emojifont}{\cuerpofont}
+\setTransitionsFor{SymbolsAndPictographsExtendedA}{\emojifont}{\cuerpofont}
+\setTransitionsFor{Dingbats}{\emojifont}{\cuerpofont}
+\setTransitionsFor{MiscellaneousSymbols}{\emojifont}{\cuerpofont}
+\setTransitionsFor{MiscellaneousSymbolsAndArrows}{\emojifont}{\cuerpofont}
+
 \usepackage[a4paper,left=1.6cm,right=1.6cm,top=1.4cm,bottom=1.4cm]{geometry}
 \usepackage[table]{xcolor}
 \usepackage{booktabs}
@@ -677,3 +698,66 @@
   \begin{minipage}[t]{#1}#2\end{minipage}\hfill
   \begin{minipage}[t]{\dimexpr\linewidth-#1-6mm\relax}#3\end{minipage}\par
 }
+
+% =====================================================================
+%  MODO FÁCIL — escribe menos y con un solo comando
+%  ---------------------------------------------------------------------
+%  En vez de \begin{bulletlist} ... \end{bulletlist}, escribes:
+%
+%     \titulo{TEMA 02}{Teoria de la Gestalt}
+%     \seccion{Percebre no és rebre}
+%     \parrafo{Segons la psicologia de la Gestalt...}
+%
+%     \lista{Buscar|Seleccionar|Relacionar|Recordar}
+%     \tareas{Leer el artículo|Resumir las técnicas}
+%     \pasos{Primero mirar|Luego escribir}
+%     \estrellas{Idea muy importante|Para el examen}
+%     \alertas{Cuidado con esto|Error común}
+%     \preguntas{¿Qué es la Gestalt?|¿Cuáles son sus leyes?}
+%     \flechas{Estímulo|Percepción|Interpretación}
+%
+%     \caja{Esto es una caja de información.}
+%     \nota{Para el examen}{Diferencia bien ...}
+%     \resumen{Esto es la caja resumen con sombra.}
+%
+%  Los elementos se separan con |  (barra vertical).
+%  Dentro puedes usar todo el LaTeX normal: \textbf{negrita},
+%  \emph{cursiva}, 🌐 emojis, \hl{resaltado}, etc.
+% =====================================================================
+
+% Repartidor de items: recibe "a|b|c" y llama a \facilitem con cada trozo
+\def\facilempty{}
+\long\def\facilitems#1|#2\facilstop{%
+  \facilitem{#1}%
+  \ifx\facilempty#2\facilempty\else\facilitems#2\facilstop\fi}
+\def\facilbullet#1{\item #1}
+\def\facilcheck#1{\item #1}
+\def\facilstep#1{\item #1}
+
+\newcommand{\lista}[1]{%
+  \begin{bulletlist}\let\facilitem\facilbullet\facilitems#1|\facilstop\end{bulletlist}}
+\newcommand{\marcas}[1]{%
+  \begin{marcalist}\let\facilitem\facilbullet\facilitems#1|\facilstop\end{marcalist}}
+\newcommand{\tareas}[1]{%
+  \begin{tarealist}\let\facilitem\facilcheck\facilitems#1|\facilstop\end{tarealist}}
+\newcommand{\pasos}[1]{%
+  \begin{steplist}\let\facilitem\facilstep\facilitems#1|\facilstop\end{steplist}}
+\newcommand{\estrellas}[1]{%
+  \begin{estrellalist}\let\facilitem\facilbullet\facilitems#1|\facilstop\end{estrellalist}}
+\newcommand{\alertas}[1]{%
+  \begin{alertalist}\let\facilitem\facilbullet\facilitems#1|\facilstop\end{alertalist}}
+\newcommand{\preguntas}[1]{%
+  \begin{preguntalist}\let\facilitem\facilbullet\facilitems#1|\facilstop\end{preguntalist}}
+\newcommand{\flechas}[1]{%
+  \begin{flechalist}\let\facilitem\facilbullet\facilitems#1|\facilstop\end{flechalist}}
+
+% Atajos para lo demás (uno solo, sin entornos)
+\newcommand{\titulo}[2]{\tituloE{#1}{#2}}
+\newcommand{\seccion}[1]{\sectionheader{0.7cm}{#1}}
+\newcommand{\secciongrande}[1]{\sectionheader{1.1cm}{#1}}
+\newcommand{\parrafo}[1]{\highlightpar{#1}}
+\newcommand{\caja}[1]{\infobox{#1}}
+\newcommand{\cajadual}[2]{\infoboxdup{#1}{#2}}
+\newcommand{\nota}[2]{\tipbox{#1}{#2}}
+\newcommand{\resumen}[1]{\shadowbox{#1}}
+\newcommand{\resalta}[1]{\hl{#1}}
