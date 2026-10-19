@@ -93,11 +93,17 @@ case "$MODO" in
   repo)  usar_repo ;;
   local) LIB="$RUTA_LOCAL" ;;
   *)
-    if [ -f "$SRCDIR/bibliotecas_latex/estilo.tex" ]; then
-      LIB="$SRCDIR/bibliotecas_latex"
-    else
-      usar_repo
-    fi
+    # Sin @fuente: busca bibliotecas_latex subiendo desde la carpeta del .tex
+    # (así funciona desde temas/, examenes/, etc.). Si no hay, usa el repo.
+    LIB=""
+    d="$SRCDIR"
+    while [ "$d" != "/" ] && [ -n "$d" ]; do
+      if [ -f "$d/bibliotecas_latex/estilo.tex" ]; then
+        LIB="$d/bibliotecas_latex"; break
+      fi
+      d="$(dirname "$d")"
+    done
+    [ -z "$LIB" ] && usar_repo
     ;;
 esac
 
@@ -139,8 +145,10 @@ mkdir -p "$BUILD"
 # Archivo que le dice a estilo.tex dónde está la librería
 printf '\\def\\bibliotecasDir{%s}\n' "$LIB" > "$BUILD/_fuente.tex"
 
-# Buscar _fuente.tex y bibliotecas_latex en la carpeta elegida
-export TEXINPUTS=".:$BUILD:$PARENT//:"
+# Buscar _fuente.tex en $BUILD y bibliotecas_latex en la carpeta elegida.
+# La carpeta elegida va ANTES que "." para que la librería escogida gane
+# aunque exista una copia local suelta.
+export TEXINPUTS="$BUILD:$PARENT//:.:"
 
 cd "$SRCDIR" || exit 2
 echo "[apuntes] Compilando $BASE.tex con XeLaTeX (librería: $LIB)…"

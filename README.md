@@ -27,6 +27,29 @@ con estilos bonitos, paletas de color y bloques listos para usar.
 4. Elige título: `\tituloA` … `\tituloQ`.
 5. Compila con **Ctrl+Alt+B** (o guarda y compila solo con Ctrl+S).
 
+## 📚 De dónde salen la librería y las fuentes
+
+El `.tex` puede leer `estilo.tex` y `fonts/` de dos sitios, a tu elección.
+Se pone en la cabecera del `.tex` (solo lo que necesites):
+
+```latex
+% @fuente repo                 % usa la copia del repo clonada en ~/.cache/apuntes-latex/repo
+% @fuente local /ruta/carpeta  % usa una carpeta local (debe tener estilo.tex y fonts/)
+```
+
+Si **no** pones `@fuente`, el script busca `bibliotecas_latex` subiendo desde la
+carpeta del `.tex` (funciona desde `temas/`, `examenes/`, etc.); si no la
+encuentra, usa el clon del repo.
+
+> No se descarga nada al compilar: se leen los archivos que ya tengas.
+> Para clonar por primera vez (o actualizar) el repo:
+
+```bash
+compilar.sh --actualizar archivo.tex   # clona si no existe y hace git pull
+```
+
+El clon vive en `~/.cache/apuntes-latex/repo`.
+
 ## 📂 Elegir dónde se guarda el PDF
 
 En la cabecera del `.tex` puedes poner solo lo que necesites:

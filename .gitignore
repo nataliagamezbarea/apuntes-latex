@@ -11,6 +11,9 @@ build/
 *.bbl
 *.blg
 
+# PDFs generados (se regeneran al compilar; no se suben)
+*.pdf
+
 # Vistas previas generadas
 vista-*.png
 preview-*.png
