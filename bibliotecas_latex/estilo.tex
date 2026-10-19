@@ -270,7 +270,7 @@
 % CAJAS
 % =====================================================================
 \newtcolorbox{infoboxenv}[1][secondary]{
-  colback=white, colframe=#1, boxrule=1.3pt, arc=4pt,
+  colback=#1!8!white, colframe=#1, boxrule=1.3pt, arc=4pt,
   boxsep=1pt, left=8pt, right=8pt, top=7pt, bottom=7pt
 }
 \newcommand{\infobox}[2][secondary]{%
@@ -283,14 +283,14 @@
 }
 
 % Caja plana sin borde, fondo de color (para resaltar párrafos, estilo img.3)
-\newcommand{\highlightpar}[2][pale]{%
+\newcommand{\highlightpar}[2][facilpale]{%
   \begin{tcolorbox}[colback=#1, colframe=#1, arc=2pt, boxsep=1pt,
       left=9pt, right=9pt, top=7pt, bottom=7pt, boxrule=0pt]
     \RaggedRight\fontsize{10.8}{15.5}\selectfont\color{ink} #2
   \end{tcolorbox}%
 }
 % Resalte "de rotulador" para frases sueltas dentro de un párrafo
-\newcommand{\hl}[2][pale]{\colorbox{#1}{\strut #2}}
+\newcommand{\hl}[2][facilpale]{\colorbox{#1}{\strut #2}}
 
 % =====================================================================
 % LISTAS: viñeta circular / viñeta rombo / numerada con círculos
@@ -378,7 +378,7 @@
 % =====================================================================
 \newcommand{\tipbox}[3][accent]{%
   \noindent
-  \begin{tcolorbox}[colback=pale, colframe=pale, borderline west={3.2pt}{0pt}{#1},
+  \begin{tcolorbox}[colback=#1!10!white, colframe=#1!10!white, borderline west={3.2pt}{0pt}{#1},
       arc=2pt, boxsep=1pt, left=10pt, right=8pt, top=7pt, bottom=7pt, boxrule=0pt]
     {\headingfontxb\color{#1}\fontsize{10.6}{13}\selectfont #2}\\[2pt]
     \RaggedRight\fontsize{10.1}{14}\selectfont\color{ink} #3
@@ -389,7 +389,7 @@
     inner ysep=3.5pt, font=\headingfontxb\color{white}\fontsize{8.5}{8.5}\selectfont] {#2};%
 }
 \newcommand{\typecard}[3][primary]{%
-  \begin{tcolorbox}[colback=white, colframe=#1, boxrule=1.2pt, arc=5pt,
+  \begin{tcolorbox}[colback=#1!6!white, colframe=#1, boxrule=1.2pt, arc=5pt,
       boxsep=0pt, left=8pt, right=8pt, bottom=7pt, top=2pt,
       colbacktitle=#1, coltitle=white, fonttitle=\headingfontxb,
       title={\fontsize{10.5}{10.5}\selectfont #2}]
@@ -411,10 +411,11 @@
 % =====================================================================
 % CAJA RESUMEN CON SOMBRA
 % =====================================================================
-\newcommand{\shadowbox}[2][tertiary]{%
+\newcommand{\shadowbox}[2][\facilcoloractual]{%
   \begin{center}
   \begin{tikzpicture}
-    \node[draw=ink, line width=0.9pt, fill=white, rounded corners=1.5pt,
+    \node[draw=\facilcoloractual!60!ink, line width=0.9pt, fill=\facilcoloractual!7!white,
+      rounded corners=1.5pt,
       text width=16.6cm, align=left, inner sep=12pt] (box) {%
       \fontsize{11}{15.5}\selectfont\color{ink} #2%
     };
@@ -863,10 +864,14 @@
 % ============================================================
 \def\facilcoloractual{primary}
 \def\facilcoloracento{accent}
+% fondo tintado del color de la seccion (para que las cajas cambien de color)
+\colorlet{facilpale}{primary!12!white}
+\newcommand{\facilsetpale}{\colorlet{facilpale}{\facilcoloractual!13!white}}
 \newcounter{facilsecc}
 \newcommand{\titulo}[3][primary]{%
   \gdef\facilcoloractual{#1}%
   \gdef\facilcolorseccion{#1}%
+  \facilsetpale
   \setcounter{facilsecc}{0}%
   \vspace{1mm}
   \pill[#1]{#2}\par
@@ -887,15 +892,16 @@
     \gdef\facilcoloractual{tertiary}\gdef\facilcoloracento{primary}%
   \or
     \gdef\facilcoloractual{secondary}\gdef\facilcoloracento{tertiary}%
-  \fi}
+  \fi
+  \facilsetpale}
 
 \newcommand{\seccion}[2][]{%
-  \if\relax\detokenize{#1}\relax\facilsigseccion\else\gdef\facilcoloractual{#1}\fi
+  \if\relax\detokenize{#1}\relax\facilsigseccion\else\gdef\facilcoloractual{#1}\facilsetpale\fi
   \sectionheader[\facilcoloractual]{0.7cm}{#2}}
 \newcommand{\secciongrande}[2][]{%
-  \if\relax\detokenize{#1}\relax\facilsigseccion\else\gdef\facilcoloractual{#1}\fi
+  \if\relax\detokenize{#1}\relax\facilsigseccion\else\gdef\facilcoloractual{#1}\facilsetpale\fi
   \sectionheader[\facilcoloractual]{1.1cm}{#2}}
-\newcommand{\parrafo}[1]{\highlightpar{\facilnegrita{#1}}}
+\newcommand{\parrafo}[1]{\highlightpar[facilpale]{\facilnegrita{#1}}}
 \newcommand{\caja}[2][\facilcoloractual]{\infobox[#1]{\facilnegrita{#2}}}
 \newcommand{\cajadual}[3][\facilcoloractual]{\infoboxdup[#1]{\facilnegrita{#2}}{\facilnegrita{#3}}}
 \newcommand{\nota}[3][\facilcoloractual]{\tipbox[#1]{#2}{\facilnegrita{#3}}}
