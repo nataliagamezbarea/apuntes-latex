@@ -1,0 +1,23 @@
+%!TEX program = xelatex
+% =====================================================================
+%  CABECERA DE SALIDA — pon SOLO lo que necesites:
+%    % @salida /ruta/carpeta     -> copia el PDF a esa carpeta
+%    % @copiar-tex               -> copia también el .tex a esa carpeta
+%  (si no pones nada, el PDF queda junto a este archivo)
+% =====================================================================
+% @salida /home/natalia/Escritorio/APUNTES/mis_pdfs
+% @copiar-tex
+
+\documentclass[10.5pt,a4paper]{extarticle}
+\input{bibliotecas_latex/estilo}
+\usepackage[spanish]{babel}
+
+\begin{document}
+\paletaOceano
+\tituloE{TEMA 02}{Prueba de salida configurable}
+
+\highlightpar{Si en la cabecera pongo \hl{\texttt{@salida}}, el PDF se copia
+a esa carpeta. Si añado \hl{\texttt{@copiar-tex}}, también copia este .tex.}
+
+\infobox[primary]{Los \texttt{.log}, \texttt{.fls} y demás se borran siempre.}
+\end{document}

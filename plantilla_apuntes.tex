@@ -1,0 +1,106 @@
+%!TEX program = xelatex
+% =====================================================================
+%  PLANTILLA ESTÁNDAR DE APUNTES
+%  ---------------------------------------------------------------
+%  CÓMO USARLA:
+%   1) Guarda este archivo DONDE QUIERAS dentro de APUNTES
+%      (por ejemplo APUNTES/temas/tema01.tex). El PDF saldrá siempre
+%      JUNTO al .tex (tema01.pdf) y los auxiliares se borran solos.
+%   2) En VS Code: Ctrl+Alt+B para compilar (o guarda el archivo y
+%      compila solo). El PDF se abre con doble clic en la pestaña.
+%   3) Elige PALETA al inicio de cada sección:
+%        \paletaBosque  \paletaCoral  \paletaLavanda  \paletaOceano
+%   4) Elige TÍTULO: \tituloA ... \tituloQ (ver estilo.tex)
+%   5) SALIDA (opcional, pon solo lo que necesites en la cabecera):
+%        % @salida /ruta/carpeta   -> copia el PDF a esa carpeta
+%        % @copiar-tex             -> copia también este .tex ahí
+%      O en VS Code: Ctrl+Shift+P -> "Tasks: Run Task" ->
+%        "Apuntes: compilar y elegir carpeta…"  (abre un selector)
+% =====================================================================
+\documentclass[10.5pt,a4paper]{extarticle}
+
+% La librería de estilos (va ANTES de \begin{document})
+% OJO: es un .tex, no un .sty, así que se usa \input (no \usepackage)
+\input{bibliotecas_latex/estilo}
+
+% Español con acentos y ñ (XeLaTeX lo maneja directamente, babel por si acaso)
+\usepackage[spanish]{babel}
+
+\begin{document}
+
+% ===================== PORTADA / TEMA 1 =====================
+\paletaOceano          % <- cambia aquí la paleta: Bosque / Coral / Lavanda / Oceano
+\tituloE{TEMA 01}{Introducción al neuromarketing}
+
+\usarfondo             % <- fondo sutil de cuaderno (franja + puntos)
+
+\sectionheader{0.8cm}{¿Qué es?}
+
+\highlightpar{El \hl{neuromarketing} combina neurociencia y marketing para
+entender \emph{por qué} el cliente compra, no solo \emph{qué} compra.}
+
+\infobox[primary]{%
+  \textbf{Idea clave:} las decisiones de compra son mayoritariamente
+  \emph{inconscientes} y emocionales antes de ser racionales.}
+
+% ---- Dos tarjetas lado a lado ----
+\typecardpair
+  {Definición}
+  {Uso de técnicas de medición cerebral y conductual para estudiar al consumidor.}
+  {Objetivo}
+  {Predecir el comportamiento de compra y diseñar mejores experiencias.}
+
+\vspace{3mm}
+
+% ---- Lista con viñetas ----
+\begin{bulletlist}
+  \item \textbf{Rama funcional:} estudia la activación cerebral ante estímulos.
+  \item \textbf{Rama conductual:} observa lo que la gente hace (ojos, clics, compras).
+\end{bulletlist}
+
+% ---- Lista de tareas / checklist ----
+\begin{tarealist}
+  \item Leer el artículo base del curso.
+  \item Resumir las técnicas de medición (fMRI, EEG, eye tracking).
+\end{tarealist}
+
+\vspace{2mm}
+
+% ---- Nota lateral ----
+\tipbox{Para el examen}{Diferencia bien entre neuromarketing \emph{funcional}
+y \emph{conductual}; caen preguntas tipo test.}
+
+\vspace{3mm}
+
+% ---- Tabla minimalista ----
+\begin{tablaminimal}{lcc}
+  \tablacab{Técnica} & \tablacab{Resolución} & \tablacab{¿Móvil?} \\
+  \midrule
+  fMRI   & Espacial alta & No \\
+  EEG    & Temporal alta & Sí \\
+  Eye tracking & Media    & Sí \\
+\end{tablaminimal}
+
+\vspace{2mm}
+
+% ---- Ficha clave-valor ----
+\begin{fichaclave}{3.2cm}
+  \fichaitem{Autor}{Kahneman, D. (2011)}
+  \fichaitem{Tema}{Sistema 1 y Sistema 2}
+  \fichaitem{Asignatura}{Neuromarketing -- Grado}
+\end{fichaclave}
+
+\vspace{3mm}
+
+% ---- Caja resumen con sombra ----
+\shadowbox{%
+  \textbf{Resumen del tema:} el neuromarketing estudia los mecanismos
+  inconscientes de la decisión de compra combinando medidas cerebrales
+  (fMRI, EEG) y conductuales (eye tracking, seguimiento de clics).}
+
+\vspace{4mm}
+
+% ---- Píldora + pie de página ----
+\pagefoot{Neuromarketing -- Tema 01}
+
+\end{document}

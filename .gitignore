@@ -1,0 +1,16 @@
+# Archivos temporales de LaTeX (no se suben)
+build/
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.xdv
+*.synctex.gz
+*.bbl
+*.blg
+
+# Vistas previas generadas
+vista-*.png
+preview-*.png
