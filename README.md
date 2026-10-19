@@ -33,8 +33,8 @@ El propio `.tex` decide de qué carpeta lee `estilo.tex` y `fonts/` con la líne
 todo dentro de ella.
 
 ```latex
-% La carpeta del repo (la que subes a GitHub):
-\newcommand{\bibliotecasDir}{/home/natalia/Escritorio/APUNTES/bibliotecas_latex}
+% La carpeta del repo (la que subes a GitHub), vía el enlace /ruta_github:
+\newcommand{\bibliotecasDir}{/ruta_github/bibliotecas_latex}
 \input{\bibliotecasDir/estilo}
 
 % U otra carpeta cualquiera (debe contener estilo.tex y fonts/):
