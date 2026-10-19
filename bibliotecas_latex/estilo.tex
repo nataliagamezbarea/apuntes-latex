@@ -297,14 +297,14 @@
 % =====================================================================
 \newlist{bulletlist}{itemize}{1}
 \setlist[bulletlist]{leftmargin=7mm, itemsep=8pt, topsep=2pt,
-  label={\raisebox{0.5pt}{\tikz\fill[primary] (0,0) circle (2.6pt);}},
+  label={\raisebox{0.5pt}{\tikz\fill[\facilcoloractual] (0,0) circle (2.6pt);}},
   font=\fontsize{10.6}{14.8}\selectfont\color{ink}}
 
 % Viñeta en forma de rombo (alternativa elegante, dos tonos)
 \newcommand{\diamanteicon}{%
   \tikz[baseline=-0.55ex]{
-    \fill[primary] (0,0) -- (3.1pt,3.1pt) -- (6.2pt,0) -- (3.1pt,-3.1pt) -- cycle;
-    \fill[accent]  (3.1pt,0) -- (4.5pt,1.4pt) -- (6.2pt,0) -- (4.5pt,-1.4pt) -- cycle;
+    \fill[\facilcoloractual] (0,0) -- (3.1pt,3.1pt) -- (6.2pt,0) -- (3.1pt,-3.1pt) -- cycle;
+    \fill[\facilcoloracento]  (3.1pt,0) -- (4.5pt,1.4pt) -- (6.2pt,0) -- (4.5pt,-1.4pt) -- cycle;
   }%
 }
 \newlist{marcalist}{itemize}{1}
@@ -314,13 +314,13 @@
 \newlist{steplist}{enumerate}{1}
 \setlist[steplist]{leftmargin=9mm, itemsep=9pt, topsep=2pt,
   label={\protect\stepcircle{\arabic*}}, font=\fontsize{10.6}{14.8}\selectfont\color{ink}}
-\newcommand{\stepcircle}[1]{\tikz[baseline=-0.65ex]{\node[circle, fill=primary,
+\newcommand{\stepcircle}[1]{\tikz[baseline=-0.65ex]{\node[circle, fill=\facilcoloractual,
   text=white, inner sep=0pt, minimum size=15pt,
   font=\fontsize{8.5}{8.5}\selectfont\bfseries] {#1};}}
 
 % --- Viñeta casilla (tareas / checklist) ---
 \newcommand{\casillaicon}{%
-  \tikz[baseline=-0.1em]{\draw[primary, line width=1.1pt, rounded corners=0.6pt]
+  \tikz[baseline=-0.1em]{\draw[\facilcoloractual, line width=1.1pt, rounded corners=0.6pt]
     (0,0) rectangle (8.5pt,8.5pt);}%
 }
 \newlist{tarealist}{itemize}{1}
@@ -329,7 +329,7 @@
 
 % --- Viñeta flecha (secuencias, causa-efecto) ---
 \newcommand{\flechaicon}{%
-  \tikz[baseline=-0.5ex]{\draw[primary, line width=1.3pt,
+  \tikz[baseline=-0.5ex]{\draw[\facilcoloractual, line width=1.3pt,
     -{Latex[length=2.6pt,width=2.6pt]}] (0,0) -- (0.22,0);}%
 }
 \newlist{flechalist}{itemize}{1}
@@ -339,7 +339,7 @@
 % --- Viñeta estrella (ideas importantes / para examen) ---
 \newcommand{\estrellaicon}{%
   \tikz[baseline=-0.4ex]{\node[star, star points=5, star point ratio=2.25,
-    fill=accent, inner sep=0pt, minimum size=9pt] {};}%
+    fill=\facilcoloracento, inner sep=0pt, minimum size=9pt] {};}%
 }
 \newlist{estrellalist}{itemize}{1}
 \setlist[estrellalist]{leftmargin=7mm, itemsep=7pt, topsep=2pt,
@@ -348,10 +348,10 @@
 % --- Viñeta alerta (avisos, cuidado, errores comunes) ---
 \newcommand{\alertaicon}{%
   \tikz[baseline=-0.15em]{
-    \draw[accent, line width=1.1pt, line join=round]
+    \draw[\facilcoloracento, line width=1.1pt, line join=round]
       (0,0) -- (4.7pt,8.5pt) -- (9.4pt,0) -- cycle;
-    \fill[accent] (4.35pt,2.6pt) rectangle (5.05pt,5.4pt);
-    \fill[accent] (4.35pt,1.2pt) rectangle (5.05pt,1.9pt);
+    \fill[\facilcoloracento] (4.35pt,2.6pt) rectangle (5.05pt,5.4pt);
+    \fill[\facilcoloracento] (4.35pt,1.2pt) rectangle (5.05pt,1.9pt);
   }%
 }
 \newlist{alertalist}{itemize}{1}
@@ -360,7 +360,7 @@
 
 % --- Viñeta pregunta (repaso, autoevaluación) ---
 \newcommand{\preguntaicon}{%
-  \tikz[baseline=-0.3ex]{\node[circle, fill=primary, text=white, inner sep=0pt,
+  \tikz[baseline=-0.3ex]{\node[circle, fill=\facilcoloractual, text=white, inner sep=0pt,
     minimum size=13pt, font=\bfseries\fontsize{7.3}{7.3}\selectfont] {?};}%
 }
 \newlist{preguntalist}{itemize}{1}
@@ -370,7 +370,7 @@
 % --- Lista con letras (a, b, c...) ---
 \newlist{letralist}{enumerate}{1}
 \setlist[letralist]{leftmargin=7.5mm, itemsep=8pt, topsep=2pt,
-  label={\headingfontxb\color{primary}\alph*)},
+  label={\headingfontxb\color{\facilcoloractual}\alph*)},
   font=\fontsize{10.6}{14.8}\selectfont\color{ink}}
 
 % =====================================================================
@@ -797,6 +797,8 @@
     \regex_replace_all:nnN { \*\* (.*?) \*\* } { \c{textbf} \cB\{ \1 \cE\} } \l_tmpa_tl
     \tl_use:N \l_tmpa_tl
   }
+% desplazamiento aleatorio 1..3 (para no repetir el color anterior)
+\cs_new:Npn \facilrandomoffset { \int_to_arabic:n { \int_rand:nn {1}{3} } }
 \ExplSyntaxOff
 \def\facilbullet#1{\item \facilnegrita{#1}}
 \def\facilcheck#1{\item \facilnegrita{#1}}
@@ -853,22 +855,46 @@
 %  y PINTA todo lo que venga detras con ese color:
 %  secciones, cajas, notas, definiciones... hasta el siguiente \titulo.
 % ============================================================
+% ============================================================
+%  APARTADO  \titulo[color]{ETIQUETA}{Titulo}
+%  Separa el documento en bloques. REINICIA el ciclo de colores,
+%  de modo que cada \seccion que venga despues pinta un color
+%  distinto automaticamente (sin poner el color a mano).
+% ============================================================
 \def\facilcoloractual{primary}
+\def\facilcoloracento{accent}
+\newcounter{facilsecc}
 \newcommand{\titulo}[3][primary]{%
   \gdef\facilcoloractual{#1}%
   \gdef\facilcolorseccion{#1}%
+  \setcounter{facilsecc}{0}%
   \vspace{1mm}
-  {\color{#1}\rule{\linewidth}{1.5pt}}\par
-  \vspace{3.5mm}
   \pill[#1]{#2}\par
   \vspace{2.5mm}
   {\headingfontxb\fontsize{23}{23}\selectfont\color{ink} #3}\par
-  \vspace{3mm}
-  {\color{#1}\rule{\linewidth}{0.7pt}}\par
-  \vspace{5mm}}
+  \vspace{6mm}}
 
-\newcommand{\seccion}[2][\facilcoloractual]{\sectionheader[#1]{0.7cm}{#2}}
-\newcommand{\secciongrande}[2][\facilcoloractual]{\sectionheader[#1]{1.1cm}{#2}}
+% Cada \seccion avanza el contador y cambia de color SOLO, de forma ALEATORIA.
+% Colores: 0=primary 1=accent 2=tertiary 3=secondary
+% El desplazamiento es aleatorio (1..3) => nunca salga el mismo dos veces seguidas.
+\newcommand{\facilsigseccion}{%
+  \setcounter{facilsecc}{\numexpr\value{facilsecc}+\facilrandomoffset\relax}%
+  \ifcase\numexpr\value{facilsecc}\mod4\relax
+    \gdef\facilcoloractual{primary}\gdef\facilcoloracento{accent}%
+  \or
+    \gdef\facilcoloractual{accent}\gdef\facilcoloracento{secondary}%
+  \or
+    \gdef\facilcoloractual{tertiary}\gdef\facilcoloracento{primary}%
+  \or
+    \gdef\facilcoloractual{secondary}\gdef\facilcoloracento{tertiary}%
+  \fi}
+
+\newcommand{\seccion}[2][]{%
+  \if\relax\detokenize{#1}\relax\facilsigseccion\else\gdef\facilcoloractual{#1}\fi
+  \sectionheader[\facilcoloractual]{0.7cm}{#2}}
+\newcommand{\secciongrande}[2][]{%
+  \if\relax\detokenize{#1}\relax\facilsigseccion\else\gdef\facilcoloractual{#1}\fi
+  \sectionheader[\facilcoloractual]{1.1cm}{#2}}
 \newcommand{\parrafo}[1]{\highlightpar{\facilnegrita{#1}}}
 \newcommand{\caja}[2][\facilcoloractual]{\infobox[#1]{\facilnegrita{#2}}}
 \newcommand{\cajadual}[3][\facilcoloractual]{\infoboxdup[#1]{\facilnegrita{#2}}{\facilnegrita{#3}}}
