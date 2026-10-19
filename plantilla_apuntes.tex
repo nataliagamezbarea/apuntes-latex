@@ -1,12 +1,13 @@
 %!TEX program = xelatex
+% ---------------------------------------------------------------------
+%  La línea de arriba es un "magic comment": le dice a VS Code que
+%  compile con XeLaTeX (obligatorio: fontspec + fuentes .ttf).
 % =====================================================================
 %  PLANTILLA ESTÁNDAR DE APUNTES
 %  ---------------------------------------------------------------
-%  LIBRERÍA Y FUENTES: se leen de la carpeta que pongas en
-%  \bibliotecasDir (más abajo). Solo cambia ESA línea:
-%     - Repo de GitHub (por defecto):
-%         /home/natalia/.cache/apuntes-latex/repo/bibliotecas_latex
-%     - Ruta local:  la carpeta que quieras (debe tener estilo.tex y fonts/)
+%  LIBRERÍA Y FUENTES (estilo.tex + fonts/): se leen de la carpeta que
+%  pongas en \bibliotecasDir (más abajo). Por defecto, DESDE GITHUB
+%  (el clon del repo). Cambia ESA línea para usar una carpeta local.
 %  ---------------------------------------------------------------
 %  CÓMO USARLA:
 %   1) Guarda este archivo DONDE QUIERAS. El PDF sale JUNTO al .tex
@@ -19,8 +20,20 @@
 % =====================================================================
 \documentclass[10.5pt,a4paper]{extarticle}
 
-% >>> Carpeta que contiene estilo.tex y fonts/ (cámbiala si quieres) <<<
+% ---------------------------------------------------------------------
+%  ¿DE DÓNDE SE LEE LA LIBRERÍA? Elige UNA de las dos opciones:
+%
+%  OPCIÓN 1 · DESDE GITHUB (por defecto)
+%    Clona el repo UNA vez (no se descarga nada al compilar):
+%      git clone https://github.com/nataliagamezbarea/apuntes-latex.git ~/.cache/apuntes-latex/repo
+%    Y deja activa esta línea:
 \newcommand{\bibliotecasDir}{/home/natalia/.cache/apuntes-latex/repo/bibliotecas_latex}
+%
+%  OPCIÓN 2 · DESDE UNA CARPETA LOCAL
+%    Comenta la línea de arriba y descomenta esta (la carpeta debe tener
+%    estilo.tex y fonts/):
+% \newcommand{\bibliotecasDir}{/ruta/a/mi/bibliotecas_latex}
+% ---------------------------------------------------------------------
 
 % La librería de estilos (va ANTES de \begin{document})
 % OJO: es un .tex, no un .sty, así que se usa \input (no \usepackage)
