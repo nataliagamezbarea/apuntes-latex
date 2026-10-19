@@ -3,6 +3,8 @@
 Plantilla reutilizable para tomar apuntes en LaTeX con VS Code (LaTeX Workshop),
 con estilos bonitos, paletas de color y bloques listos para usar.
 
+Repo de GitHub: **https://github.com/nataliagamezbarea/apuntes-latex**
+
 ## ✨ Qué incluye
 
 - `bibliotecas_latex/estilo.tex` — la librería de estilos: paletas de color,
@@ -33,7 +35,8 @@ El propio `.tex` decide de qué carpeta lee `estilo.tex` y `fonts/` con la líne
 todo dentro de ella.
 
 ```latex
-% La carpeta del repo (la que subes a GitHub), vía el enlace /ruta_github:
+% La carpeta del repo de GitHub (https://github.com/nataliagamezbarea/apuntes-latex),
+% vía el enlace /ruta_github:
 \newcommand{\bibliotecasDir}{/ruta_github/bibliotecas_latex}
 \input{\bibliotecasDir/estilo}
 
