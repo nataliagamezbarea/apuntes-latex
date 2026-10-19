@@ -29,17 +29,24 @@
 %      ya usan los colores activos automáticamente.
 % =====================================================================
 
-% Fuentes: se cargan con ruta ABSOLUTA, así este .tex funciona desde
-% CUALQUIER carpeta (temas/, examenes/, etc.) sin copiar las fuentes.
+% ---------------------------------------------------------------------
+%  ¿DE DÓNDE SALEN LA LIBRERÍA Y LAS FUENTES?
+%  El script compilar.sh genera _fuente.tex definiendo \bibliotecasDir
+%  (puede ser el repo de GitHub o una ruta local). Si no existe, se usa
+%  ./bibliotecas_latex.
+% ---------------------------------------------------------------------
+\IfFileExists{_fuente.tex}{\input{_fuente}}{}
+\providecommand{\bibliotecasDir}{./bibliotecas_latex}
+
 \usepackage{fontspec}
-\setmainfont{NunitoRegular.ttf}[Path=/home/natalia/Escritorio/APUNTES/bibliotecas_latex/fonts/, BoldFont=NunitoBold.ttf, ItalicFont=NunitoRegular.ttf, ItalicFeatures={FakeSlant=0.2}, BoldItalicFont=NunitoBold.ttf, BoldItalicFeatures={FakeSlant=0.2}]
-\newfontfamily\headingfont{Baloo2Bold.ttf}[Path=/home/natalia/Escritorio/APUNTES/bibliotecas_latex/fonts/]
-\newfontfamily\headingfontxb{Baloo2ExtraBold.ttf}[Path=/home/natalia/Escritorio/APUNTES/bibliotecas_latex/fonts/]
-\newfontfamily\bodyxb{NunitoBold.ttf}[Path=/home/natalia/Escritorio/APUNTES/bibliotecas_latex/fonts/]
-\newfontfamily\brushfont{Lobster.ttf}[Path=/home/natalia/Escritorio/APUNTES/bibliotecas_latex/fonts/]
-\newfontfamily\markerfont{PermanentMarker.ttf}[Path=/home/natalia/Escritorio/APUNTES/bibliotecas_latex/fonts/, WordSpace=2.4]
-\newfontfamily\cursivefont{Pacifico.ttf}[Path=/home/natalia/Escritorio/APUNTES/bibliotecas_latex/fonts/]
-\newfontfamily\handfont{KalamBold.ttf}[Path=/home/natalia/Escritorio/APUNTES/bibliotecas_latex/fonts/]
+\setmainfont{NunitoRegular.ttf}[Path=\bibliotecasDir/fonts/, BoldFont=NunitoBold.ttf, ItalicFont=NunitoRegular.ttf, ItalicFeatures={FakeSlant=0.2}, BoldItalicFont=NunitoBold.ttf, BoldItalicFeatures={FakeSlant=0.2}]
+\newfontfamily\headingfont{Baloo2Bold.ttf}[Path=\bibliotecasDir/fonts/]
+\newfontfamily\headingfontxb{Baloo2ExtraBold.ttf}[Path=\bibliotecasDir/fonts/]
+\newfontfamily\bodyxb{NunitoBold.ttf}[Path=\bibliotecasDir/fonts/]
+\newfontfamily\brushfont{Lobster.ttf}[Path=\bibliotecasDir/fonts/]
+\newfontfamily\markerfont{PermanentMarker.ttf}[Path=\bibliotecasDir/fonts/, WordSpace=2.4]
+\newfontfamily\cursivefont{Pacifico.ttf}[Path=\bibliotecasDir/fonts/]
+\newfontfamily\handfont{KalamBold.ttf}[Path=\bibliotecasDir/fonts/]
 
 \usepackage[a4paper,left=1.6cm,right=1.6cm,top=1.4cm,bottom=1.4cm]{geometry}
 \usepackage[table]{xcolor}
