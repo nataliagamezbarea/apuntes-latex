@@ -20,6 +20,9 @@
 # Los apuntes son tuyos: no se suben
 /apuntes
 
+# Las imagenes de TUS apuntes tambien son tuyas: no se suben
+/imagenes_explicativas/tus-apuntes/
+
 # Vistas previas generadas
 vista-*.png
 preview-*.png

@@ -1,0 +1,41 @@
+{
+  // ===================================================================
+  //  LaTeX Workshop — compilar SIEMPRE igual:
+  //    * XeLaTeX (fuentes del sistema, emojis y acentos)
+  //    * -shell-escape (imprescindible: \imagen, \inputcarpeta y la
+  //      descarga de la libreria lo necesitan)
+  //    * dos pasadas, para que los indices y las referencias queden bien
+  // ===================================================================
+  "latex-workshop.latex.magic.args": [
+    "-synctex=1",
+    "-interaction=nonstopmode",
+    "-file-line-error",
+    "-shell-escape",
+    "%DOC%"
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "xelatex",
+      "command": "xelatex",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-shell-escape",
+        "%DOC%"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "xelatex (shell-escape) x2",
+      "tools": ["xelatex", "xelatex"]
+    },
+    {
+      "name": "xelatex (shell-escape)",
+      "tools": ["xelatex"]
+    }
+  ],
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  "latex-workshop.view.pdf.viewer": "tab"
+}

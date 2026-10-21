@@ -25,7 +25,12 @@
 \newcount\apuntescontador
 \newcommand{\inputcarpeta}[1]{%
   \begingroup
-    \advance\apuntescontador by 1
+    % \advance dentro de un grupo es local: con \global el contador
+    % sube de verdad y cada carpeta usa su propio fichero temporal.
+    \global\advance\apuntescontador by 1
+    % la carpeta en la que estamos: la usan \imagen y \filaimagen
+    % para encontrar las imagenes (imagenes/ de este tema).
+    \def\apuntescarpeta{#1}%
     \immediate\write18{find "#1" -name "*.tex" 2>/dev/null | sort -V | sed 's/.*/\\input{&}/' > "/tmp/apuntes-entradas-\jobname-\the\apuntescontador.tex"}%
     \input{/tmp/apuntes-entradas-\jobname-\the\apuntescontador.tex}%
   \endgroup
