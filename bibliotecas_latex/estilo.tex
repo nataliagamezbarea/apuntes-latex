@@ -914,9 +914,18 @@
 % ============================================================
 \def\facilcoloractual{primary}
 \def\facilcoloracento{accent}
-% fondo tintado del color de la seccion (para que las cajas cambien de color)
+% fondos y tonos derivados del color del apartado:
+%  facilpale  -> fondo muy claro (parrafos, listas)
+%  facilcajaA -> tono MEDIO  (tarjetas/definiciones: NO es el color pleno
+%                del titulo, asi no se confunden con el encabezado)
+%  facilcajaB -> tono OSCURO (segunda tarjeta de un par)
 \colorlet{facilpale}{primary!12!white}
-\newcommand{\facilsetpale}{\colorlet{facilpale}{\facilcoloractual!13!white}}
+\colorlet{facilcajaA}{primary!50!black}
+\colorlet{facilcajaB}{primary!72!black}
+\newcommand{\facilsetpale}{%
+  \colorlet{facilpale}{\facilcoloractual!13!white}%
+  \colorlet{facilcajaA}{\facilcoloractual!50!black}%
+  \colorlet{facilcajaB}{\facilcoloractual!72!black}}
 \newcounter{facilsecc}
 \newcommand{\titulo}[3][primary]{%
   \gdef\facilcoloractual{#1}%
@@ -954,27 +963,31 @@
   \vspace{4mm}%
   \sectionheader[\facilcoloractual]{1.1cm}{#2}\vspace{2.5mm}}
 % --- Bloques del "modo facil". Todos llevan una separacion vertical
-%     PREDETERMINADA debajo para que no queden pegados entre si. ---
+%     PREDETERMINADA debajo para que no queden pegados entre si.
+%     EXCEPTO \resumen: esa SI usa el color PLENO del apartado (es la
+%     caja destacada del tema). Las demas usan tono MEDIO (facilcajaA),
+%     distinto del color del titulo de seccion. ---
 \newcommand{\parrafo}[1]{\highlightpar[facilpale]{\facilnegrita{#1}}\par\vspace{3mm}}
-\newcommand{\caja}[2][\facilcoloractual]{\infobox[#1]{\facilnegrita{#2}}\par\vspace{3mm}}
-\newcommand{\cajadual}[3][\facilcoloractual]{\infoboxdup[#1]{\facilnegrita{#2}}{\facilnegrita{#3}}\par\vspace{3mm}}
-\newcommand{\nota}[3][\facilcoloractual]{\tipbox[#1]{#2}{\facilnegrita{#3}}\par\vspace{3mm}}
+\newcommand{\caja}[2][facilcajaA]{\infobox[#1]{\facilnegrita{#2}}\par\vspace{3mm}}
+\newcommand{\cajadual}[3][facilcajaA]{\infoboxdup[#1]{\facilnegrita{#2}}{\facilnegrita{#3}}\par\vspace{3mm}}
+\newcommand{\nota}[3][facilcajaA]{\tipbox[#1]{#2}{\facilnegrita{#3}}\par\vspace{3mm}}
 \newcommand{\resumen}[2][\facilcoloractual]{\shadowbox[#1]{\facilnegrita{#2}}\par\vspace{4mm}}
 \newcommand{\resalta}[1]{\hl{#1}}
-\newcommand{\dato}[3][\facilcoloractual]{\statbox[#1]{#2}{#3}}
+\newcommand{\dato}[3][facilcajaA]{\statbox[#1]{#2}{#3}}
 
 % ---- CAJAS DE DEFINICION (titulo + texto) ----
-% \definicion[color]{Titulo}{Texto}  -> una sola tarjeta (con separacion debajo)
-\newcommand{\definicion}[3][\facilcoloractual]{%
+% \definicion[color]{Titulo}{Texto}  -> una sola tarjeta (tono medio, con
+%   separacion debajo; distinto del color del titulo de seccion)
+\newcommand{\definicion}[3][facilcajaA]{%
   \typecard[#1]{#2}{\facilnegrita{#3}}\par\vspace{4mm}}
 % \definicionpar[color]{Titulo}{Texto}  -> DOS tarjetas apiladas (una debajo
 %   de otra), cada una con su titulo. Es la forma corta de usar el bloque.
-\newcommand{\definicionpar}[3][\facilcoloractual]{%
+\newcommand{\definicionpar}[3][facilcajaA]{%
   \typecard[#1]{#2}{\facilnegrita{#3}}\par\vspace{3mm}}
 % \definiciondoble[color]{Titulo izq}{Texto izq}{Titulo der}{Texto der}
-%   -> dos tarjetas LADO A LADO en una misma fila.
+%   -> dos tarjetas LADO A LADO, MISMA ALTURA (tono medio + tono oscuro).
 \newcommand{\definiciondoble}[5][\facilcoloractual]{%
   \typecardpair[#1]{#2}{\facilnegrita{#3}}{#4}{\facilnegrita{#5}}}
 
 % Cambiar el color del apartado a mitad de pagina (sin esperar al siguiente \titulo)
-\newcommand{\colorapartado}[1]{\gdef\facilcoloractual{#1}\gdef\facilcolorseccion{#1}}
+\newcommand{\colorapartado}[1]{\gdef\facilcoloractual{#1}\gdef\facilcolorseccion{#1}\facilsetpale}
