@@ -17,10 +17,12 @@
     \group_begin:
       \hsize=\rectcolwidth
       \linewidth=\rectcolwidth
-      \sbox\rectbox { \typecardlibre[rectactual]{#1}{\negrita{#2}} }
+      \global\setbox\rectbox=\vbox{ \typecardlibre[rectactual]{#1}{\negrita{#2}} }
     \group_end:
-    \ifdim\ht\rectbox>\rectmaxheight
-      \rectmaxheight=\ht\rectbox
+    \dim_set:Nn \l_tmpa_dim { \ht\rectbox }
+    \dim_add:Nn \l_tmpa_dim { \dp\rectbox }
+    \ifdim\l_tmpa_dim>\rectmaxheight
+      \rectmaxheight=\l_tmpa_dim
     \fi
     \tl_if_blank:nF {#3} { \rect_measure_aux:nw #3 \s_rect_stop }
   }
@@ -55,6 +57,7 @@
     \int_zero:N \g_rect_pos_int
     \cardheight=\rectmaxheight
     \ifnum\rectpairs>1
+      \par\vspace{5mm}%
       \noindent
     \fi
     \rect_typeset_aux:nw #2 \s_rect_stop
