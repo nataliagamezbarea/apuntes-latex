@@ -1,0 +1,12 @@
+\newcommand{\tituloC}[1]{
+  \begin{center}
+  \begin{tikzpicture}
+    \node (t) [text width=15.5cm, align=center] {{\brushfont\fontsize{24}{28}\selectfont\color{ink} #1}};
+    \begin{pgfonlayer}{background}
+      \fill[tertiary] ($(t.south west)+(-0.25,-0.15)$) rectangle ($(t.south east)+(0.25,0.18)$);
+    \end{pgfonlayer}
+  \end{tikzpicture}
+  \end{center}
+  \vspace{4mm}
+}
+

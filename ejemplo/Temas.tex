@@ -1,0 +1,32 @@
+%!TEX program = xelatex
+% =====================================================================
+%  TEMAS.TEX — DOCUMENTO PRINCIPAL (une TODO)
+%  ---------------------------------------------------------------------
+%  Aqui solo se enlaza cada ASIGNATURA. Para añadir una nueva, copia la
+%  carpeta de una asignatura y añade una linea mas abajo.
+%
+%  ESTRUCTURA DE CARPETAS:
+%     apuntes/            <- los apuntes
+%       <asignatura>/     <- una carpeta por asignatura
+%         Temas.tex       <- enlaza los temas de la asignatura
+%         temas/          <- una carpeta por tema
+%           TemaX.tex     <- enlaza los apartados del tema
+%           TemaX/        <- una carpeta por apartado
+%             ApartadoY.tex      <- enlaza los subapartados
+%             ApartadoY/         <- una carpeta por subapartado
+%               SubapartadoZ.tex
+%               SubapartadoZ/     <- aqui van las imagenes del subapartado
+% =====================================================================
+\documentclass[11pt,a4paper]{extarticle}
+
+% La carga (descarga la libreria de estilos y la enlaza) va en un
+% archivo aparte: aqui solo se ENLAZA.
+\input{carga.tex}
+
+\begin{document}
+
+% ---- LISTA DE ASIGNATURAS (una linea por asignatura) ----
+\input{apuntes/Acceso_a_Datos/Temas.tex}
+\input{apuntes/Programacion/Temas.tex}
+
+\end{document}

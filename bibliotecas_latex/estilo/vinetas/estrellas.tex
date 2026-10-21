@@ -1,0 +1,12 @@
+\newcommand{\estrellaicon}{
+  \tikz[baseline=-0.4ex]{\node[star, star points=5, star point ratio=2.25,
+    fill=\coloracento, inner sep=0pt, minimum size=9pt] {};}
+}
+
+\newlist{estrellalist}{itemize}{1}
+\setlist[estrellalist]{leftmargin=7mm, itemsep=7pt, topsep=2pt,
+  label={\estrellaicon}, font=\fontsize{10.6}{14.8}\selectfont\color{ink}}
+
+\newcommand{\estrellas}[1]{
+  \begin{estrellalist}\let\itemtipo\itembullet\items#1|\itemfin\end{estrellalist}}
+

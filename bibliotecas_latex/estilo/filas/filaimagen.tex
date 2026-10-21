@@ -1,0 +1,10 @@
+\newcommand{\filaimagen}[3]{
+  \noindent
+  \begin{minipage}[t]{#1}
+    \includegraphics[width=\linewidth]{#2}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{\dimexpr\linewidth-#1-6mm\relax}
+    #3
+  \end{minipage}\par
+}
+

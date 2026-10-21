@@ -1,0 +1,11 @@
+\newlist{steplist}{enumerate}{1}
+\setlist[steplist]{leftmargin=9mm, itemsep=9pt, topsep=2pt,
+  label={\protect\stepcircle{\arabic*}}, font=\fontsize{10.6}{14.8}\selectfont\color{ink}}
+
+\newcommand{\stepcircle}[1]{\tikz[baseline=-0.65ex]{\node[circle, fill=\coloractual,
+  text=white, inner sep=0pt, minimum size=15pt,
+  font=\fontsize{8.5}{8.5}\selectfont\bfseries] {#1};}}
+
+\newcommand{\pasos}[1]{
+  \begin{steplist}\let\itemtipo\itemstep\items#1|\itemfin\end{steplist}}
+

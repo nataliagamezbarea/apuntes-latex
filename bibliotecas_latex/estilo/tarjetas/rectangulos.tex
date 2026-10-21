@@ -1,0 +1,64 @@
+\newcount\rectcount
+\newdimen\rectmaxheight
+\newdimen\rectcolwidth
+\newdimen\rectgap
+\newbox\rectbox
+
+\ExplSyntaxOn
+\int_new:N \g_rect_pos_int
+\int_new:N \g_rect_count_int
+
+\long\protected\def\rect_measure_aux:nw #1#2#3 \s_rect_stop
+  {
+    \int_gincr:N \g_rect_pos_int
+    \int_if_even:nTF { \g_rect_pos_int }
+      { \colorlet{rectactual}{rectbase!72!black} }
+      { \colorlet{rectactual}{rectbase!55!black} }
+    \sbox\rectbox { \typecard[rectactual]{#1}{\negrita{#2}} }
+    \ifdim\ht\rectbox>\rectmaxheight
+      \rectmaxheight=\ht\rectbox
+    \fi
+    \tl_if_blank:nF {#3} { \rect_measure_aux:nw #3 \s_rect_stop }
+  }
+
+\long\protected\def\rect_typeset_aux:nw #1#2#3 \s_rect_stop
+  {
+    \int_gincr:N \g_rect_pos_int
+    \int_if_even:nTF { \g_rect_pos_int }
+      { \colorlet{rectactual}{rectbase!72!black} }
+      { \colorlet{rectactual}{rectbase!55!black} }
+    \ifnum\rectpairs>1
+      \begin{minipage}[t][\rectmaxheight][t]{\rectcolwidth}
+        \typecard[rectactual]{#1}{\negrita{#2}}
+      \end{minipage}%
+    \else
+      \typecard[rectactual]{#1}{\negrita{#2}}%
+    \fi
+    \tl_if_blank:nF {#3}
+      { \hspace{\rectgap} \rect_typeset_aux:nw #3 \s_rect_stop }
+  }
+
+\NewDocumentCommand{\rectangulos}{O{\coloractual} +m}
+  {
+    \colorlet{rectbase}{#1}
+    \int_gset:Nn \g_rect_count_int { \tl_count:n {#2} }
+    \edef\rectpairs{\number\numexpr\int_use:N \g_rect_count_int/2\relax}
+    \rectgap=6mm
+    \edef\rectcolwidth{\the\dimexpr(\linewidth-6mm*(\rectpairs-1))/\rectpairs\relax}
+    \rectmaxheight=0pt
+    \ifnum\rectpairs>1
+      \int_zero:N \g_rect_pos_int
+      \rect_measure_aux:nw #2 \s_rect_stop
+    \fi
+    \int_zero:N \g_rect_pos_int
+    \noindent
+    \ifnum\rectpairs>1
+      \cardheight=\rectmaxheight
+    \fi
+    \rect_typeset_aux:nw #2 \s_rect_stop
+    \cardheight=0pt
+    \par\vspace{4mm}
+  }
+\ExplSyntaxOff
+\newcommand{\rectangulosdoble}[5][\coloractual]{\rectangulos[#1]{{#2}{#3}{#4}{#5}}}
+\newcommand{\definiciondoble}[5][\coloractual]{\rectangulosdoble[#1]{#2}{#3}{#4}{#5}}

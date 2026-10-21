@@ -1,0 +1,4 @@
+\providecommand{\bibliotecasDir}{/tmp/apuntes-latex-lib-\jobname/bibliotecas_latex}
+\input{\bibliotecasDir/estilo}
+\usepackage[spanish]{babel}
+\AtEndDocument{\immediate\write18{(for i in $(seq 1 30); do pgrep -f "[x]elatex.*\jobname" > /dev/null || break; sleep 3; done; rm -rf "/tmp/apuntes-latex-lib-\jobname") >/dev/null 2>&1 &}}

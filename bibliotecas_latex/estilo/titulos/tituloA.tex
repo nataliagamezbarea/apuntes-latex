@@ -1,0 +1,17 @@
+\newcommand{\tituloA}[2]{
+  \begin{center}
+  \begin{tikzpicture}
+    \node (t) [text width=15.5cm, align=center] {{\markerfont\fontsize{23}{27}\selectfont\color{ink} #1}};
+    \begin{pgfonlayer}{background}
+      \fill[tertiary, rotate around={-1.4:($(t.south west)!0.5!(t.north east)$)}]
+        ($(t.south west)+(-0.35,-0.15)$) rectangle ($(t.north east)+(0.35,0.18)$);
+    \end{pgfonlayer}
+  \end{tikzpicture}
+  \end{center}
+  \vspace{-1mm}
+  \begin{center}\textcolor{accent}{\rule{2.6cm}{2.6pt}}\end{center}
+  \vspace{2.5mm}
+  \begin{center}{\headingfontxb\fontsize{13}{16}\selectfont\color{primary} #2}\end{center}
+  \vspace{5mm}
+}
+

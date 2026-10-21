@@ -1,0 +1,10 @@
+\newcommand{\seccion}[2][]{
+  \if\relax\detokenize{#1}\relax\sigseccion\else\setcolorapartado{#1}\fi
+  \vspace{3mm}
+  \sectionheader[\coloractual]{0.7cm}{#2}\vspace{2mm}}
+
+\newcommand{\secciongrande}[2][]{
+  \if\relax\detokenize{#1}\relax\sigseccion\else\setcolorapartado{#1}\fi
+  \vspace{4mm}
+  \sectionheader[\coloractual]{1.1cm}{#2}\vspace{2.5mm}}
+

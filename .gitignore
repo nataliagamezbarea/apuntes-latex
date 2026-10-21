@@ -1,18 +1,23 @@
-# Archivos temporales de LaTeX (no se suben)
-build/
+# Archivos generados por LaTeX (solo se generan; no se suben)
 *.aux
 *.log
 *.out
 *.toc
+*.lof
+*.lot
 *.fls
 *.fdb_latexmk
 *.xdv
 *.synctex.gz
 *.bbl
 *.blg
-
-# PDFs generados (se regeneran al compilar; no se suben)
+*.nav
+*.snm
+*.vrb
 *.pdf
+
+# Los apuntes son tuyos: no se suben
+apuntes
 
 # Vistas previas generadas
 vista-*.png

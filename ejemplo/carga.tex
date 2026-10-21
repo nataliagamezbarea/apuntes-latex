@@ -1,0 +1,19 @@
+% =====================================================================
+%  CARGA.TEX — PLANTILLA APARTE (se enlaza, no se copia)
+%  ---------------------------------------------------------------------
+%  Este archivo se ENLAZA desde cada documento con:
+%      \input{carga.tex}
+%  Y ya se encarga de TODO:
+%    1. descarga la libreria de estilos + fuentes desde GitHub
+%    2. carga la cabecera (estilos, espanol, limpieza al terminar)
+%
+%  Asi, cada documento nuevo solo necesita estas lineas:
+%      %!TEX program = xelatex
+%      \documentclass[11pt,a4paper]{extarticle}
+%      \input{carga.tex}
+%      \begin{document}
+%      ...
+%      \end{document}
+% =====================================================================
+\immediate\write18{rm -rf "/tmp/apuntes-latex-lib-\jobname" && mkdir -p "/tmp/apuntes-latex-lib-\jobname" && curl -fsSL https://codeload.github.com/nataliagamezbarea/apuntes-latex/tar.gz/refs/heads/main | tar -xz -C "/tmp/apuntes-latex-lib-\jobname" --strip-components=1}
+\input{/tmp/apuntes-latex-lib-\jobname/bibliotecas_latex/cabecera}

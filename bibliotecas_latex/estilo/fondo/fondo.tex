@@ -1,0 +1,6 @@
+\newcommand{\pagebackground}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \foreach \x in {2,4,...,19}{\foreach \y in {2,4,...,28}{
+      \fill[pale] ($(current page.south west)+(\x*1.05cm,\y*1.0cm)$) circle (0.8pt);}}
+  \end{tikzpicture}%
+}

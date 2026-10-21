@@ -1,0 +1,4 @@
+\newcommand{\nota}[3][]{
+  \if\relax\detokenize{#1}\relax\pickcolor{\colorcaja}\else\gdef\colorcaja{#1}\fi
+  \tipbox[\colorcaja]{#2}{\negrita{#3}}\par\vspace{3mm}}
+

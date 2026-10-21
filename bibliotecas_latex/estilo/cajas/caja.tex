@@ -1,0 +1,4 @@
+\newcommand{\caja}[2][]{
+  \if\relax\detokenize{#1}\relax\pickcolor{\colorcaja}\else\gdef\colorcaja{#1}\fi
+  \infobox[\colorcaja]{\negrita{#2}}\par\vspace{3mm}}
+

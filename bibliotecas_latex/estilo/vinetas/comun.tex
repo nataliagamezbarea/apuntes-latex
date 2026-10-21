@@ -1,0 +1,25 @@
+\def\itemvacio{}
+
+\def\itemnulo{}
+
+\long\def\items#1|#2\itemfin{
+  \itemtipo{#1}
+  \ifx\itemvacio#2\itemvacio\else\items#2\itemfin\fi}
+
+\ExplSyntaxOn
+
+\long\protected\def\negrita #1
+  {
+    \tl_set:Nn \l_tmpa_tl {#1}
+    \regex_replace_all:nnN { \*\* (.*?) \*\* } { \c{textbf} \cB\{ \1 \cE\} } \l_tmpa_tl
+    \tl_use:N \l_tmpa_tl
+  }
+
+\ExplSyntaxOff
+
+\def\itembullet#1{\item \negrita{#1}}
+
+\def\itemcheck#1{\item \negrita{#1}}
+
+\def\itemstep#1{\item \negrita{#1}}
+

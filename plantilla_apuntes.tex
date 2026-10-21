@@ -1,56 +1,56 @@
 %!TEX program = xelatex
-
+% =====================================================================
+%  PLANTILLA DE APUNTES — copia este archivo y ya está.
+%
+%  La librería de estilos (estilo/ + fuentes) se descarga de GitHub al
+%  compilar y se borra al terminar, así que siempre tienes la última
+%  versión. Solo necesitas -shell-escape (ya está en la config).
+%
+%  ESTRUCTURA DE TUS APUNTES (ver la carpeta ejemplo/):
+%     apuntes/<asignatura>/Temas.tex      -> enlaza los temas
+%     apuntes/<asignatura>/temas/TemaX.tex -> enlaza los apartados
+%     .../TemaX/ApartadoY.tex             -> enlaza los subapartados
+%     .../ApartadoY/SubapartadoZ.tex      -> el texto (+ imagenes)
+%  Las rutas de \input se escriben desde la RAIZ del documento.
+% =====================================================================
 \documentclass[11pt,a4paper]{extarticle}
 
-% ---------------------------------------------------------------------
-%  LIBRERÍA Y FUENTES DESDE GITHUB (siempre la última versión)
-%  https://github.com/nataliagamezbarea/apuntes-latex
-%
-%  Al compilar: descarga estilo.tex + fonts/ de GitHub a una carpeta
-%  temporal, los usa, y al terminar la BORRA (no queda nada, ni en el
-%  proyecto ni en tu equipo). Si algo cambia en GitHub, la próxima
-%  compilación lo coge.
-%  Necesita -shell-escape (ya está activado en la config de VS Code).
-% ---------------------------------------------------------------------
 \immediate\write18{rm -rf "/tmp/apuntes-latex-lib-\jobname" && mkdir -p "/tmp/apuntes-latex-lib-\jobname" && curl -fsSL https://codeload.github.com/nataliagamezbarea/apuntes-latex/tar.gz/refs/heads/main | tar -xz -C "/tmp/apuntes-latex-lib-\jobname" --strip-components=1}
-\AtEndDocument{\immediate\write18{(sleep 3; rm -rf "/tmp/apuntes-latex-lib-\jobname") >/dev/null 2>&1 &}}
-
-% Carpeta temporal con estilo.tex y fonts/ (se borra al terminar)
-\newcommand{\bibliotecasDir}{/tmp/apuntes-latex-lib-\jobname/bibliotecas_latex}
-
-% La librería de estilos (va ANTES de \begin{document})
-% OJO: es un .tex, no un .sty, así que se usa \input (no \usepackage)
-\input{\bibliotecasDir/estilo}
-
-% Español con acentos y ñ (XeLaTeX lo maneja directamente, babel por si acaso)
-\usepackage[spanish]{babel}
+\input{/tmp/apuntes-latex-lib-\jobname/bibliotecas_latex/cabecera}
 
 \begin{document}
 
-% ===================== PORTADA / TEMA 1 =====================
-% \titulo[color]{ETIQUETA}{Título} = APARTADO. Cambia el color de todo lo que
-% venga debajo (secciones, cajas, notas...). Ponle color o déjalo sin color.
+% ---- APARTADO: \titulo[color]{ETIQUETA}{Título} ----
+% Cambia el color de todo lo que venga debajo.
 \titulo{TEMA 01}{Introducción al neuromarketing}
 
-\usarfondo             % <- fondo sutil de cuaderno (puntos)
+\usarfondo
 
 \seccion{¿Qué es?}
 
 \parrafo{El \hl{neuromarketing} combina neurociencia y marketing para
 entender \emph{por qué} el cliente compra, no solo \emph{qué} compra.}
 
-% **texto** = negrita automática (sin escribir \textbf)
 \caja{**Idea clave:** las decisiones de compra son mayoritariamente
 \emph{inconscientes} y emocionales antes de ser racionales.}
 
-% ---- Dos tarjetas lado a lado ----
-\definiciondoble{Definición}{Uso de técnicas de medición cerebral y conductual
+% ---- DOS tarjetas lado a lado (misma altura) ----
+\rectangulosdoble{Definición}{Uso de técnicas de medición cerebral y conductual
   para estudiar al consumidor.}
   {Objetivo}{Predecir el comportamiento de compra y diseñar mejores experiencias.}
 
-\vspace{3mm}
+% ---- CUATRO tarjetas en fila (las columnas se calculan solas) ----
+\rectangulos{
+  {Definición}{Uso de técnicas de medición cerebral y conductual.}
+  {Objetivo}{Predecir el comportamiento de compra.}
+  {Muestra}{Grupo de participantes del estudio.}
+  {Variables}{Todo lo que se mide en el experimento.}
+}
 
-% ---- Listas: solo separa los items con | y pone ** para negrita ----
+% ---- UNA tarjeta suelta ----
+\definicion{Eye tracking}{Sigue la mirada del sujeto mientras mira un anuncio.}
+
+% ---- Listas: separa los items con | y usa ** para negrita ----
 \lista{**Rama funcional:** estudia la activación cerebral ante estímulos.
       |**Rama conductual:** observa lo que la gente hace.}
 
@@ -63,16 +63,11 @@ entender \emph{por qué} el cliente compra, no solo \emph{qué} compra.}
 \preguntas{¿Qué mide el eye tracking?}
 \flechas{Estímulo cerebral|Conducta observable|Decisión de compra}
 
-% ---- Nota lateral ----
 \nota{Para el examen}{Diferencia bien entre neuromarketing \emph{funcional}
 y \emph{conductual}; caen preguntas tipo test.}
 
-\vspace{3mm}
-
 % ---- Emojis y símbolos: se ven solos, sin envolver nada ----
 \caja{🌐 Web  📚 Apuntes  ✅ Hecho  ⚠️ Cuidado  ★ Destacado  ♥ Importante}
-
-\vspace{3mm}
 
 % ---- Tabla minimalista ----
 \begin{tablaminimal}{lcc}
@@ -83,11 +78,10 @@ y \emph{conductual}; caen preguntas tipo test.}
   Eye tracking & Media    & Sí \\
 \end{tablaminimal}
 
-% ---- Caja resumen con sombra ----
+% ---- Caja resumen con sombra (la única con el color pleno) ----
 \resumen{**Resumen del tema:** el neuromarketing estudia los mecanismos
 inconscientes de la decisión de compra.}
 
-% ---- Píldora + pie de página ----
 \pagefoot{Neuromarketing -- Tema 01}
 
 \end{document}

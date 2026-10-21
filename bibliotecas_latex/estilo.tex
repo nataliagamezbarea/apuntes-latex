@@ -1,993 +1,117 @@
 % =====================================================================
-%  ESTILO.TEX — LIBRERÍA DE APUNTES (multi-tema, multi-color)
-% =====================================================================
-%  CÓMO FUNCIONA (para reutilizar sin que todo salga igual):
-%   1) Al principio de cada página / sección llama a UNA paleta:
-%        \paletaBosque   \paletaCoral   \paletaLavanda   \paletaOceano
-%      Esto redefine los colores "primary / secondary / tertiary /
-%      pale / accent / ink" que usan TODOS los bloques.
-%   2) Elige un estilo de título (son independientes de la paleta,
-%      así que puedes combinar cualquier título con cualquier color):
-%        \tituloA{Texto}{Subtítulo}   -> marcador grueso + manchas
-%        \tituloB{Texto}{Subtítulo}   -> minimalista, subrayado fino
-%        \tituloC{Texto}              -> cursivo + barra resaltada
-%        \tituloD{Texto}              -> barras dobles (estilo cuaderno)
-%        \tituloE{Etiqueta}{Texto}    -> minimalista, pill + título limpio
-%        \tituloF{Texto}              -> minimalista, dos líneas finas
-%        \tituloG{Texto}{Subtítulo}   -> minimalista, barra lateral fina
-%        \tituloH{Texto}              -> minimalista, subrayado corto
-%        \tituloI{Texto}              -> minimalista, entre corchetes
-%        \tituloJ{Núm.}{Texto}        -> minimalista, número editorial
-%        \tituloK{Texto}              -> minimalista, marco fino completo
-%        \tituloL{Texto}              -> minimalista, esquinas de ficha
-%        \tituloM{Texto}              -> minimalista, asterisco de acento
-%        \tituloN{Texto}              -> minimalista, barras verticales
-%        \tituloO{Palabra}{Resto}     -> minimalista, 1ª palabra resaltada
-%        \tituloP{Etiqueta}{Texto}    -> minimalista, etiqueta + línea
-%        \tituloQ{Texto}              -> minimalista, subrayado ondulado
-%   3) El resto de bloques (cajas, listas, tarjetas, pills, tablas...)
-%      ya usan los colores activos automáticamente.
+%  ESTILO.TEX — CARGADOR DE LA LIBRERIA DE APUNTES
+%  Cada cosa esta en su propio fichero dentro de estilo/:
+%    carga/    paquetes, fuentes, emojis
+%    paletas/  24 paletas (una por fichero)
+%    colores/  variables, paleta propia, pool, color actual
+%    titulos/  un fichero por estilo de titulo (A-Q) + titulo, seccion
+%    parrafos/ realce, resaltado, parrafo, resalta
+%    cajas/    un fichero por caja (caja, nota, dato, resumen...)
+%    tarjetas/ un fichero por tarjeta (typecard, definicion, rectangulos)
+%    vinetas/  un fichero por tipo de vineta
+%    tablas/   un fichero por tipo de tabla
+%    filas/    un fichero por tipo de fila
+%    fondo/    fondo de pagina, usarfondo, pie
 % =====================================================================
 
-% ---------------------------------------------------------------------
-%  ¿DE DÓNDE SALEN LA LIBRERÍA Y LAS FUENTES?
-%  El propio .tex define \bibliotecasDir ANTES de cargar este archivo
-%  (puede ser el repo de GitHub o una ruta local). Si no lo define, se
-%  usa ./bibliotecas_latex (la carpeta que está al lado de este estilo).
-% ---------------------------------------------------------------------
 \providecommand{\bibliotecasDir}{./bibliotecas_latex}
 
-\usepackage{fontspec}
-\setmainfont{NunitoRegular.ttf}[Path=\bibliotecasDir/fonts/, BoldFont=NunitoBold.ttf, ItalicFont=NunitoRegular.ttf, ItalicFeatures={FakeSlant=0.2}, BoldItalicFont=NunitoBold.ttf, BoldItalicFeatures={FakeSlant=0.2}]
-\newfontfamily\headingfont{Baloo2Bold.ttf}[Path=\bibliotecasDir/fonts/]
-\newfontfamily\headingfontxb{Baloo2ExtraBold.ttf}[Path=\bibliotecasDir/fonts/]
-\newfontfamily\bodyxb{NunitoBold.ttf}[Path=\bibliotecasDir/fonts/]
-\newfontfamily\brushfont{Lobster.ttf}[Path=\bibliotecasDir/fonts/]
-\newfontfamily\markerfont{PermanentMarker.ttf}[Path=\bibliotecasDir/fonts/, WordSpace=2.4]
-\newfontfamily\cursivefont{Pacifico.ttf}[Path=\bibliotecasDir/fonts/]
-\newfontfamily\handfont{KalamBold.ttf}[Path=\bibliotecasDir/fonts/]
+\input{\bibliotecasDir/estilo/carga/fuentes}
+\input{\bibliotecasDir/estilo/carga/emojis}
+\input{\bibliotecasDir/estilo/carga/paquetes}
 
-% ---------------------------------------------------------------------
-%  EMOJIS Y SÍMBOLOS (🌐 ♥ ✓ → ★ ...)
-%  XeLaTeX no tiene "fallback" automático: si la fuente principal no
-%  tiene el glifo, ese carácter sale en blanco. Aquí se arregla SIN
-%  envolver el emoji a mano: ucharclasses detecta los bloques Unicode de
-%  emojis/símbolos y usa Symbola SOLO para ese carácter, volviendo
-%  automáticamente a la fuente normal justo después.
-% ---------------------------------------------------------------------
-\usepackage{ucharclasses}
-\newfontfamily\emojifont{Symbola.ttf}[Path=\bibliotecasDir/fonts/]
-\newfontfamily\cuerpofont{NunitoRegular.ttf}[Path=\bibliotecasDir/fonts/, BoldFont=NunitoBold.ttf, ItalicFont=NunitoRegular.ttf, ItalicFeatures={FakeSlant=0.2}, BoldItalicFont=NunitoBold.ttf, BoldItalicFeatures={FakeSlant=0.2}]
-\setDefaultTransitions{}{}
-\setTransitionsFor{Emoticons}{\emojifont}{\cuerpofont}
-\setTransitionsFor{MiscellaneousSymbolsAndPictographs}{\emojifont}{\cuerpofont}
-\setTransitionsFor{TransportAndMapSymbols}{\emojifont}{\cuerpofont}
-\setTransitionsFor{SupplementalSymbolsAndPictographs}{\emojifont}{\cuerpofont}
-\setTransitionsFor{SymbolsAndPictographsExtendedA}{\emojifont}{\cuerpofont}
-\setTransitionsFor{Dingbats}{\emojifont}{\cuerpofont}
-\setTransitionsFor{MiscellaneousSymbols}{\emojifont}{\cuerpofont}
-\setTransitionsFor{MiscellaneousSymbolsAndArrows}{\emojifont}{\cuerpofont}
+\input{\bibliotecasDir/estilo/paletas/paletaAmarillo}
+\input{\bibliotecasDir/estilo/paletas/paletaArena}
+\input{\bibliotecasDir/estilo/paletas/paletaAzul}
+\input{\bibliotecasDir/estilo/paletas/paletaBosque}
+\input{\bibliotecasDir/estilo/paletas/paletaBurdeos}
+\input{\bibliotecasDir/estilo/paletas/paletaCafe}
+\input{\bibliotecasDir/estilo/paletas/paletaCeleste}
+\input{\bibliotecasDir/estilo/paletas/paletaCiruela}
+\input{\bibliotecasDir/estilo/paletas/paletaCoral}
+\input{\bibliotecasDir/estilo/paletas/paletaFucsia}
+\input{\bibliotecasDir/estilo/paletas/paletaGris}
+\input{\bibliotecasDir/estilo/paletas/paletaLavanda}
+\input{\bibliotecasDir/estilo/paletas/paletaLila}
+\input{\bibliotecasDir/estilo/paletas/paletaLima}
+\input{\bibliotecasDir/estilo/paletas/paletaMelocoton}
+\input{\bibliotecasDir/estilo/paletas/paletaMenta}
+\input{\bibliotecasDir/estilo/paletas/paletaNaranja}
+\input{\bibliotecasDir/estilo/paletas/paletaOceano}
+\input{\bibliotecasDir/estilo/paletas/paletaOliva}
+\input{\bibliotecasDir/estilo/paletas/paletaRojo}
+\input{\bibliotecasDir/estilo/paletas/paletaRosa}
+\input{\bibliotecasDir/estilo/paletas/paletaTurquesa}
+\input{\bibliotecasDir/estilo/paletas/pasteles}
 
-\usepackage[a4paper,left=1.6cm,right=1.6cm,top=1.4cm,bottom=1.4cm]{geometry}
-\usepackage[table]{xcolor}
-\usepackage{booktabs}
-\usepackage{array}
-\usepackage{tikz}
-\usetikzlibrary{shadows,calc,fit,backgrounds,decorations.pathmorphing,arrows.meta,shapes.geometric}
-\usepackage[most]{tcolorbox}
-\usepackage{enumitem}
-\usepackage{ragged2e}
-\usepackage{parskip}
-\usepackage{eso-pic}
-\usepackage{graphicx}
-\pagestyle{empty}
-\setlength{\parindent}{0pt}
+\input{\bibliotecasDir/estilo/colores/variables}
+\input{\bibliotecasDir/estilo/colores/mipaleta}
+\input{\bibliotecasDir/estilo/colores/pool}
+\input{\bibliotecasDir/estilo/colores/actuales}
 
-% =====================================================================
-% COLORES BASE (4 paletas x 6 tonos)
-% =====================================================================
-% --- Bosque (verde bosque + terracota, más vivo) ---
-\definecolor{bosqueA}{HTML}{2F5233}
-\definecolor{bosqueB}{HTML}{6B9C4D}
-\definecolor{bosqueC}{HTML}{BFE0A8}
-\definecolor{bosqueP}{HTML}{F3F1E3}
-\definecolor{bosqueX}{HTML}{D9722C}
-\definecolor{bosqueT}{HTML}{20301E}
-% --- Coral (minimalista) ---
-\definecolor{coralA}{HTML}{D97A63}
-\definecolor{coralB}{HTML}{E8A491}
-\definecolor{coralC}{HTML}{F3C9BB}
-\definecolor{coralP}{HTML}{FCEFEA}
-\definecolor{coralX}{HTML}{20201E}
-\definecolor{coralT}{HTML}{262220}
-% --- Lavanda (resaltador) ---
-\definecolor{lavA}{HTML}{9163CE}
-\definecolor{lavB}{HTML}{C9A3F0}
-\definecolor{lavC}{HTML}{E4D2FA}
-\definecolor{lavP}{HTML}{F4ECFC}
-\definecolor{lavX}{HTML}{F4D35E}
-\definecolor{lavT}{HTML}{262626}
-% --- Océano (teal / cuaderno) ---
-\definecolor{oceA}{HTML}{15806E}
-\definecolor{oceB}{HTML}{3EB89A}
-\definecolor{oceC}{HTML}{93E3CE}
-\definecolor{oceP}{HTML}{E3F8F1}
-\definecolor{oceX}{HTML}{31408F}
-\definecolor{oceT}{HTML}{262626}
+\input{\bibliotecasDir/estilo/titulos/barras}
+\input{\bibliotecasDir/estilo/titulos/titulo}
+\input{\bibliotecasDir/estilo/titulos/seccion}
+\input{\bibliotecasDir/estilo/titulos/tituloA}
+\input{\bibliotecasDir/estilo/titulos/tituloB}
+\input{\bibliotecasDir/estilo/titulos/tituloC}
+\input{\bibliotecasDir/estilo/titulos/tituloD}
+\input{\bibliotecasDir/estilo/titulos/tituloE}
+\input{\bibliotecasDir/estilo/titulos/tituloF}
+\input{\bibliotecasDir/estilo/titulos/tituloG}
+\input{\bibliotecasDir/estilo/titulos/tituloH}
+\input{\bibliotecasDir/estilo/titulos/tituloI}
+\input{\bibliotecasDir/estilo/titulos/tituloJ}
+\input{\bibliotecasDir/estilo/titulos/tituloK}
+\input{\bibliotecasDir/estilo/titulos/tituloL}
+\input{\bibliotecasDir/estilo/titulos/tituloM}
+\input{\bibliotecasDir/estilo/titulos/tituloN}
+\input{\bibliotecasDir/estilo/titulos/tituloO}
+\input{\bibliotecasDir/estilo/titulos/tituloP}
+\input{\bibliotecasDir/estilo/titulos/tituloQ}
 
-% =====================================================================
-% VARIABLES SEMÁNTICAS (lo que usan los bloques)
-% =====================================================================
-\colorlet{primary}{oceA}
-\colorlet{secondary}{oceB}
-\colorlet{tertiary}{oceC}
-\colorlet{pale}{oceP}
-\colorlet{accent}{oceX}
-\colorlet{ink}{oceT}
+\input{\bibliotecasDir/estilo/parrafos/realce}
+\input{\bibliotecasDir/estilo/parrafos/resaltado}
+\input{\bibliotecasDir/estilo/parrafos/parrafo}
+\input{\bibliotecasDir/estilo/parrafos/resalta}
 
-\newcommand{\paletaBosque}{\colorlet{primary}{bosqueA}\colorlet{secondary}{bosqueB}\colorlet{tertiary}{bosqueC}\colorlet{pale}{bosqueP}\colorlet{accent}{bosqueX}\colorlet{ink}{bosqueT}}
-\newcommand{\paletaCoral}{\colorlet{primary}{coralA}\colorlet{secondary}{coralB}\colorlet{tertiary}{coralC}\colorlet{pale}{coralP}\colorlet{accent}{coralX}\colorlet{ink}{coralT}}
-\newcommand{\paletaLavanda}{\colorlet{primary}{lavA}\colorlet{secondary}{lavB}\colorlet{tertiary}{lavC}\colorlet{pale}{lavP}\colorlet{accent}{lavX}\colorlet{ink}{lavT}}
-\newcommand{\paletaOceano}{\colorlet{primary}{oceA}\colorlet{secondary}{oceB}\colorlet{tertiary}{oceC}\colorlet{pale}{oceP}\colorlet{accent}{oceX}\colorlet{ink}{oceT}}
+\input{\bibliotecasDir/estilo/cajas/infobox}
+\input{\bibliotecasDir/estilo/cajas/tipbox}
+\input{\bibliotecasDir/estilo/cajas/pildora}
+\input{\bibliotecasDir/estilo/cajas/statbox}
+\input{\bibliotecasDir/estilo/cajas/sombra}
+\input{\bibliotecasDir/estilo/cajas/caja}
+\input{\bibliotecasDir/estilo/cajas/cajadual}
+\input{\bibliotecasDir/estilo/cajas/nota}
+\input{\bibliotecasDir/estilo/cajas/resumen}
+\input{\bibliotecasDir/estilo/cajas/dato}
 
-% ---------------------------------------------------------------------
-%  MÁS PALETAS (todas combinables entre sí)
-% ---------------------------------------------------------------------
-\definecolor{rosaA}{HTML}{E75480}\definecolor{rosaB}{HTML}{F593B3}\definecolor{rosaC}{HTML}{FBD3E2}\definecolor{rosaP}{HTML}{FDEEF4}\definecolor{rosaX}{HTML}{B23A63}\definecolor{rosaT}{HTML}{2B2226}
-\definecolor{lilaA}{HTML}{7B4FB0}\definecolor{lilaB}{HTML}{A87FD9}\definecolor{lilaC}{HTML}{DCC6F2}\definecolor{lilaP}{HTML}{F1E8FB}\definecolor{lilaX}{HTML}{4B2C73}\definecolor{lilaT}{HTML}{262230}
-\definecolor{fucsA}{HTML}{D6247C}\definecolor{fucsB}{HTML}{EF6FA8}\definecolor{fucsC}{HTML}{F9C2DC}\definecolor{fucsP}{HTML}{FDEBF4}\definecolor{fucsX}{HTML}{8C0F4C}\definecolor{fucsT}{HTML}{2A1520}
-\definecolor{burdA}{HTML}{8C2F39}\definecolor{burdB}{HTML}{B85C66}\definecolor{burdC}{HTML}{E4BFC3}\definecolor{burdP}{HTML}{F7EBEC}\definecolor{burdX}{HTML}{57181F}\definecolor{burdT}{HTML}{261C1E}
-\definecolor{melcA}{HTML}{F08A5D}\definecolor{melcB}{HTML}{F7B18A}\definecolor{melcC}{HTML}{FBD9C6}\definecolor{melcP}{HTML}{FEF1EA}\definecolor{melcX}{HTML}{B4542A}\definecolor{melcT}{HTML}{2E2420}
-\definecolor{naraA}{HTML}{E86A17}\definecolor{naraB}{HTML}{F4A261}\definecolor{naraC}{HTML}{FBD7B5}\definecolor{naraP}{HTML}{FEF2E8}\definecolor{naraX}{HTML}{9B3F08}\definecolor{naraT}{HTML}{2C2118}
-\definecolor{amarA}{HTML}{E0A422}\definecolor{amarB}{HTML}{F0C75E}\definecolor{amarC}{HTML}{FAE6AE}\definecolor{amarP}{HTML}{FDF6E3}\definecolor{amarX}{HTML}{8A5B08}\definecolor{amarT}{HTML}{2B2418}
-\definecolor{mentA}{HTML}{2FA98C}\definecolor{mentB}{HTML}{7FD0BC}\definecolor{mentC}{HTML}{C6EBE2}\definecolor{mentP}{HTML}{E9F8F4}\definecolor{mentX}{HTML}{166B57}\definecolor{mentT}{HTML}{1E2B28}
-\definecolor{limaA}{HTML}{6FAF21}\definecolor{limaB}{HTML}{A3D46B}\definecolor{limaC}{HTML}{DCF0BE}\definecolor{limaP}{HTML}{F1F9E4}\definecolor{limaX}{HTML}{3F6C0C}\definecolor{limaT}{HTML}{23291A}
-\definecolor{olivA}{HTML}{6E7B2E}\definecolor{olivB}{HTML}{A3AE62}\definecolor{olivC}{HTML}{DCE0BE}\definecolor{olivP}{HTML}{F1F3E4}\definecolor{olivX}{HTML}{43491A}\definecolor{olivT}{HTML}{242619}
-\definecolor{turqA}{HTML}{1B9AAA}\definecolor{turqB}{HTML}{67C4D1}\definecolor{turqC}{HTML}{BFE7EC}\definecolor{turqP}{HTML}{EAF8FA}\definecolor{turqX}{HTML}{0F5B66}\definecolor{turqT}{HTML}{1C282B}
-\definecolor{celeA}{HTML}{2CA6D9}\definecolor{celeB}{HTML}{82CBEA}\definecolor{celeC}{HTML}{CDEAF7}\definecolor{celeP}{HTML}{ECF8FE}\definecolor{celeX}{HTML}{166A8E}\definecolor{celeT}{HTML}{1D2830}
-\definecolor{azulA}{HTML}{2E6FB7}\definecolor{azulB}{HTML}{7BA9DD}\definecolor{azulC}{HTML}{C9DEF3}\definecolor{azulP}{HTML}{EBF4FC}\definecolor{azulX}{HTML}{1A4372}\definecolor{azulT}{HTML}{1E2630}
-\definecolor{rojoA}{HTML}{D33F49}\definecolor{rojoB}{HTML}{EC7C84}\definecolor{rojoC}{HTML}{F8CDD0}\definecolor{rojoP}{HTML}{FDEDEE}\definecolor{rojoX}{HTML}{8C1F26}\definecolor{rojoT}{HTML}{2B1D1E}
-\definecolor{ciruA}{HTML}{7A3B69}\definecolor{ciruB}{HTML}{A96F97}\definecolor{ciruC}{HTML}{DFC1D5}\definecolor{ciruP}{HTML}{F5EAF1}\definecolor{ciruX}{HTML}{4B2140}\definecolor{ciruT}{HTML}{291E26}
-\definecolor{cafeA}{HTML}{8A5A3C}\definecolor{cafeB}{HTML}{B98A66}\definecolor{cafeC}{HTML}{E4CDBA}\definecolor{cafeP}{HTML}{F7EDE4}\definecolor{cafeX}{HTML}{5A3520}\definecolor{cafeT}{HTML}{2A211B}
-\definecolor{arenaA}{HTML}{B79A6B}\definecolor{arenaB}{HTML}{D4BE97}\definecolor{arenaC}{HTML}{EDE2CC}\definecolor{arenaP}{HTML}{F8F3E9}\definecolor{arenaX}{HTML}{7A6234}\definecolor{arenaT}{HTML}{2B2620}
-\definecolor{grisA}{HTML}{4A4A4A}\definecolor{grisB}{HTML}{8A8A8A}\definecolor{grisC}{HTML}{D6D6D6}\definecolor{grisP}{HTML}{F2F2F2}\definecolor{grisX}{HTML}{1F1F1F}\definecolor{grisT}{HTML}{1A1A1A}
-% --- Colores pastel adicionales (para pool de secciones, sin rojo) ---
-\definecolor{past04}{HTML}{BF77D9}   % lila pastel suave
-\definecolor{past10}{HTML}{6B998A}  % turquesa pastel
+\input{\bibliotecasDir/estilo/tarjetas/tarjeta}
+\input{\bibliotecasDir/estilo/tarjetas/tarjetapar}
+\input{\bibliotecasDir/estilo/tarjetas/definicion}
+\input{\bibliotecasDir/estilo/tarjetas/rectangulos}
 
-\newcommand{\paletaRosa}{\colorlet{primary}{rosaA}\colorlet{secondary}{rosaB}\colorlet{tertiary}{rosaC}\colorlet{pale}{rosaP}\colorlet{accent}{rosaX}\colorlet{ink}{rosaT}}
-\newcommand{\paletaLila}{\colorlet{primary}{lilaA}\colorlet{secondary}{lilaB}\colorlet{tertiary}{lilaC}\colorlet{pale}{lilaP}\colorlet{accent}{lilaX}\colorlet{ink}{lilaT}}
-\newcommand{\paletaFucsia}{\colorlet{primary}{fucsA}\colorlet{secondary}{fucsB}\colorlet{tertiary}{fucsC}\colorlet{pale}{fucsP}\colorlet{accent}{fucsX}\colorlet{ink}{fucsT}}
-\newcommand{\paletaBurdeos}{\colorlet{primary}{burdA}\colorlet{secondary}{burdB}\colorlet{tertiary}{burdC}\colorlet{pale}{burdP}\colorlet{accent}{burdX}\colorlet{ink}{burdT}}
-\newcommand{\paletaMelocoton}{\colorlet{primary}{melcA}\colorlet{secondary}{melcB}\colorlet{tertiary}{melcC}\colorlet{pale}{melcP}\colorlet{accent}{melcX}\colorlet{ink}{melcT}}
-\newcommand{\paletaNaranja}{\colorlet{primary}{naraA}\colorlet{secondary}{naraB}\colorlet{tertiary}{naraC}\colorlet{pale}{naraP}\colorlet{accent}{naraX}\colorlet{ink}{naraT}}
-\newcommand{\paletaAmarillo}{\colorlet{primary}{amarA}\colorlet{secondary}{amarB}\colorlet{tertiary}{amarC}\colorlet{pale}{amarP}\colorlet{accent}{amarX}\colorlet{ink}{amarT}}
-\newcommand{\paletaMenta}{\colorlet{primary}{mentA}\colorlet{secondary}{mentB}\colorlet{tertiary}{mentC}\colorlet{pale}{mentP}\colorlet{accent}{mentX}\colorlet{ink}{mentT}}
-\newcommand{\paletaLima}{\colorlet{primary}{limaA}\colorlet{secondary}{limaB}\colorlet{tertiary}{limaC}\colorlet{pale}{limaP}\colorlet{accent}{limaX}\colorlet{ink}{limaT}}
-\newcommand{\paletaOliva}{\colorlet{primary}{olivA}\colorlet{secondary}{olivB}\colorlet{tertiary}{olivC}\colorlet{pale}{olivP}\colorlet{accent}{olivX}\colorlet{ink}{olivT}}
-\newcommand{\paletaTurquesa}{\colorlet{primary}{turqA}\colorlet{secondary}{turqB}\colorlet{tertiary}{turqC}\colorlet{pale}{turqP}\colorlet{accent}{turqX}\colorlet{ink}{turqT}}
-\newcommand{\paletaCeleste}{\colorlet{primary}{celeA}\colorlet{secondary}{celeB}\colorlet{tertiary}{celeC}\colorlet{pale}{celeP}\colorlet{accent}{celeX}\colorlet{ink}{celeT}}
-\newcommand{\paletaAzul}{\colorlet{primary}{azulA}\colorlet{secondary}{azulB}\colorlet{tertiary}{azulC}\colorlet{pale}{azulP}\colorlet{accent}{azulX}\colorlet{ink}{azulT}}
-\newcommand{\paletaRojo}{\colorlet{primary}{rojoA}\colorlet{secondary}{rojoB}\colorlet{tertiary}{rojoC}\colorlet{pale}{rojoP}\colorlet{accent}{rojoX}\colorlet{ink}{rojoT}}
-\newcommand{\paletaCiruela}{\colorlet{primary}{ciruA}\colorlet{secondary}{ciruB}\colorlet{tertiary}{ciruC}\colorlet{pale}{ciruP}\colorlet{accent}{ciruX}\colorlet{ink}{ciruT}}
-\newcommand{\paletaCafe}{\colorlet{primary}{cafeA}\colorlet{secondary}{cafeB}\colorlet{tertiary}{cafeC}\colorlet{pale}{cafeP}\colorlet{accent}{cafeX}\colorlet{ink}{cafeT}}
-\newcommand{\paletaArena}{\colorlet{primary}{arenaA}\colorlet{secondary}{arenaB}\colorlet{tertiary}{arenaC}\colorlet{pale}{arenaP}\colorlet{accent}{arenaX}\colorlet{ink}{arenaT}}
-\newcommand{\paletaGris}{\colorlet{primary}{grisA}\colorlet{secondary}{grisB}\colorlet{tertiary}{grisC}\colorlet{pale}{grisP}\colorlet{accent}{grisX}\colorlet{ink}{grisT}}
+\input{\bibliotecasDir/estilo/vinetas/comun}
+\input{\bibliotecasDir/estilo/vinetas/vineta}
+\input{\bibliotecasDir/estilo/vinetas/marcas}
+\input{\bibliotecasDir/estilo/vinetas/pasos}
+\input{\bibliotecasDir/estilo/vinetas/tareas}
+\input{\bibliotecasDir/estilo/vinetas/flechas}
+\input{\bibliotecasDir/estilo/vinetas/estrellas}
+\input{\bibliotecasDir/estilo/vinetas/alertas}
+\input{\bibliotecasDir/estilo/vinetas/preguntas}
+\input{\bibliotecasDir/estilo/vinetas/letras}
 
-% ---------------------------------------------------------------------
-%  TU PROPIA PALETA: 3 colores y la librería arma todo el resto
-%     \mipaleta{#E75480}{#B23A63}{#2B2226}
-%     \mipaleta{teal}{blue!70!black}{black}
-%  #1 = color principal   #2 = acento   #3 = texto (tinta)
-% ---------------------------------------------------------------------
-\newcommand{\mipaleta}[3]{%
-  \colorlet{primary}{#1}%
-  \colorlet{secondary}{primary!65!white}%
-  \colorlet{tertiary}{primary!32!white}%
-  \colorlet{pale}{primary!12!white}%
-  \colorlet{accent}{#2}%
-  \colorlet{ink}{#3}}
+\input{\bibliotecasDir/estilo/tablas/minimal}
+\input{\bibliotecasDir/estilo/tablas/cabecera}
+\input{\bibliotecasDir/estilo/tablas/cuadricula}
+\input{\bibliotecasDir/estilo/tablas/sino}
+\input{\bibliotecasDir/estilo/tablas/ficha}
 
-% =====================================================================
-% BARRA DECORATIVA DOBLE (usada por tituloD y sectionheader)
-% =====================================================================
-\newcommand{\barrule}[2][primary]{%
-  \begin{tikzpicture}[baseline={([yshift=-3.2pt]current bounding box.center)}]
-    \fill[#1]        (0,0.20) rectangle (#2,0.34);
-    \fill[#1!45!white](0,0.06) rectangle (#2,0.14);
-  \end{tikzpicture}%
-}
+\input{\bibliotecasDir/estilo/filas/filaimagen}
+\input{\bibliotecasDir/estilo/filas/filaimagender}
+\input{\bibliotecasDir/estilo/filas/filacontenido}
 
-% =====================================================================
-% ENCABEZADO DE SECCIÓN (barra – texto – barra)
-% =====================================================================
-\newlength{\barleftlen}
-\newlength{\bartextlen}
-\newlength{\barrightlen}
-\newcommand{\sectionheader}[3][primary]{%
-  \setlength{\barleftlen}{#2}%
-  \settowidth{\bartextlen}{\headingfontxb\Large #3}%
-  \setlength{\barrightlen}{\linewidth}%
-  \addtolength{\barrightlen}{-\barleftlen}%
-  \addtolength{\barrightlen}{-\bartextlen}%
-  \addtolength{\barrightlen}{-0.9cm}%
-  \noindent\barrule[#1]{\barleftlen}\hspace{4mm}{\headingfontxb\Large\color{#1} #3}\hspace{4mm}\barrule[#1]{\barrightlen}\par
-}
-
-% =====================================================================
-% ESTILOS DE TÍTULO — 4 variantes, combinables con cualquier paleta
-% =====================================================================
-
-% --- A: MARCADOR (mayúsculas gruesas sobre una franja resaltada, estilo img.1)
-\newcommand{\tituloA}[2]{%
-  \begin{center}
-  \begin{tikzpicture}
-    \node (t) [text width=15.5cm, align=center] {{\markerfont\fontsize{23}{27}\selectfont\color{ink} #1}};
-    \begin{pgfonlayer}{background}
-      \fill[tertiary, rotate around={-1.4:($(t.south west)!0.5!(t.north east)$)}]
-        ($(t.south west)+(-0.35,-0.15)$) rectangle ($(t.north east)+(0.35,0.18)$);
-    \end{pgfonlayer}
-  \end{tikzpicture}
-  \end{center}
-  \vspace{-1mm}
-  \begin{center}\textcolor{accent}{\rule{2.6cm}{2.6pt}}\end{center}
-  \vspace{2.5mm}
-  \begin{center}{\headingfontxb\fontsize{13}{16}\selectfont\color{primary} #2}\end{center}
-  \vspace{5mm}
-}
-
-% --- B: MINIMALISTA (título sencillo + subrayado fino, estilo img.2)
-\newcommand{\tituloB}[2]{%
-  {\headingfontxb\fontsize{22}{22}\selectfont\color{ink} #1}\par
-  \vspace{1mm}
-  \textcolor{primary}{\rule{4.4cm}{2.2pt}}\par
-  \vspace{2mm}
-  {\headingfont\fontsize{11}{11}\selectfont\color{primary} #2}\par
-  \vspace{6mm}
-}
-
-% --- C: CURSIVO + BARRA RESALTADA (estilo img.3)
-\newcommand{\tituloC}[1]{%
-  \begin{center}
-  \begin{tikzpicture}
-    \node (t) [text width=15.5cm, align=center] {{\brushfont\fontsize{24}{28}\selectfont\color{ink} #1}};
-    \begin{pgfonlayer}{background}
-      \fill[tertiary] ($(t.south west)+(-0.25,-0.15)$) rectangle ($(t.south east)+(0.25,0.18)$);
-    \end{pgfonlayer}
-  \end{tikzpicture}
-  \end{center}%
-  \vspace{4mm}
-}
-
-% --- D: BARRAS DOBLES (estilo "cuaderno", ver primer proyecto)
-\newcommand{\tituloD}[1]{%
-  \begin{center}
-    \barrule[primary]{1.5cm}\hspace{4mm}%
-    {\cursivefont\fontsize{22}{26}\selectfont\color{primary} #1}%
-    \hspace{4mm}\barrule[primary]{1.5cm}
-  \end{center}
-  \vspace{3mm}
-}
-
-% =====================================================================
-% CAJAS
-% =====================================================================
-\newtcolorbox{infoboxenv}[1][secondary]{
-  colback=#1!8!white, colframe=#1, boxrule=1.3pt, arc=4pt,
-  boxsep=1pt, left=8pt, right=8pt, top=7pt, bottom=7pt
-}
-\newcommand{\infobox}[2][secondary]{%
-  \begin{infoboxenv}[#1]\RaggedRight\fontsize{10.6}{14.5}\selectfont\color{ink} #2\end{infoboxenv}%
-}
-\newcommand{\infoboxdup}[3][secondary]{%
-  \noindent
-  \begin{minipage}[t]{0.485\linewidth}\infobox[#1]{#2}\end{minipage}\hfill%
-  \begin{minipage}[t]{0.485\linewidth}\infobox[primary]{#3}\end{minipage}%
-}
-
-% Caja plana SIN borde, pero con una franja lateral de color (el fondo
-% queda claro y el filo da contraste: el recuadro ya NO se ve del mismo
-% color que el fondo). Se usa desde \parrafo.
-\newcommand{\highlightpar}[2][facilpale]{%
-  \begin{tcolorbox}[enhanced, colback=#1, colframe=#1, arc=2pt, boxsep=1pt,
-      left=9pt, right=9pt, top=7pt, bottom=7pt, boxrule=0pt,
-      borderline west={3.2pt}{0pt}{\facilcoloractual},
-      borderline south={1.1pt}{0pt}{\facilcoloractual!45!white}]
-    \RaggedRight\fontsize{10.8}{15.5}\selectfont\color{ink} #2
-  \end{tcolorbox}%
-}
-% Resalte "de rotulador" para frases sueltas dentro de un párrafo.
-% Por defecto usa el color de acento del apartado (visible sobre facilpale),
-% NO facilpale, que era igual que el fondo y por eso no se distinguía.
-\newcommand{\hl}[2][\facilcoloracento]{\colorbox{#1!35!white}{\strut #2}}
-
-% =====================================================================
-% LISTAS: viñeta circular / viñeta rombo / numerada con círculos
-% =====================================================================
-\newlist{bulletlist}{itemize}{1}
-\setlist[bulletlist]{leftmargin=7mm, itemsep=8pt, topsep=2pt,
-  label={\raisebox{0.5pt}{\tikz\fill[\facilcoloractual] (0,0) circle (2.6pt);}},
-  font=\fontsize{10.6}{14.8}\selectfont\color{ink}}
-
-% Viñeta en forma de rombo (alternativa elegante, dos tonos)
-\newcommand{\diamanteicon}{%
-  \tikz[baseline=-0.55ex]{
-    \fill[\facilcoloractual] (0,0) -- (3.1pt,3.1pt) -- (6.2pt,0) -- (3.1pt,-3.1pt) -- cycle;
-    \fill[\facilcoloracento]  (3.1pt,0) -- (4.5pt,1.4pt) -- (6.2pt,0) -- (4.5pt,-1.4pt) -- cycle;
-  }%
-}
-\newlist{marcalist}{itemize}{1}
-\setlist[marcalist]{leftmargin=7mm, itemsep=7pt, topsep=2pt,
-  label={\diamanteicon}, font=\fontsize{10.6}{14.8}\selectfont\color{ink}}
-
-\newlist{steplist}{enumerate}{1}
-\setlist[steplist]{leftmargin=9mm, itemsep=9pt, topsep=2pt,
-  label={\protect\stepcircle{\arabic*}}, font=\fontsize{10.6}{14.8}\selectfont\color{ink}}
-\newcommand{\stepcircle}[1]{\tikz[baseline=-0.65ex]{\node[circle, fill=\facilcoloractual,
-  text=white, inner sep=0pt, minimum size=15pt,
-  font=\fontsize{8.5}{8.5}\selectfont\bfseries] {#1};}}
-
-% --- Viñeta casilla (tareas / checklist) ---
-\newcommand{\casillaicon}{%
-  \tikz[baseline=-0.1em]{\draw[\facilcoloractual, line width=1.1pt, rounded corners=0.6pt]
-    (0,0) rectangle (8.5pt,8.5pt);}%
-}
-\newlist{tarealist}{itemize}{1}
-\setlist[tarealist]{leftmargin=7.5mm, itemsep=8pt, topsep=2pt,
-  label={\casillaicon}, font=\fontsize{10.6}{14.8}\selectfont\color{ink}}
-
-% --- Viñeta flecha (secuencias, causa-efecto) ---
-\newcommand{\flechaicon}{%
-  \tikz[baseline=-0.5ex]{\draw[\facilcoloractual, line width=1.3pt,
-    -{Latex[length=2.6pt,width=2.6pt]}] (0,0) -- (0.22,0);}%
-}
-\newlist{flechalist}{itemize}{1}
-\setlist[flechalist]{leftmargin=7.5mm, itemsep=7pt, topsep=2pt,
-  label={\flechaicon}, font=\fontsize{10.6}{14.8}\selectfont\color{ink}}
-
-% --- Viñeta estrella (ideas importantes / para examen) ---
-\newcommand{\estrellaicon}{%
-  \tikz[baseline=-0.4ex]{\node[star, star points=5, star point ratio=2.25,
-    fill=\facilcoloracento, inner sep=0pt, minimum size=9pt] {};}%
-}
-\newlist{estrellalist}{itemize}{1}
-\setlist[estrellalist]{leftmargin=7mm, itemsep=7pt, topsep=2pt,
-  label={\estrellaicon}, font=\fontsize{10.6}{14.8}\selectfont\color{ink}}
-
-% --- Viñeta alerta (avisos, cuidado, errores comunes) ---
-\newcommand{\alertaicon}{%
-  \tikz[baseline=-0.15em]{
-    \draw[\facilcoloracento, line width=1.1pt, line join=round]
-      (0,0) -- (4.7pt,8.5pt) -- (9.4pt,0) -- cycle;
-    \fill[\facilcoloracento] (4.35pt,2.6pt) rectangle (5.05pt,5.4pt);
-    \fill[\facilcoloracento] (4.35pt,1.2pt) rectangle (5.05pt,1.9pt);
-  }%
-}
-\newlist{alertalist}{itemize}{1}
-\setlist[alertalist]{leftmargin=7.5mm, itemsep=7pt, topsep=2pt,
-  label={\alertaicon}, font=\fontsize{10.6}{14.8}\selectfont\color{ink}}
-
-% --- Viñeta pregunta (repaso, autoevaluación) ---
-\newcommand{\preguntaicon}{%
-  \tikz[baseline=-0.3ex]{\node[circle, fill=\facilcoloractual, text=white, inner sep=0pt,
-    minimum size=13pt, font=\bfseries\fontsize{7.3}{7.3}\selectfont] {?};}%
-}
-\newlist{preguntalist}{itemize}{1}
-\setlist[preguntalist]{leftmargin=7.5mm, itemsep=8pt, topsep=2pt,
-  label={\preguntaicon}, font=\fontsize{10.6}{14.8}\selectfont\color{ink}}
-
-% --- Lista con letras (a, b, c...) ---
-\newlist{letralist}{enumerate}{1}
-\setlist[letralist]{leftmargin=7.5mm, itemsep=8pt, topsep=2pt,
-  label={\headingfontxb\color{\facilcoloractual}\alph*)},
-  font=\fontsize{10.6}{14.8}\selectfont\color{ink}}
-
-% =====================================================================
-% NOTA CON BORDE LATERAL / PÍLDORA / TARJETA CON CABECERA / DATO
-% =====================================================================
-\newcommand{\tipbox}[3][accent]{%
-  \noindent
-  \begin{tcolorbox}[colback=#1!10!white, colframe=#1!10!white, borderline west={3.2pt}{0pt}{#1},
-      arc=2pt, boxsep=1pt, left=10pt, right=8pt, top=7pt, bottom=7pt, boxrule=0pt]
-    {\headingfontxb\color{#1}\fontsize{10.6}{13}\selectfont #2}\\[2pt]
-    \RaggedRight\fontsize{10.1}{14}\selectfont\color{ink} #3
-  \end{tcolorbox}%
-}
-\newcommand{\pill}[2][primary]{%
-  \tikz[baseline=-0.6ex]\node[fill=#1, rounded corners=7pt, inner xsep=8pt,
-    inner ysep=3.5pt, font=\headingfontxb\color{white}\fontsize{8.5}{8.5}\selectfont] {#2};%
-}
-\newcommand{\typecard}[3][primary]{%
-  \begin{tcolorbox}[enhanced,
-      colback=#1!8!white, colframe=#1!45!white, boxrule=1.1pt, arc=5pt,
-      boxsep=0pt, left=8pt, right=8pt, bottom=8pt, top=6pt,
-      colbacktitle=#1, coltitle=white, fonttitle=\headingfontxb,
-      attach boxed title to top left={xshift=0pt, yshift=2mm},
-      boxed title style={boxrule=0pt, arc=4pt, top=1.5pt, bottom=1.5pt,
-                         left=6pt, right=6pt},
-      title={\fontsize{9.5}{9.5}\selectfont #2}]
-    \par\vspace{2mm}% <- separacion automatica Titulo-barra -> texto
-    \RaggedRight\fontsize{9.6}{13.2}\selectfont\color{ink} #3
-  \end{tcolorbox}%
-}
-% Dos tarjetas lado a lado con ALTURAS IGUALES (raster + equal height):
-% si una tiene mas texto que la otra, ambas miden lo que mida la mas larga.
-% NINGUNA tarjeta usa el color PLENO del apartado (asi no se confunden con
-% el titulo de la seccion): izquierda tono MEDIO, derecha tono OSCURO.
-\newcommand{\typecardpair}[5][primary]{%
-  \noindent
-  \colorlet{facilparejA}{#1!50!black}%
-  \colorlet{facilparejB}{#1!72!black}%
-  \begin{tcbraster}[enhanced, raster columns=2, raster column skip=6mm,
-      raster equal height=rows, nobeforeafter,
-      boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
-    \typecard[facilparejA]{#2}{#3}%
-    \typecard[facilparejB]{#4}{#5}%
-  \end{tcbraster}\par
-  \vspace{4mm}%
-}
-\newcommand{\statbox}[3][primary]{%
-  \tikz{\node[fill=#1, rounded corners=7pt, text width=3.5cm, align=center,
-    inner sep=10pt] {{\headingfontxb\color{white}\fontsize{21}{21}\selectfont #2}\\[3pt]
-    {\color{white}\fontsize{8}{9.7}\selectfont #3}};}%
-}
-
-% =====================================================================
-% CAJA RESUMEN CON SOMBRA
-% =====================================================================
-\newcommand{\shadowbox}[2][\facilcoloractual]{%
-  \begin{center}
-  \begin{tikzpicture}
-    \node[draw=\facilcoloractual!60!ink, line width=0.9pt, fill=\facilcoloractual!7!white,
-      rounded corners=1.5pt,
-      text width=16.6cm, align=left, inner sep=12pt] (box) {%
-      \fontsize{11}{15.5}\selectfont\color{ink} #2%
-    };
-    \begin{pgfonlayer}{background}
-      \node[fill=#1, rounded corners=5pt, fit=(box), inner sep=0pt,
-        xshift=0.28cm, yshift=-0.28cm] (shadow) {};
-    \end{pgfonlayer}
-  \end{tikzpicture}
-  \end{center}%
-}
-\newcommand{\closingbars}{}
-
-% --- E: MINIMALISTA CON ETIQUETA (pill pequeña + título limpio, sin líneas)
-\newcommand{\tituloE}[2]{%
-  % #1 = etiqueta corta (ej. "TEMA 01"), #2 = título
-  \pill[primary]{#1}\par
-  \vspace{2mm}
-  {\headingfontxb\fontsize{22}{22}\selectfont\color{ink} #2}\par
-  \vspace{5mm}
-}
-
-% --- F: MINIMALISTA CON DOS LÍNEAS FINAS (arriba y abajo, muy reducido)
-\newcommand{\tituloF}[1]{%
-  \begin{center}
-    \textcolor{primary}{\rule{3.2cm}{0.8pt}}\par
-    \vspace{1.5mm}
-    {\headingfontxb\fontsize{23}{23}\selectfont\color{ink} #1}\par
-    \vspace{1.5mm}
-    \textcolor{primary}{\rule{3.2cm}{0.8pt}}\par
-  \end{center}
-  \vspace{4mm}
-}
-
-% --- G: MINIMALISTA CON BARRA LATERAL (título + subtítulo junto a un filo de color)
-\newcommand{\tituloG}[2]{%
-  % #1 = título, #2 = subtítulo
-  \noindent
-  \begin{tikzpicture}[baseline]
-    \fill[primary] (0,-0.08) rectangle (0.11,0.92);
-  \end{tikzpicture}%
-  \hspace{4mm}%
-  \begin{minipage}[c]{0.88\linewidth}
-    {\headingfontxb\fontsize{19}{19}\selectfont\color{ink} #1}\\[1mm]
-    {\headingfont\fontsize{9.8}{9.8}\selectfont\color{primary} #2}
-  \end{minipage}\par
-  \vspace{5mm}
-}
-
-% --- H: MINIMALISTA CON SUBRAYADO CORTO A LA IZQUIERDA (estilo editorial)
-\newcommand{\tituloH}[1]{%
-  {\headingfontxb\fontsize{22}{22}\selectfont\color{ink} #1}\par
-  \vspace{1.5mm}
-  \textcolor{primary}{\rule{1.6cm}{3pt}}\par
-  \vspace{6mm}
-}
-
-% --- I: MINIMALISTA ENTRE CORCHETES TIPOGRÁFICOS
-\newcommand{\tituloI}[1]{%
-  \begin{center}
-    {\headingfont\fontsize{20}{20}\selectfont\color{primary}[\,}%
-    {\headingfontxb\fontsize{20}{20}\selectfont\color{ink} #1}%
-    {\headingfont\fontsize{20}{20}\selectfont\color{primary}\,]}
-  \end{center}
-  \vspace{6mm}
-}
-
-% --- J: MINIMALISTA CON NÚMERO GRANDE (estilo revista / editorial)
-\newcommand{\tituloJ}[2]{%
-  % #1 = número o código corto (ej. "01"), #2 = título
-  \noindent
-  \begin{minipage}[c]{2.1cm}
-    {\headingfontxb\fontsize{40}{40}\selectfont\color{tertiary} #1}
-  \end{minipage}%
-  \begin{minipage}[c]{0.75\linewidth}
-    {\headingfontxb\fontsize{19}{19}\selectfont\color{ink} #2}
-  \end{minipage}\par
-  \vspace{6mm}
-}
-
-% --- K: MINIMALISTA CON MARCO FINO COMPLETO
-\newcommand{\tituloK}[1]{%
-  \begin{center}
-  \begin{tikzpicture}
-    \node[draw=primary, line width=1pt, text width=15cm, align=center, inner xsep=12pt, inner ysep=8pt]
-      {\headingfontxb\fontsize{18}{22}\selectfont\color{ink} #1};
-  \end{tikzpicture}
-  \end{center}
-  \vspace{5mm}
-}
-
-% --- L: MINIMALISTA CON ESQUINAS TIPO FICHA TÉCNICA
-\newcommand{\tituloL}[1]{%
-  \begin{center}
-  \begin{tikzpicture}
-    \node (t) [text width=15cm, align=center, inner xsep=12pt, inner ysep=8pt]
-      {\headingfontxb\fontsize{18}{22}\selectfont\color{ink} #1};
-    \draw[primary, line width=1.1pt] (t.north west) -- ++(0.35,0) (t.north west) -- ++(0,-0.35);
-    \draw[primary, line width=1.1pt] (t.north east) -- ++(-0.35,0) (t.north east) -- ++(0,-0.35);
-    \draw[primary, line width=1.1pt] (t.south west) -- ++(0.35,0) (t.south west) -- ++(0,0.35);
-    \draw[primary, line width=1.1pt] (t.south east) -- ++(-0.35,0) (t.south east) -- ++(0,0.35);
-  \end{tikzpicture}
-  \end{center}
-  \vspace{5mm}
-}
-
-% --- M: MINIMALISTA CON ASTERISCO DE ACENTO
-\newcommand{\tituloM}[1]{%
-  {\headingfontxb\color{accent}\fontsize{20}{20}\selectfont *~}%
-  {\headingfontxb\fontsize{20}{20}\selectfont\color{ink} #1}\par
-  \vspace{6mm}
-}
-
-% --- N: MINIMALISTA CON BARRAS VERTICALES A LOS LADOS
-\newcommand{\tituloN}[1]{%
-  \begin{center}
-    \textcolor{primary}{\rule{1.4pt}{0.55cm}}\hspace{4mm}%
-    {\headingfontxb\fontsize{20}{20}\selectfont\color{ink} #1}%
-    \hspace{4mm}\textcolor{primary}{\rule{1.4pt}{0.55cm}}
-  \end{center}
-  \vspace{6mm}
-}
-
-% --- O: MINIMALISTA CON PRIMERA PALABRA RESALTADA
-\newcommand{\tituloO}[2]{%
-  % #1 = primera palabra (con fondo de color), #2 = resto del título
-  \colorbox{tertiary}{\strut\headingfontxb\fontsize{20}{20}\selectfont\color{ink} #1}%
-  \ {\headingfontxb\fontsize{20}{20}\selectfont\color{ink} #2}\par
-  \vspace{6mm}
-}
-
-% --- P: MINIMALISTA CON ETIQUETA EN LA ESQUINA (estilo ficha)
-\newcommand{\tituloP}[2]{%
-  % #1 = etiqueta pequeña (ej. "APUNTE"), #2 = título
-  {\headingfont\fontsize{8.5}{8.5}\selectfont\color{primary} #1}\par
-  \vspace{0.5mm}
-  {\headingfontxb\fontsize{21}{21}\selectfont\color{ink} #2}\par
-  \vspace{1.5mm}
-  \textcolor{tertiary}{\rule{\linewidth}{1.4pt}}\par
-  \vspace{5mm}
-}
-
-% --- Q: MINIMALISTA CON SUBRAYADO ONDULADO
-\newcommand{\tituloQ}[1]{%
-  \begin{center}
-  \begin{tikzpicture}
-    \node (t) [text width=15cm, align=center] {{\headingfontxb\fontsize{18}{22}\selectfont\color{ink} #1}};
-    \draw[primary, line width=1.4pt, decorate,
-      decoration={coil, aspect=0, segment length=6.5pt, amplitude=1.3pt}]
-      ($(t.south west)+(0,-0.14)$) -- ($(t.south east)+(0,-0.14)$);
-  \end{tikzpicture}
-  \end{center}
-  \vspace{6mm}
-}
-
-% =====================================================================
-% FONDO SUTIL (franja lateral + puntos) + PIE DE PÁGINA
-% =====================================================================
-\newcommand{\pagebackground}{%
-  \begin{tikzpicture}[remember picture, overlay]
-    \foreach \x in {2,4,...,19}{\foreach \y in {2,4,...,28}{
-      \fill[pale] ($(current page.south west)+(\x*1.05cm,\y*1.0cm)$) circle (0.8pt);}}
-  \end{tikzpicture}%
-}
-\newcommand{\usarfondo}{\AddToShipoutPictureBG{\pagebackground}}
-% El pie usa el MISMO color que el \titulo / apartado activo, para que
-% titulo y pie combinen (antes salia siempre en "primary").
-\newcommand{\pagefoot}[2][\facilcoloractual]{\vfill\begin{center}\pill[#1]{#2}\end{center}\vspace{2mm}}
-
-% =====================================================================
-% TABLA MINIMALISTA (solo líneas horizontales, sin verticales)
-% =====================================================================
-%  USO:
-%    \begin{tablaminimal}{lcc}          <- especificación de columnas
-%      \tablacab{Nombre} & \tablacab{Edad} & \tablacab{Ciudad} \\
-%      \midrule
-%      Ana   & 23 & Madrid  \\
-%      Luis  & 31 & Sevilla \\
-%    \end{tablaminimal}
-%  \tablacab{texto} da formato de cabecera (negrita + color primary).
-%  Las filas del cuerpo alternan un fondo "pale" muy sutil automáticamente.
-% =====================================================================
-\newenvironment{tablaminimal}[1]{%
-  \begingroup
-  \arrayrulecolor{primary}
-  \renewcommand{\arraystretch}{1.15}
-  \rowcolors{2}{white}{pale}
-  \begin{center}
-  \fontsize{10.2}{13}\selectfont\color{ink}
-  \begin{tabular}{#1}
-  \toprule[1.1pt]
-}{%
-  \bottomrule[1.1pt]
-  \end{tabular}
-  \end{center}
-  \endgroup
-}
-\newcommand{\tablacab}[1]{{\headingfontxb\color{primary}\fontsize{10.2}{13}\selectfont #1}}
-
-% =====================================================================
-% TABLA CON CABECERA DE COLOR SÓLIDO
-% =====================================================================
-%  USO:
-%    \begin{tablacabecera}{lll}
-%      \rowcolor{primary}
-%      \tablacabb{Nombre} & \tablacabb{Edad} & \tablacabb{Ciudad} \\
-%      Ana   & 23 & Madrid  \\
-%      Luis  & 31 & Sevilla \\
-%    \end{tablacabecera}
-%  \tablacabb{texto} da formato de cabecera en blanco (para fondo de color).
-%  La fila de cabecera necesita \rowcolor{primary} (o cualquier color) justo
-%  antes de escribirla.
-% =====================================================================
-\newenvironment{tablacabecera}[1]{%
-  \begingroup
-  \arrayrulecolor{tertiary}
-  \renewcommand{\arraystretch}{1.3}
-  \rowcolors{2}{white}{pale}
-  \begin{center}
-  \fontsize{10.2}{13}\selectfont\color{ink}
-  \begin{tabular}{#1}
-}{%
-  \bottomrule[0.8pt]
-  \end{tabular}
-  \end{center}
-  \endgroup
-}
-\newcommand{\tablacabb}[1]{{\headingfontxb\color{white}\fontsize{10.2}{13}\selectfont #1}}
-
-% =====================================================================
-% TABLA CON CUADRÍCULA COMPLETA (bordes finos en todas las celdas)
-% =====================================================================
-%  USO:
-%    \begin{tablacuadricula}{|l|c|c|}     <- especificación CON barras "|"
-%      \tablacab{Producto} & \tablacab{Precio} & \tablacab{Stock} \\ \hline
-%      Manzana & 1,20€ & 34 \\ \hline
-%      Pan     & 0,90€ & 12 \\ \hline
-%    \end{tablacuadricula}
-%  El primer \hline lo pone el propio entorno; el resto los escribes tú
-%  tras cada fila, como en una tabla LaTeX normal.
-% =====================================================================
-\newenvironment{tablacuadricula}[1]{%
-  \begingroup
-  \arrayrulecolor{tertiary}
-  \renewcommand{\arraystretch}{1.35}
-  \begin{center}
-  \fontsize{10.2}{13}\selectfont\color{ink}
-  \begin{tabular}{#1}
-  \hline
-}{%
-  \end{tabular}
-  \end{center}
-  \endgroup
-}
-
-% =====================================================================
-% TABLA COMPARATIVA CON SÍ / NO (para comparar características)
-% =====================================================================
-%  USO: reutiliza \tablaminimal + los símbolos \si y \no en las celdas.
-%    \begin{tablaminimal}{lcc}
-%      \tablacab{Función} & \tablacab{Plan Básico} & \tablacab{Plan Pro} \\
-%      \midrule
-%      Soporte 24h   & \no & \si \\
-%      Exportar PDF  & \si & \si \\
-%    \end{tablaminimal}
-% =====================================================================
-\newcommand{\si}{\tikz[baseline=-0.4ex]{\draw[primary, line width=1.4pt,
-  line cap=round, line join=round] (0,0.075) -- (0.055,0) -- (0.16,0.135);}}
-\newcommand{\no}{\tikz[baseline=-0.4ex]{
-  \draw[accent, line width=1.4pt, line cap=round] (0,0) -- (0.13,0.13);
-  \draw[accent, line width=1.4pt, line cap=round] (0,0.13) -- (0.13,0);}}
-
-% =====================================================================
-% FICHA CLAVE-VALOR (cuadro sin rejilla, tipo ficha de datos)
-% =====================================================================
-%  USO:
-%    \begin{fichaclave}{3.2cm}            <- ancho de la columna "clave"
-%      \fichaitem{Nombre}{Ana Torres}
-%      \fichaitem{Fecha}{20/08/2026}
-%      \fichaitem{Tema}{Introducción al neuromarketing}
-%    \end{fichaclave}
-% =====================================================================
-\newenvironment{fichaclave}[1]{%
-  \begingroup
-  \arrayrulecolor{pale}
-  \renewcommand{\arraystretch}{1.6}
-  \begin{center}
-  \fontsize{10.4}{14}\selectfont\color{ink}
-  \begin{tabular}{@{}>{\raggedright\arraybackslash}m{#1}@{\hspace{4mm}}l@{}}
-}{%
-  \end{tabular}
-  \end{center}
-  \endgroup
-}
-\newcommand{\fichaitem}[2]{{\headingfontxb\color{primary} #1} & #2 \\ \hline}
-
-% =====================================================================
-% ESTRUCTURAS DE FILA: IMAGEN + RECUADRO / CONTENIDO + CONTENIDO
-% =====================================================================
-%  USO — imagen a la izquierda, texto o caja a la derecha:
-%    \filaimagen{5.5cm}{ruta/imagen.png}{
-%      \infobox{Texto que acompaña a la imagen...}
-%    }
-%  USO — imagen a la derecha, texto o caja a la izquierda:
-%    \filaimagender{5.5cm}{ruta/imagen.png}{
-%      \infobox{Texto que acompaña a la imagen...}
-%    }
-%  USO — dos contenidos cualquiera en fila (caja + caja, texto + tabla...):
-%    \filacontenido{7cm}{
-%      contenido de la izquierda
-%    }{
-%      contenido de la derecha
-%    }
-%  El primer argumento numérico es el ancho de la primera columna;
-%  la segunda columna ocupa automáticamente el espacio restante.
-% =====================================================================
-\newcommand{\filaimagen}[3]{%
-  \noindent
-  \begin{minipage}[t]{#1}
-    \includegraphics[width=\linewidth]{#2}
-  \end{minipage}\hfill
-  \begin{minipage}[t]{\dimexpr\linewidth-#1-6mm\relax}
-    #3
-  \end{minipage}\par
-}
-\newcommand{\filaimagender}[3]{%
-  \noindent
-  \begin{minipage}[t]{\dimexpr\linewidth-#1-6mm\relax}
-    #3
-  \end{minipage}\hfill
-  \begin{minipage}[t]{#1}
-    \includegraphics[width=\linewidth]{#2}
-  \end{minipage}\par
-}
-\newcommand{\filacontenido}[3]{%
-  \noindent
-  \begin{minipage}[t]{#1}#2\end{minipage}\hfill
-  \begin{minipage}[t]{\dimexpr\linewidth-#1-6mm\relax}#3\end{minipage}\par
-}
-
-% =====================================================================
-%  MODO FÁCIL — escribe menos y con un solo comando
-%  ---------------------------------------------------------------------
-%  En vez de \begin{bulletlist} ... \end{bulletlist}, escribes:
-%
-%     \titulo{TEMA 02}{Teoria de la Gestalt}
-%     \seccion{Percebre no és rebre}
-%     \parrafo{Segons la psicologia de la Gestalt...}
-%
-%     \lista{Buscar|Seleccionar|Relacionar|Recordar}
-%     \tareas{Leer el artículo|Resumir las técnicas}
-%     \pasos{Primero mirar|Luego escribir}
-%     \estrellas{Idea muy importante|Para el examen}
-%     \alertas{Cuidado con esto|Error común}
-%     \preguntas{¿Qué es la Gestalt?|¿Cuáles son sus leyes?}
-%     \flechas{Estímulo|Percepción|Interpretación}
-%
-%     \caja{Esto es una caja de información.}
-%     \nota{Para el examen}{Diferencia bien ...}
-%     \resumen{Esto es la caja resumen con sombra.}
-%
-%  Los elementos se separan con |  (barra vertical).
-%  Dentro puedes usar todo el LaTeX normal: \textbf{negrita},
-%  \emph{cursiva}, 🌐 emojis, \hl{resaltado}, etc.
-% =====================================================================
-
-% Repartidor de items: recibe "a|b|c" y llama a \facilitem con cada trozo
-\def\facilempty{}
-\def\facilnulo{}
-\long\def\facilitems#1|#2\facilstop{%
-  \facilitem{#1}%
-  \ifx\facilempty#2\facilempty\else\facilitems#2\facilstop\fi}
-
-% ---------------------------------------------------------------------
-%  NEGRITA AUTOMÁTICA: escribes **texto** y sale en negrita
-%     \lista{**Buscar**|Seleccionar|**Recordar**}
-%  (también vale en \parrafo, \caja, \nota, \definicion...)
-% ---------------------------------------------------------------------
-\ExplSyntaxOn
-\cs_new_protected:Npn \facilnegrita #1
-  {
-    \tl_set:Nn \l_tmpa_tl {#1}
-    \regex_replace_all:nnN { \*\* (.*?) \*\* } { \c{textbf} \cB\{ \1 \cE\} } \l_tmpa_tl
-    \tl_use:N \l_tmpa_tl
-  }
-
-% ---------------------------------------------------------------------
-%  POOL DE COLORES PARA LAS SECCIONES
-%  Un color de cada familia (azul, turquesa, menta, lima, verde, oliva,
-%  amarillo, naranja, melocoton, coral, rojo, burdeos, fucsia, rosa,
-%  ciruela, lila, lavanda, cafe...) => cada seccion sale de un tono
-%  distinto, sin repetir el anterior.
-% ---------------------------------------------------------------------
-\clist_new:N \g_facil_pool_cl
-\clist_gset:Nn \g_facil_pool_cl
-  { azulA, celeA, turqA, mentA, oceA, limaA, bosqueA, olivA, amarA, naraA,
-    melcA, coralA, arenaA, past04, fucsA, rosaA, ciruA, lilaA, lavA, past10 }
-% ORDEN FIJO DE COLORES: se recorre el pool de 20 colores de uno en uno,
-% SIN ALEATORIEDAD, para que la salida sea SIEMPRE IGUAL en cada
-% compilacion (antes usaba \seq_shuffle y los colores cambiaban en cada
-% ejecucion). Nunca repite el color de la seccion anterior.
-\int_new:N \g_facil_last_int
-\int_gset:Nn \g_facil_last_int { 0 }
-\cs_new_protected:Npn \facilpickcolor #1
-  {
-    \int_set:Nn \l_tmpa_int
-      { \int_mod:nn { \g_facil_last_int + 1 }
-                    { \clist_count:N \g_facil_pool_cl } }
-    \int_gset_eq:NN \g_facil_last_int \l_tmpa_int
-    \tl_set:Nx #1 { \clist_item:Nn \g_facil_pool_cl { \l_tmpa_int + 1 } }
-  }
-\ExplSyntaxOff
-\def\facilbullet#1{\item \facilnegrita{#1}}
-\def\facilcheck#1{\item \facilnegrita{#1}}
-\def\facilstep#1{\item \facilnegrita{#1}}
-
-\newcommand{\lista}[1]{%
-  \begin{bulletlist}\let\facilitem\facilbullet\facilitems#1|\facilstop\end{bulletlist}}
-\newcommand{\marcas}[1]{%
-  \begin{marcalist}\let\facilitem\facilbullet\facilitems#1|\facilstop\end{marcalist}}
-\newcommand{\tareas}[1]{%
-  \begin{tarealist}\let\facilitem\facilcheck\facilitems#1|\facilstop\end{tarealist}}
-\newcommand{\pasos}[1]{%
-  \begin{steplist}\let\facilitem\facilstep\facilitems#1|\facilstop\end{steplist}}
-\newcommand{\estrellas}[1]{%
-  \begin{estrellalist}\let\facilitem\facilbullet\facilitems#1|\facilstop\end{estrellalist}}
-\newcommand{\alertas}[1]{%
-  \begin{alertalist}\let\facilitem\facilbullet\facilitems#1|\facilstop\end{alertalist}}
-\newcommand{\preguntas}[1]{%
-  \begin{preguntalist}\let\facilitem\facilbullet\facilitems#1|\facilstop\end{preguntalist}}
-\newcommand{\flechas}[1]{%
-  \begin{flechalist}\let\facilitem\facilbullet\facilitems#1|\facilstop\end{flechalist}}
-
-% Atajos para lo demás (uno solo, sin entornos)
-% ---------------------------------------------------------------------
-%  TODO acepta color opcional entre corchetes [color]. Sin corchetes,
-%  usa el color de la paleta activa.
-%
-%     \titulo{TEMA 02}{Teoria de la Gestalt}
-%     \titulo[coralA]{TEMA 02}{Teoria de la Gestalt}
-%
-%     \seccion{Percebre no és rebre}
-%     \seccion[oceX]{Percebre no és rebre}
-%
-%     \caja{Texto de la caja.}
-%     \caja[coralA]{Texto en coral.}
-%
-%     \nota{Para el examen}{Diferencia bien...}
-%     \nota[lavA]{Ojo}{Esto cae seguro.}
-%
-%     \resumen{Caja resumen con sombra}
-%     \resumen[coralA]{Caja resumen en coral}
-%
-%  Colores que puedes usar:
-%   - De la paleta activa: primary, secondary, tertiary, accent, pale, ink
-%   - De cualquier paleta:  oceA oceB oceC oceP oceX oceT
-%                           bosqueA bosqueB bosqueC bosqueP bosqueX bosqueT
-%                           coralA coralB coralC coralP coralX coralT
-%                           lavA lavB lavC lavP lavX lavT
-%   - Cualquier color LaTeX: red, blue, teal!60!white, ...
-% ---------------------------------------------------------------------
-% ============================================================
-%  APARTADO  \titulo[color]{ETIQUETA}{Titulo}
-%  Separa el documento en bloques grandes (reglas arriba y abajo)
-%  y PINTA todo lo que venga detras con ese color:
-%  secciones, cajas, notas, definiciones... hasta el siguiente \titulo.
-% ============================================================
-% ============================================================
-%  APARTADO  \titulo[color]{ETIQUETA}{Titulo}
-%  Separa el documento en bloques. REINICIA el ciclo de colores,
-%  de modo que cada \seccion que venga despues pinta un color
-%  distinto automaticamente (sin poner el color a mano).
-% ============================================================
-\def\facilcoloractual{primary}
-\def\facilcoloracento{accent}
-% fondos y tonos derivados del color del apartado:
-%  facilpale  -> fondo muy claro (parrafos, listas)
-%  facilcajaA -> tono MEDIO  (tarjetas/definiciones: NO es el color pleno
-%                del titulo, asi no se confunden con el encabezado)
-%  facilcajaB -> tono OSCURO (segunda tarjeta de un par)
-\colorlet{facilpale}{primary!12!white}
-\colorlet{facilcajaA}{primary!50!black}
-\colorlet{facilcajaB}{primary!72!black}
-\newcommand{\facilsetpale}{%
-  \colorlet{facilpale}{\facilcoloractual!13!white}%
-  \colorlet{facilcajaA}{\facilcoloractual!50!black}%
-  \colorlet{facilcajaB}{\facilcoloractual!72!black}}
-\newcounter{facilsecc}
-\newcommand{\titulo}[3][primary]{%
-  \gdef\facilcoloractual{#1}%
-  \gdef\facilcolorseccion{#1}%
-  \facilsetpale
-  \setcounter{facilsecc}{0}%
-  \vspace{2mm}
-  \pill[#1]{#2}\par
-  \vspace{4mm}%   <- separacion automatica Etiqueta -> Titulo
-  {\headingfontxb\fontsize{23}{23}\selectfont\color{ink} #3}\par
-  \vspace{6mm}}
-
-% Cada \seccion elige SOLO un color ALEATORIO del pool de 20 colores
-% (azul, turquesa, menta, lima, verde, oliva, amarillo, naranja, melocoton,
-%  coral, rojo, burdeos, fucsia, rosa, ciruela, lila, lavanda, cafe...).
-% Nunca repite el color de la seccion anterior.
-\newcommand{\facilsigseccion}{%
-  \facilpickcolor{\facilcoloractual}%
-  \facilpickcolor{\facilcoloracento}%
-  \facilsetpale}
-
-% Color a mano: \seccion[rojoA]{...}  -> el acento se deriva solo (mas oscuro)
-\newcommand{\facilsetcolor}[1]{%
-  \gdef\facilcoloractual{#1}%
-  \colorlet{facilacento}{#1!55!black}%
-  \gdef\facilcoloracento{facilacento}%
-  \facilsetpale}
-
-\newcommand{\seccion}[2][]{%
-  \if\relax\detokenize{#1}\relax\facilsigseccion\else\facilsetcolor{#1}\fi
-  \vspace{3mm}%
-  \sectionheader[\facilcoloractual]{0.7cm}{#2}\vspace{2mm}}
-\newcommand{\secciongrande}[2][]{%
-  \if\relax\detokenize{#1}\relax\facilsigseccion\else\facilsetcolor{#1}\fi
-  \vspace{4mm}%
-  \sectionheader[\facilcoloractual]{1.1cm}{#2}\vspace{2.5mm}}
-% --- Bloques del "modo facil". Todos llevan una separacion vertical
-%     PREDETERMINADA debajo para que no queden pegados entre si.
-%     EXCEPTO \resumen: esa SI usa el color PLENO del apartado (es la
-%     caja destacada del tema). Las demas usan tono MEDIO (facilcajaA),
-%     distinto del color del titulo de seccion. ---
-\newcommand{\parrafo}[1]{\highlightpar[facilpale]{\facilnegrita{#1}}\par\vspace{3mm}}
-\newcommand{\caja}[2][facilcajaA]{\infobox[#1]{\facilnegrita{#2}}\par\vspace{3mm}}
-\newcommand{\cajadual}[3][facilcajaA]{\infoboxdup[#1]{\facilnegrita{#2}}{\facilnegrita{#3}}\par\vspace{3mm}}
-\newcommand{\nota}[3][facilcajaA]{\tipbox[#1]{#2}{\facilnegrita{#3}}\par\vspace{3mm}}
-\newcommand{\resumen}[2][\facilcoloractual]{\shadowbox[#1]{\facilnegrita{#2}}\par\vspace{4mm}}
-\newcommand{\resalta}[1]{\hl{#1}}
-\newcommand{\dato}[3][facilcajaA]{\statbox[#1]{#2}{#3}}
-
-% ---- CAJAS DE DEFINICION (titulo + texto) ----
-% \definicion[color]{Titulo}{Texto}  -> una sola tarjeta (tono medio, con
-%   separacion debajo; distinto del color del titulo de seccion)
-\newcommand{\definicion}[3][facilcajaA]{%
-  \typecard[#1]{#2}{\facilnegrita{#3}}\par\vspace{4mm}}
-% \definicionpar[color]{Titulo}{Texto}  -> DOS tarjetas apiladas (una debajo
-%   de otra), cada una con su titulo. Es la forma corta de usar el bloque.
-\newcommand{\definicionpar}[3][facilcajaA]{%
-  \typecard[#1]{#2}{\facilnegrita{#3}}\par\vspace{3mm}}
-% \definiciondoble[color]{Titulo izq}{Texto izq}{Titulo der}{Texto der}
-%   -> dos tarjetas LADO A LADO, MISMA ALTURA (tono medio + tono oscuro).
-\newcommand{\definiciondoble}[5][\facilcoloractual]{%
-  \typecardpair[#1]{#2}{\facilnegrita{#3}}{#4}{\facilnegrita{#5}}}
-
-% Cambiar el color del apartado a mitad de pagina (sin esperar al siguiente \titulo)
-\newcommand{\colorapartado}[1]{\gdef\facilcoloractual{#1}\gdef\facilcolorseccion{#1}\facilsetpale}
+\input{\bibliotecasDir/estilo/fondo/fondo}
+\input{\bibliotecasDir/estilo/fondo/usarfondo}
+\input{\bibliotecasDir/estilo/fondo/pie}

@@ -1,0 +1,16 @@
+\newcommand{\definicion}[3][]{
+  \if\relax\detokenize{#1}\relax
+    \colorlet{tarjetacolor}{\coloractual!55!black}
+  \else
+    \colorlet{tarjetacolor}{#1}
+  \fi
+  \typecard[tarjetacolor]{#2}{\negrita{#3}}\par\vspace{4mm}}
+
+\newcommand{\definicionpar}[3][]{
+  \if\relax\detokenize{#1}\relax
+    \colorlet{tarjetacolor}{\coloractual!55!black}
+  \else
+    \colorlet{tarjetacolor}{#1}
+  \fi
+  \typecard[tarjetacolor]{#2}{\negrita{#3}}\par\vspace{3mm}}
+

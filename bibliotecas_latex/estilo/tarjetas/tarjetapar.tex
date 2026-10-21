@@ -1,0 +1,13 @@
+\newcommand{\typecardpair}[5][primary]{
+  \noindent
+  \colorlet{parejaA}{#1!50!black}
+  \colorlet{parejaB}{#1!72!black}
+  \begin{tcbraster}[enhanced, raster columns=2, raster column skip=6mm,
+      raster equal height=rows, nobeforeafter,
+      boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
+    \typecard[parejaA]{#2}{#3}
+    \typecard[parejaB]{#4}{#5}
+  \end{tcbraster}\par
+  \vspace{4mm}
+}
+

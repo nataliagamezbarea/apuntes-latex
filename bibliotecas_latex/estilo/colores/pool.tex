@@ -1,0 +1,18 @@
+\ExplSyntaxOn
+
+\clist_new:N \g_pool_cl
+\clist_gset:Nn \g_pool_cl
+  { azulA, celeA, turqA, mentA, oceA, limaA, bosqueA, olivA, amarA, naraA,
+    melcA, coralA, arenaA, past04, fucsA, rosaA, ciruA, lilaA, lavA, past10 }
+
+\int_new:N \g_last_int
+\int_gset:Nn \g_last_int { 0 }
+\cs_new_protected:Npn \pickcolor #1
+  {
+    \int_set:Nn \l_tmpa_int
+      { \int_mod:nn { \g_last_int + 1 }
+                    { \clist_count:N \g_pool_cl } }
+    \int_gset_eq:NN \g_last_int \l_tmpa_int
+    \tl_set:Nx #1 { \clist_item:Nn \g_pool_cl { \l_tmpa_int + 1 } }
+  }
+\ExplSyntaxOff

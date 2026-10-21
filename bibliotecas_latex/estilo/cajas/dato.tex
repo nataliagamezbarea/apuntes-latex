@@ -1,0 +1,4 @@
+\newcommand{\dato}[3][]{
+  \if\relax\detokenize{#1}\relax\pickcolor{\colorcaja}\else\gdef\colorcaja{#1}\fi
+  \statbox[\colorcaja]{#2}{#3}}
+
