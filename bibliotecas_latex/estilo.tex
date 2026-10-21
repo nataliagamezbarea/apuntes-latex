@@ -400,21 +400,25 @@
 \newcommand{\typecard}[3][primary]{%
   \begin{tcolorbox}[enhanced,
       colback=#1!8!white, colframe=#1!45!white, boxrule=1.1pt, arc=5pt,
-      boxsep=0pt, left=8pt, right=8pt, bottom=8pt, top=2pt,
+      boxsep=0pt, left=8pt, right=8pt, bottom=8pt, top=6pt,
       colbacktitle=#1, coltitle=white, fonttitle=\headingfontxb,
       attach boxed title to top left={xshift=0pt, yshift=0pt},
       boxed title style={boxrule=0pt, arc=4pt},
       title={\fontsize{10.5}{10.5}\selectfont #2}]
+    \par\vspace{2mm}% <- separacion automatica Titulo-barra -> texto
     \RaggedRight\fontsize{9.6}{13.2}\selectfont\color{ink} #3
   \end{tcolorbox}%
 }
 % Dos tarjetas lado a lado (envuelve \typecard en minipages).
-% Añade una separacion vertical PREDETERMINADA debajo del par, para que
-% los bloques no queden pegados al siguiente contenido.
+% La PRIMERA usa el color del apartado (igual que el titulo de seccion);
+% la SEGUNDA usa un tono MAS OSCURO del mismo color, para que el par no
+% quede uniforme y no se confunda con el titulo.
+% Añade una separacion vertical PREDETERMINADA debajo del par.
 \newcommand{\typecardpair}[5][primary]{%
   \noindent
+  \colorlet{facilparej}{#1!58!black}%
   \begin{minipage}[t]{0.485\linewidth}\typecard[#1]{#2}{#3}\end{minipage}\hfill%
-  \begin{minipage}[t]{0.485\linewidth}\typecard[#1]{#4}{#5}\end{minipage}\par
+  \begin{minipage}[t]{0.485\linewidth}\typecard[facilparej]{#4}{#5}\end{minipage}\par
   \vspace{4mm}%
 }
 \newcommand{\statbox}[3][primary]{%
@@ -914,9 +918,9 @@
   \gdef\facilcolorseccion{#1}%
   \facilsetpale
   \setcounter{facilsecc}{0}%
-  \vspace{1mm}
+  \vspace{2mm}
   \pill[#1]{#2}\par
-  \vspace{2.5mm}
+  \vspace{4mm}%   <- separacion automatica Etiqueta -> Titulo
   {\headingfontxb\fontsize{23}{23}\selectfont\color{ink} #3}\par
   \vspace{6mm}}
 
