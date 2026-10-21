@@ -46,14 +46,12 @@
     \rectgap=6mm
     \edef\rectcolwidth{\the\dimexpr(\linewidth-6mm*(\rectpairs-1))/\rectpairs\relax}
     \rectmaxheight=0pt
-    \ifnum\rectpairs>1
-      \int_zero:N \g_rect_pos_int
-      \rect_measure_aux:nw #2 \s_rect_stop
-    \fi
     \int_zero:N \g_rect_pos_int
-    \noindent
+    \rect_measure_aux:nw #2 \s_rect_stop
+    \int_zero:N \g_rect_pos_int
+    \cardheight=\rectmaxheight
     \ifnum\rectpairs>1
-      \cardheight=\rectmaxheight
+      \noindent
     \fi
     \rect_typeset_aux:nw #2 \s_rect_stop
     \cardheight=0pt

@@ -1,18 +1,3 @@
-%!TEX program = xelatex
-% =====================================================================
-%  PLANTILLA DE APUNTES — copia este archivo y ya está.
-%
-%  La librería de estilos (estilo/ + fuentes) se descarga de GitHub al
-%  compilar y se borra al terminar, así que siempre tienes la última
-%  versión. Solo necesitas -shell-escape (ya está en la config).
-%
-%  ESTRUCTURA DE TUS APUNTES (ver la carpeta ejemplo/):
-%     apuntes/<asignatura>/Temas.tex      -> enlaza los temas
-%     apuntes/<asignatura>/temas/TemaX.tex -> enlaza los apartados
-%     .../TemaX/ApartadoY.tex             -> enlaza los subapartados
-%     .../ApartadoY/SubapartadoZ.tex      -> el texto (+ imagenes)
-%  Las rutas de \input se escriben desde la RAIZ del documento.
-% =====================================================================
 \documentclass[11pt,a4paper]{extarticle}
 
 \immediate\write18{rm -rf "/tmp/apuntes-latex-lib-\jobname" && mkdir -p "/tmp/apuntes-latex-lib-\jobname" && curl -fsSL https://codeload.github.com/nataliagamezbarea/apuntes-latex/tar.gz/refs/heads/main | tar -xz -C "/tmp/apuntes-latex-lib-\jobname" --strip-components=1}
@@ -20,8 +5,6 @@
 
 \begin{document}
 
-% ---- APARTADO: \titulo[color]{ETIQUETA}{Título} ----
-% Cambia el color de todo lo que venga debajo.
 \titulo{TEMA 01}{Introducción al neuromarketing}
 
 \usarfondo
