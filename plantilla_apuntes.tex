@@ -1,3 +1,15 @@
+%!TEX program = xelatex
+% =====================================================================
+%  PLANTILLA / CATÁLOGO DE LA LIBRERÍA
+%  ---------------------------------------------------------------------
+%  Este archivo es el CONTEXTO COMPLETO: aquí está TODO lo que se
+%  puede hacer con la librería, con su sintaxis exacta.
+%  Copia lo que necesites a tus apuntos.
+%
+%  La librería (estilo/ + fuentes) se descarga de GitHub al compilar y
+%  se borra al terminar, así que siempre tienes la última versión.
+%  Compila con XeLaTeX y -shell-escape.
+% =====================================================================
 \documentclass[11pt,a4paper]{extarticle}
 
 \immediate\write18{rm -rf "/tmp/apuntes-latex-lib-\jobname" && mkdir -p "/tmp/apuntes-latex-lib-\jobname" && curl -fsSL https://codeload.github.com/nataliagamezbarea/apuntes-latex/tar.gz/refs/heads/main | tar -xz -C "/tmp/apuntes-latex-lib-\jobname" --strip-components=1}
@@ -5,24 +17,79 @@
 
 \begin{document}
 
-\titulo{TEMA 01}{Introducción al neuromarketing}
-
+\paletaOceano
+\titulo{CATÁLOGO}{Todas las opciones de la librería}
 \usarfondo
 
+% =====================================================================
+\secciongrande{1. Apartado (el bloque grande)}
+% =====================================================================
+% \titulo[color]{ETIQUETA}{Título}
+% Cambia el color de todo lo que viene debajo.
+\titulo{TEMA 01}{Introducción al neuromarketing}
+\usarfondo
+
+\secciongrande{1.1. Secciones}
+% \seccion[color]{Título}      -> sección normal
+% \secciongrande[color]{Título} -> sección grande
 \seccion{¿Qué es?}
+\secciongrande{Formas de desplegar una aplicación web}
 
+% =====================================================================
+\secciongrande{2. Texto y párrafos}
+% =====================================================================
+% \parrafo{texto}          -> párrafo con franja lateral de color
+% \hl[color]{texto}       -> resaltado de rotulador
+% \resalta{texto}          -> alias de \hl
+% **texto**                -> negrita automática (sin escribir \textbf)
 \parrafo{El \hl{neuromarketing} combina neurociencia y marketing para
-entender \emph{por qué} el cliente compra, no solo \emph{qué} compra.}
+entender \emph{por qué} el cliente compra, no solo \emph{qué} compra.
+Escribir **negrita** dentro de cualquier bloque lo pone en negrita solo.}
 
+\resalta{Texto solo resaltado}
+
+% =====================================================================
+\secciongrande{3. Cajas}
+% =====================================================================
+% \caja[color]{texto}            -> caja de información
+% \cajadual[color]{T1}{T2}       -> dos cajas lado a lado
+% \nota[color]{Título}{Texto}    -> nota con borde lateral
+% \dato[color]{Título}{Texto}    -> dato destacado
+% \resumen[color]{texto}         -> caja resumen (ÚNICA con color pleno)
+% \pill[color]{texto}            -> píldora
 \caja{**Idea clave:** las decisiones de compra son mayoritariamente
 \emph{inconscientes} y emocionales antes de ser racionales.}
 
-% ---- DOS tarjetas lado a lado (misma altura) ----
+\cajadual{Control izquierdo}{Control derecho}
+
+\nota{Para el examen}{Diferencia bien entre neuromarketing \emph{funcional}
+y \emph{conductual}; caen preguntas tipo test.}
+
+\dato{2024}{Año de publicación}
+
+\resumen{**Resumen del tema:** el neuromarketing estudia los mecanismos
+inconscientes de la decisión de compra.}
+
+\pill{Etiqueta}
+
+% =====================================================================
+\secciongrande{4. Tarjetas}
+% =====================================================================
+% \definicion[color]{Título}{Texto}   -> UNA tarjeta
+% \definicionpar[color]{Título}{Texto} -> UNA tarjeta (más compacta)
+% \rectangulosdoble[color]{T1}{X1}{T2}{X2} -> DOS tarjetas en fila
+% \rectangulos[color]{{T1}{X1} {T2}{X2} {T3}{X3} {T4}{X4}} -> 2, 3, 4... en fila
+% Las tarjetas de una fila miden TODAS la altura de la más alta.
+% Ninguna usa el color pleno del apartado (solo \resumen lo usa).
+\definicion{Eye tracking}{Sigue la mirada del sujeto mientras mira un anuncio.}
+
+\definicionpar{Hosting compartido}{Tu web se aloja en un servidor que
+también utilizan otros sitios.}
+
 \rectangulosdoble{Definición}{Uso de técnicas de medición cerebral y conductual
   para estudiar al consumidor.}
   {Objetivo}{Predecir el comportamiento de compra y diseñar mejores experiencias.}
 
-% ---- CUATRO tarjetas en fila (las columnas se calculan solas) ----
 \rectangulos{
   {Definición}{Uso de técnicas de medición cerebral y conductual.}
   {Objetivo}{Predecir el comportamiento de compra.}
@@ -30,12 +97,22 @@ entender \emph{por qué} el cliente compra, no solo \emph{qué} compra.}
   {Variables}{Todo lo que se mide en el experimento.}
 }
 
-% ---- UNA tarjeta suelta ----
-\definicion{Eye tracking}{Sigue la mirada del sujeto mientras mira un anuncio.}
-
-% ---- Listas: separa los items con | y usa ** para negrita ----
+% =====================================================================
+\secciongrande{5. Listas y viñetas}
+% =====================================================================
+% Los items se separan con | (barra vertical).
+% \lista{a|b|c}    viñeta circular
+% \marcas{a|b|c}   viñeta de rombo
+% \tareas{a|b|c}   casillas de tarea
+% \pasos{a|b|c}    pasos numerados
+% \estrellas{a|b}  estrella
+% \alertas{a|b}    triángulo de aviso
+% \preguntas{a|b}  signo de interrogación
+% \flechas{a|b|c}  flecha
 \lista{**Rama funcional:** estudia la activación cerebral ante estímulos.
       |**Rama conductual:** observa lo que la gente hace.}
+
+\marcas{Primero|Segundo|Tercero}
 
 \tareas{Leer el artículo base del curso.|Resumir las técnicas de medición.}
 
@@ -46,13 +123,13 @@ entender \emph{por qué} el cliente compra, no solo \emph{qué} compra.}
 \preguntas{¿Qué mide el eye tracking?}
 \flechas{Estímulo cerebral|Conducta observable|Decisión de compra}
 
-\nota{Para el examen}{Diferencia bien entre neuromarketing \emph{funcional}
-y \emph{conductual}; caen preguntas tipo test.}
-
-% ---- Emojis y símbolos: se ven solos, sin envolver nada ----
-\caja{🌐 Web  📚 Apuntes  ✅ Hecho  ⚠️ Cuidado  ★ Destacado  ♥ Importante}
-
-% ---- Tabla minimalista ----
+% =====================================================================
+\secciongrande{6. Tablas}
+% =====================================================================
+% \begin{tablaminimal}{ccc}      tabla sin líneas verticales
+% \begin{tablacabecera}{ccc}     cabecera de color
+% \begin{tablacuadricula}{|c|c|} rejilla completa
+% \begin{fichaclave}{c}          ficha de clave/valor
 \begin{tablaminimal}{lcc}
   \tablacab{Técnica} & \tablacab{Resolución} & \tablacab{¿Móvil?} \\
   \midrule
@@ -61,10 +138,90 @@ y \emph{conductual}; caen preguntas tipo test.}
   Eye tracking & Media    & Sí \\
 \end{tablaminimal}
 
-% ---- Caja resumen con sombra (la única con el color pleno) ----
-\resumen{**Resumen del tema:** el neuromarketing estudia los mecanismos
-inconscientes de la decisión de compra.}
+\begin{tablacabecera}{ll}
+  \rowcolor{primary}
+  \tablacabb{Concepto} & \tablacabb{Definición} \\
+  \midrule
+  Marca & Lo que el consumidor recuerda \\
+ \Producto & El objeto que se compra \\
+\end{tablacabecera}
 
+\begin{tablacuadricula}{|l|c|}
+  \tablacab{Producto} & \tablacab{Precio} \\ \hline
+  Manzana & 1,20€ \\ \hline
+  Pan     & 0,90€ \\ \hline
+\end{tablacuadricula}
+
+\begin{fichaclave}{l}
+  \fichaitem{Paleta}{Oceano}
+  \fichaitem{Tema}{Introducción}
+\end{fichaclave}
+
+\no \si
+
+% =====================================================================
+\secciongrande{7. Filas (imagen + contenido)}
+% =====================================================================
+% \filaimagen{ancho}{imagen}{contenido}
+% \filaimagender{ancho}{imagen}{contenido}   (imagen a la derecha)
+% \filacontenido{ancho}{contenido izq.}{contenido der.}
+\filaimagen{0.32\linewidth}{ejemplo/apuntes/Acceso_a_Datos/temas/Tema1/imagenes/diagrama.png}
+{Texto a la derecha de la imagen.}
+
+\filacontenido{0.4\linewidth}{Contenido de la izquierda.}{Contenido de la derecha.}
+
+% =====================================================================
+\secciongrande{8. Emojis y símbolos}
+% =====================================================================
+% Salen solos, sin envolver nada: 🌐 ♥ ✓ → ★ ⚠️ ✅ 📚
+\caja{🌐 Web  📚 Apuntes  ✅ Hecho  ⚠️ Cuidado  ★ Destacado  ♥ Importante  → Flecha  ✓ Correcto}
+
+% =====================================================================
+\secciongrande{9. Estilos de título (A-Q)}
+% =====================================================================
+% Cada uno es un apartado distinto: elige el que más te guste.
+\tituloA{Introducción al neuromarketing}{Estilo A: rotulador}
+\tituloB{Introducción al neuromarketing}{Estilo B}
+\tituloC{Estilo C: Brush}
+\tituloD{Estilo D}
+\tituloE{ETIQUETA}{Estilo E: etiqueta + título}
+\tituloF{Estilo F}
+\tituloG{Título}{Subtítulo del estilo G}
+\tituloH{Estilo H}
+\tituloI{Estilo I}
+\tituloJ{01}{Título con número grande}
+\tituloK{Estilo K}
+\tituloL{Estilo L}
+\tituloM{Estilo M}
+\tituloN{Estilo N}
+\tituloO{ETIQUETA}{Estilo O}
+\tituloP{Título}{Subtítulo del estilo P}
+\tituloQ{Estilo Q}
+
+% =====================================================================
+\secciongrande{10. Paletas (el color del apartado)}
+% =====================================================================
+% Elige una paleta al empezar el documento; todo lo de abajo toma su color.
+%   \paletaAmarillo  \paletaArena    \paletaAzul      \paletaBosque
+%   \paletaBurdeos   \paletaCafe     \paletaCeleste   \paletaCiruela
+%   \paletaCoral     \paletaFucsia   \paletaGris      \paletaLavanda
+%   \paletaLila      \paletaLima     \paletaMelocoton \paletaMenta
+%   \paletaNaranja   \paletaOceano   \paletaOliva     \paletaRojo
+%   \paletaRosa      \paletaTurquesa
+% Y si quieres tu propio color:
+%   \mipaleta{color principal}{color de acento}{color del texto}
+%   \mipaleta{#E75480}{#B23A63}{#2B2226}
+% Y para forzar el color de un bloque: \colorapartado{rosaA}
+\paletaLavanda
+\titulo{PALETA}{Cambiada a lavanda}
+\colorapartado{rosaA}
+\secciongrande{Con \colorapartado{rosaA} el color cambia aquí}
+
+% =====================================================================
+\secciongrande{11. Fondo y pie de página}
+% =====================================================================
+% \usarfondo            -> fondo de cuaderno (puntos)
+% \pagefoot[color]{Pie} -> pie de página (píldora centrada)
 \pagefoot{Neuromarketing -- Tema 01}
 
 \end{document}
