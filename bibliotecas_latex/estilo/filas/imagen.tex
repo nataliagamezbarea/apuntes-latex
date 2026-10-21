@@ -25,6 +25,8 @@
 
 % macro vacia para comparar con \ifx (\@empty no sirve aqui)
 \def\imagenvacio{}
+\def\SI{SI}
+\def\NO{NO}
 
 % ---------------------------------------------------------------------
 %  \buscarimagen{fichero}
@@ -51,18 +53,14 @@
   \IfFileExists{\imagenficheroesc}{%
     \edef\imagenruta{\imagenficheroesc}%
   }{%
-    % --- 2 y 3) buscar por el nombre en el proyecto ---
+    % --- 2) "imagenes_explicativas" del proyecto (y subcarpetas) ---
+    % --- 3) y si no, por el nombre en todo el proyecto ---
     \immediate\write18{mkdir -p "\imagentmpdir" && sh "\bibliotecasDir/estilo/filas/buscarimagen.sh" "\imagenficheroesc" "\imagentmpfile"}%
     \IfFileExists{\imagentmpfile}{%
       \edef\imagenruta{\imagentmpfile}%
     }{%
-      % --- 4) no esta en ninguna parte: error claro ---
+      % --- 4) no esta en ninguna parte ---
       \edef\imagenruta{\imagenficheroesc}%
-      \PackageError{imagen}{No se encuentra la imagen "\imagenfichero"}{%
-        Ponla en la carpeta "imagenes_explicativas" del proyecto (por ejemplo\n
-        imagenes_explicativas/tus-apuntes/\imagenfichero) o escribe la ruta\n
-        completa: \string\imagen{Tema1.1/imagenes/\imagenfichero}\n
-        Recuerda: la extension del fichero (por ejemplo .png).}%
     }%
   }%
 }
@@ -75,8 +73,12 @@
     % --- ancho ---
     \def\imagenancho{#1}%
     \ifx\imagenancho\imagenvacio\def\imagenancho{\linewidth}\fi
+    % --- buscar la imagen ---
     \buscarimagen{#2}%
+    \global\def\imagenfalta\SI
+    % --- meterla (aqui dentro, mientras \imagenruta existe) ---
     \IfFileExists{\imagenruta}{%
+      \global\def\imagenfalta\NO
       \begin{center}%
         % graphicx no expande el nombre del fichero: hay que pasarlo
         % "escapado" (detokenize) para que los _ y otros signos valgan.
@@ -84,6 +86,18 @@
         \edef\imagenllamada{\noexpand\includegraphics[width=\imagenancho,keepaspectratio]{\imagenrutadetok}}%
         \imagenllamada
       \end{center}%
-    }%
+    }{}%
+    % el nombre, para el mensaje de error (se guarda "global" porque el
+    % error se lanza despues de cerrar el grupo)
+    \edef\imagentmp{\imagenficheroesc}%
+    \global\def\imagenmala{\imagentmp}%
   \endgroup
+  % El error va FUERA del grupo: si no, \PackageError deja el grupo
+  % abierto y el documento acaba con "(\end occurred inside a group".
+  \ifx\imagenfalta\SI
+    \PackageError{imagen}{No se encuentra la imagen "\imagenmala"}{%
+      Ponla en la carpeta "imagenes_explicativas" del proyecto (por ejemplo
+      imagenes_explicativas/tus-apuntes/) o escribe la ruta completa desde
+      la raiz del documento. No olvides la extension del fichero (por ejemplo .png).}%
+  \fi
 }
