@@ -235,28 +235,41 @@ apuntes/
     tema2.tex                 <- el documento que une TODOS sus apartados
     carga.tex                 <- descarga la librería de GitHub y la enlaza
     Tema2.1/                  <- un tema (una carpeta por tema)
-      1.1-apartado.tex        <- un apartado (1.1)
-      1.2-apartado.tex        <- el siguiente (1.2)
-      1.2.1-subapartado.tex   <- un subapartado (1.2.1)
+      1.1-apartado.tex        <- los apartados, numerados (1.1, 1.2...)
+      1.2-apartado.tex
       imagenes/               <- las imágenes de este tema
     Tema2.2/                  <- el siguiente tema
       2.1-apartado.tex
 ```
 
-La numeración es la académica: **TEMA 2 → TEMA 2.1 → apartado 1.1 →
-subapartado 1.1.1**, y el número va en el nombre del archivo.
+La numeración es la académica: **TEMA 2 → TEMA 2.1 → apartado 1.1**, y el
+número va en el nombre del archivo. Si un apartado tiene varias partes, se
+puede partir en `1.1.1`, `1.1.2`... (cada uno en su propio archivo).
 
 Para unir los apartados de un tema no hace falta escribir un `\input` por
 cada archivo: `\inputcarpeta` mete **todos los `.tex` de una carpeta (y de
 sus subcarpetas) en orden**:
 
 ```latex
-\inputcarpeta{Tema2.1}      % mete 1.1, 1.2, 1.2.1... de golpe
+\inputcarpeta{Tema2.1}      % mete 1.1, 1.2... de golpe
 ```
 
 Las rutas se cuentan **desde la raíz del documento** (la carpeta donde
-compilas). En la carpeta `ejemplo/` tienes un ejemplo completo de esta
-estructura con dos asignaturas, apartados, subapartados e imágenes.
+compilas). En la carpeta `ejemplo/` tienes un ejemplo completo:
+
+```
+ejemplo/
+  carga.tex
+  temas.tex                          <- el documento principal
+  apuntes/
+    asignatura/
+      Temas.tex                      <- la asignatura
+      Tema X/                        <- un tema
+        Tema X.X/                    <- sus apartados (1.1, 1.2...)
+          1.1-apartado.tex
+          1.2-apartado.tex
+          imagenes/
+```
 
 ---
 
