@@ -24,32 +24,94 @@
 \begin{document}
 
 \paletaOceano
-\titulo{TEMA 02}{Teoria de la Gestalt}
+\titulo{TEMA 01}{Introducción}
 \usarfondo
 
 % ===================== 1 =====================
-\secciongrande{Percebre no és rebre}
+\secciongrande{Diferencia máquina(localhost) y servidor}
 
-\parrafo{Segons la psicologia de la Gestalt, la ment configura mitjançant
-certes lleis els elements que li arriben pels sentits (percepció) o per la
-memòria (pensament).}
+\definiciondoble
+       {localhost}
+{
+       \lista{
+              \textbf{Funciona solo en tu ordenador}|
+              \textbf{Dejar de estar disponible al apagar el portátil}|
+              \textbf{No permitir el acceso desde otros ordenadores}|
+              \textbf{Necesitar un servidor para publicar la aplicación}|
+              \textbf{No ser accesible desde cualquier lugar}
+       }
 
-\lista{\textbf{Buscar}|\textbf{Seleccionar}|\textbf{Relacionar}|
-       \textbf{Establir connexions}|\textbf{Recordar}|
-       \textbf{Identificar}|\textbf{Jerarquitzar}|\textbf{Avaluar}|
-       \textbf{Aprendre}|\textbf{Interpretar}}
+       
+  }
+  {servidor}
+  {
+        \lista{
+              \textbf{Esta siempre encendido}|
+              \textbf{Se mantiene siempre conectado}|
+              \textbf{Es accesible desde cualquier lugar}|
+              \textbf{Recibe peticiones de usuarios externos}|
+              \textbf{Ofrecer la aplicación a otras personas}
+       }
+}
 
-% ===================== 2 =====================
-\secciongrande{El missatge visual}
 
-\parrafo{Dissenyar és construir un missatge amb una intenció concreta.}
+  % ===================== 2 =====================
+\secciongrande{Formas de desplegar una aplicación web}
 
-\lista{\textbf{Buscar}|\textbf{Seleccionar}|\textbf{Relacionar}|
-       \textbf{Establir connexions}|\textbf{Recordar}|
-       \textbf{Identificar}|\textbf{Jerarquitzar}|\textbf{Avaluar}|
-       \textbf{Aprendre}|\textbf{Interpretar}}
+
+\definicionpar
+       {Hosting compartido}
+{
+       Tu web se aloja en un servidor que también utilizan otros sitios.
+
+       Control: limitado sobre la configuración del servidor.
+}
+
+\definicionpar
+       {VPS (servidor virtual privado)}
+{
+       Dispones de un entorno virtual propio donde puedes instalar y configurar el sistema operativo.
+
+       Control: amplio, con permisos de administrador.
+}
+
+\definicionpar
+       {Servidor dedicado}
+{
+       Alquilas un equipo físico que se utiliza exclusivamente para tu aplicación.
+
+       Control: completo sobre el sistema y los recursos de la máquina.
+}
+
+\definicionpar
+       {Nube o IaaS}
+{
+       Contratas recursos informáticos virtuales según las necesidades de tu aplicación, por ejemplo, en AWS, Azure o Google Cloud.
+
+       Control: elevado, con un coste que depende del uso de los recursos.
+}
+
+\definicionpar
+       {PaaS (plataforma como servicio)}
+{
+       Subes tu aplicación a una plataforma que administra la infraestructura, como Vercel, Netlify o Render.
+
+       Control: te centras en el código sin tener que gestionar directamente el servidor.
+}
+
+\definicionpar
+       {Contenedores}
+{
+       Agrupas la aplicación con las dependencias que necesita para ejecutarse en diferentes entornos.
+
+       Control: puedes configurar el entorno del contenedor, aunque el control de la máquina depende de la plataforma utilizada.
+}
+
+\vspace{3mm}
 
 % ---- Pie de página ----
-\pagefoot{Gestalt -- Tema 02}
+\pagefoot{Tema 01 -- Introducción}
 
 \end{document}
+
+

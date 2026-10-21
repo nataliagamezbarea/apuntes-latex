@@ -285,15 +285,21 @@
   \begin{minipage}[t]{0.485\linewidth}\infobox[primary]{#3}\end{minipage}%
 }
 
-% Caja plana sin borde, fondo de color (para resaltar párrafos, estilo img.3)
+% Caja plana SIN borde, pero con una franja lateral de color (el fondo
+% queda claro y el filo da contraste: el recuadro ya NO se ve del mismo
+% color que el fondo). Se usa desde \parrafo.
 \newcommand{\highlightpar}[2][facilpale]{%
-  \begin{tcolorbox}[colback=#1, colframe=#1, arc=2pt, boxsep=1pt,
-      left=9pt, right=9pt, top=7pt, bottom=7pt, boxrule=0pt]
+  \begin{tcolorbox}[enhanced, colback=#1, colframe=#1, arc=2pt, boxsep=1pt,
+      left=9pt, right=9pt, top=7pt, bottom=7pt, boxrule=0pt,
+      borderline west={3.2pt}{0pt}{\facilcoloractual},
+      borderline south={1.1pt}{0pt}{\facilcoloractual!45!white}]
     \RaggedRight\fontsize{10.8}{15.5}\selectfont\color{ink} #2
   \end{tcolorbox}%
 }
-% Resalte "de rotulador" para frases sueltas dentro de un párrafo
-\newcommand{\hl}[2][facilpale]{\colorbox{#1}{\strut #2}}
+% Resalte "de rotulador" para frases sueltas dentro de un párrafo.
+% Por defecto usa el color de acento del apartado (visible sobre facilpale),
+% NO facilpale, que era igual que el fondo y por eso no se distinguía.
+\newcommand{\hl}[2][\facilcoloracento]{\colorbox{#1!35!white}{\strut #2}}
 
 % =====================================================================
 % LISTAS: viñeta circular / viñeta rombo / numerada con círculos
@@ -392,18 +398,24 @@
     inner ysep=3.5pt, font=\headingfontxb\color{white}\fontsize{8.5}{8.5}\selectfont] {#2};%
 }
 \newcommand{\typecard}[3][primary]{%
-  \begin{tcolorbox}[colback=#1!6!white, colframe=#1, boxrule=1.2pt, arc=5pt,
-      boxsep=0pt, left=8pt, right=8pt, bottom=7pt, top=2pt,
+  \begin{tcolorbox}[enhanced,
+      colback=#1!8!white, colframe=#1!45!white, boxrule=1.1pt, arc=5pt,
+      boxsep=0pt, left=8pt, right=8pt, bottom=8pt, top=2pt,
       colbacktitle=#1, coltitle=white, fonttitle=\headingfontxb,
+      attach boxed title to top left={xshift=0pt, yshift=0pt},
+      boxed title style={boxrule=0pt, arc=4pt},
       title={\fontsize{10.5}{10.5}\selectfont #2}]
     \RaggedRight\fontsize{9.6}{13.2}\selectfont\color{ink} #3
   \end{tcolorbox}%
 }
-% Dos tarjetas lado a lado (envuelve \typecard en minipages)
+% Dos tarjetas lado a lado (envuelve \typecard en minipages).
+% Añade una separacion vertical PREDETERMINADA debajo del par, para que
+% los bloques no queden pegados al siguiente contenido.
 \newcommand{\typecardpair}[5][primary]{%
   \noindent
   \begin{minipage}[t]{0.485\linewidth}\typecard[#1]{#2}{#3}\end{minipage}\hfill%
-  \begin{minipage}[t]{0.485\linewidth}\typecard[secondary]{#4}{#5}\end{minipage}%
+  \begin{minipage}[t]{0.485\linewidth}\typecard[#1]{#4}{#5}\end{minipage}\par
+  \vspace{4mm}%
 }
 \newcommand{\statbox}[3][primary]{%
   \tikz{\node[fill=#1, rounded corners=7pt, text width=3.5cm, align=center,
@@ -583,7 +595,9 @@
   \end{tikzpicture}%
 }
 \newcommand{\usarfondo}{\AddToShipoutPictureBG{\pagebackground}}
-\newcommand{\pagefoot}[1]{\vfill\begin{center}\pill[primary]{#1}\end{center}}
+% El pie usa el MISMO color que el \titulo / apartado activo, para que
+% titulo y pie combinen (antes salia siempre en "primary").
+\newcommand{\pagefoot}[2][\facilcoloractual]{\vfill\begin{center}\pill[#1]{#2}\end{center}\vspace{2mm}}
 
 % =====================================================================
 % TABLA MINIMALISTA (solo líneas horizontales, sin verticales)
@@ -813,20 +827,19 @@
 \clist_gset:Nn \g_facil_pool_cl
   { azulA, celeA, turqA, mentA, oceA, limaA, bosqueA, olivA, amarA, naraA,
     melcA, coralA, arenaA, past04, fucsA, rosaA, ciruA, lilaA, lavA, past10 }
-% MAZO BARAJADO: se reparten los 20 colores SIN REPETIR.
-% Cuando se acaba el mazo, se vuelve a barajar (nunca seguidos).
-\seq_new:N \g_facil_bag_seq
-\cs_new_protected:Npn \facilbarajamazo
-  {
-    \seq_gset_from_clist:NN \g_facil_bag_seq \g_facil_pool_cl
-    \seq_shuffle:N \g_facil_bag_seq
-  }
-\facilbarajamazo
+% ORDEN FIJO DE COLORES: se recorre el pool de 20 colores de uno en uno,
+% SIN ALEATORIEDAD, para que la salida sea SIEMPRE IGUAL en cada
+% compilacion (antes usaba \seq_shuffle y los colores cambiaban en cada
+% ejecucion). Nunca repite el color de la seccion anterior.
+\int_new:N \g_facil_last_int
+\int_gset:Nn \g_facil_last_int { 0 }
 \cs_new_protected:Npn \facilpickcolor #1
   {
-    \seq_if_empty:NT \g_facil_bag_seq { \facilbarajamazo }
-    \seq_gpop_left:NN \g_facil_bag_seq \l_tmpa_tl
-    \tl_gset_eq:NN #1 \l_tmpa_tl
+    \int_set:Nn \l_tmpa_int
+      { \int_mod:nn { \g_facil_last_int + 1 }
+                    { \clist_count:N \g_facil_pool_cl } }
+    \int_gset_eq:NN \g_facil_last_int \l_tmpa_int
+    \tl_set:Nx #1 { \clist_item:Nn \g_facil_pool_cl { \l_tmpa_int + 1 } }
   }
 \ExplSyntaxOff
 \def\facilbullet#1{\item \facilnegrita{#1}}
@@ -925,21 +938,34 @@
 
 \newcommand{\seccion}[2][]{%
   \if\relax\detokenize{#1}\relax\facilsigseccion\else\facilsetcolor{#1}\fi
-  \sectionheader[\facilcoloractual]{0.7cm}{#2}}
+  \vspace{3mm}%
+  \sectionheader[\facilcoloractual]{0.7cm}{#2}\vspace{2mm}}
 \newcommand{\secciongrande}[2][]{%
   \if\relax\detokenize{#1}\relax\facilsigseccion\else\facilsetcolor{#1}\fi
-  \sectionheader[\facilcoloractual]{1.1cm}{#2}}
-\newcommand{\parrafo}[1]{\highlightpar[facilpale]{\facilnegrita{#1}}}
-\newcommand{\caja}[2][\facilcoloractual]{\infobox[#1]{\facilnegrita{#2}}}
-\newcommand{\cajadual}[3][\facilcoloractual]{\infoboxdup[#1]{\facilnegrita{#2}}{\facilnegrita{#3}}}
-\newcommand{\nota}[3][\facilcoloractual]{\tipbox[#1]{#2}{\facilnegrita{#3}}}
-\newcommand{\resumen}[2][\facilcoloractual]{\shadowbox[#1]{\facilnegrita{#2}}}
+  \vspace{4mm}%
+  \sectionheader[\facilcoloractual]{1.1cm}{#2}\vspace{2.5mm}}
+% --- Bloques del "modo facil". Todos llevan una separacion vertical
+%     PREDETERMINADA debajo para que no queden pegados entre si. ---
+\newcommand{\parrafo}[1]{\highlightpar[facilpale]{\facilnegrita{#1}}\par\vspace{3mm}}
+\newcommand{\caja}[2][\facilcoloractual]{\infobox[#1]{\facilnegrita{#2}}\par\vspace{3mm}}
+\newcommand{\cajadual}[3][\facilcoloractual]{\infoboxdup[#1]{\facilnegrita{#2}}{\facilnegrita{#3}}\par\vspace{3mm}}
+\newcommand{\nota}[3][\facilcoloractual]{\tipbox[#1]{#2}{\facilnegrita{#3}}\par\vspace{3mm}}
+\newcommand{\resumen}[2][\facilcoloractual]{\shadowbox[#1]{\facilnegrita{#2}}\par\vspace{4mm}}
 \newcommand{\resalta}[1]{\hl{#1}}
 \newcommand{\dato}[3][\facilcoloractual]{\statbox[#1]{#2}{#3}}
 
 % ---- CAJAS DE DEFINICION (titulo + texto) ----
-\newcommand{\definicion}[3][\facilcoloractual]{\typecard[#1]{#2}{\facilnegrita{#3}}}
-\newcommand{\definicionpar}[5][\facilcoloractual]{\typecardpair[#1]{#2}{\facilnegrita{#3}}{#4}{\facilnegrita{#5}}}
+% \definicion[color]{Titulo}{Texto}  -> una sola tarjeta (con separacion debajo)
+\newcommand{\definicion}[3][\facilcoloractual]{%
+  \typecard[#1]{#2}{\facilnegrita{#3}}\par\vspace{4mm}}
+% \definicionpar[color]{Titulo}{Texto}  -> DOS tarjetas apiladas (una debajo
+%   de otra), cada una con su titulo. Es la forma corta de usar el bloque.
+\newcommand{\definicionpar}[3][\facilcoloractual]{%
+  \typecard[#1]{#2}{\facilnegrita{#3}}\par\vspace{3mm}}
+% \definiciondoble[color]{Titulo izq}{Texto izq}{Titulo der}{Texto der}
+%   -> dos tarjetas LADO A LADO en una misma fila.
+\newcommand{\definiciondoble}[5][\facilcoloractual]{%
+  \typecardpair[#1]{#2}{\facilnegrita{#3}}{#4}{\facilnegrita{#5}}}
 
 % Cambiar el color del apartado a mitad de pagina (sin esperar al siguiente \titulo)
 \newcommand{\colorapartado}[1]{\gdef\facilcoloractual{#1}\gdef\facilcolorseccion{#1}}
