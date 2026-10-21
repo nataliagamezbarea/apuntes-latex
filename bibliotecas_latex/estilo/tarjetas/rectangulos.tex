@@ -12,8 +12,8 @@
   {
     \int_gincr:N \g_rect_pos_int
     \int_if_even:nTF { \g_rect_pos_int }
-      { \colorlet{rectactual}{rectbase!72!black} }
-      { \colorlet{rectactual}{rectbase!55!black} }
+      { \colorlet{rectactual}{rectbase} }
+      { \colorlet{rectactual}{rectbase} }
     \group_begin:
       \hsize=\rectcolwidth
       \linewidth=\rectcolwidth
@@ -31,8 +31,8 @@
   {
     \int_gincr:N \g_rect_pos_int
     \int_if_even:nTF { \g_rect_pos_int }
-      { \colorlet{rectactual}{rectbase!72!black} }
-      { \colorlet{rectactual}{rectbase!55!black} }
+      { \colorlet{rectactual}{rectbase} }
+      { \colorlet{rectactual}{rectbase} }
     \ifnum\rectpairs>1
       \begin{minipage}[t][\rectmaxheight][t]{\rectcolwidth}
         \typecardalto[rectactual]{#1}{\negrita{#2}}
@@ -44,7 +44,7 @@
       { \hspace{\rectgap} \rect_typeset_aux:nw #3 \s_rect_stop }
   }
 
-\NewDocumentCommand{\rectangulos}{O{\coloractual} +m}
+\NewDocumentCommand{\rectangulos}{O{\colorcaja} +m}
   {
     \colorlet{rectbase}{#1}
     \int_gset:Nn \g_rect_count_int { \tl_count:n {#2} }
@@ -65,5 +65,5 @@
     \par\vspace{4mm}
   }
 \ExplSyntaxOff
-\newcommand{\rectangulosdoble}[5][\coloractual]{\rectangulos[#1]{{#2}{#3}{#4}{#5}}}
-\newcommand{\definiciondoble}[5][\coloractual]{\rectangulosdoble[#1]{#2}{#3}{#4}{#5}}
+\newcommand{\rectangulosdoble}[5][\colorcaja]{\rectangulos[#1]{{#2}{#3}{#4}{#5}}}
+\newcommand{\definiciondoble}[5][\colorcaja]{\rectangulosdoble[#1]{#2}{#3}{#4}{#5}}

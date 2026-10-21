@@ -25,34 +25,23 @@
 
 % ------------------------------------------------------------------
 \titulo{BLOQUE 1}{Apartado (el título grande)}
-\codigo{\textbackslash titulo\{ETIQUETA\}\{Título\}}
-\codigo{\textbackslash titulo[color]\{ETIQUETA\}\{Título\}}
 Es lo que abre cada tema: cambia el color de todo lo que viene debajo.
 
 % ------------------------------------------------------------------
 \newpage
 \titulo{BLOQUE 2}{Secciones}
-\codigo{\textbackslash seccion\{Título\}}
-\codigo{\textbackslash secciongrande\{Título\}}
 \seccion{Sección normal}
 \secciongrande{Sección grande}
 
 % ------------------------------------------------------------------
 \newpage
 \titulo{BLOQUE 3}{Párrafos y texto}
-\codigo{\textbackslash parrafo\{Texto con **negrita**\}}
-\codigo{\textbackslash hl\{resaltado\}}
 \parrafo{El \hl{neuromarketing} combina neurociencia y marketing. Escribir
 **negrita** dentro de cualquier bloque lo pone en negrita solo.}
 
 % ------------------------------------------------------------------
 \newpage
 \titulo{BLOQUE 4}{Cajas}
-\codigo{\textbackslash caja\{Texto\}}
-\codigo{\textbackslash cajadual\{Texto 1\}\{Texto 2\}}
-\codigo{\textbackslash nota\{Título\}\{Texto\}}
-\codigo{\textbackslash dato\{Título\}\{Texto\}}
-\codigo{\textbackslash resumen\{Texto\}}
 \caja{**Idea clave:** caja de información con el color del apartado.}
 \cajadual{Control izquierdo}{Control derecho}
 \nota{Para el examen}{Caja de nota con borde de color.}
@@ -62,10 +51,6 @@ Es lo que abre cada tema: cambia el color de todo lo que viene debajo.
 % ------------------------------------------------------------------
 \newpage
 \titulo{BLOQUE 5}{Tarjetas}
-\codigo{\textbackslash definicion\{Título\}\{Texto\}}
-\codigo{\textbackslash definicionpar\{Título\}\{Texto\}}
-\codigo{\textbackslash rectangulosdoble\{T1\}\{X1\}\{T2\}\{X2\}}
-\codigo{\textbackslash rectangulos\{\{T1\}\{X1\} \{T2\}\{X2\} \{T3\}\{X3\}\}}
 \definicion{Tarjeta suelta}{Una sola tarjeta con su título encima.}
 \definicionpar{Tarjeta compacta}{Igual pero más baja.}
 \rectangulosdoble{Primera}{Texto de la primera tarjeta.}
@@ -79,8 +64,6 @@ Es lo que abre cada tema: cambia el color de todo lo que viene debajo.
 % ------------------------------------------------------------------
 \newpage
 \titulo{BLOQUE 6}{Listas y viñetas}
-\codigo{\textbackslash lista\{Uno|Two|Tres\}}
-\codigo{\textbackslash marcas\{...\} \textbackslash tareas\{...\} \textbackslash pasos\{...\}}
 \lista{**Negrita** en el item.|Otro item.|Un último item.}
 \tareas{Tarea 1.|Tarea 2.}
 \pasos{Paso 1.|Paso 2.|Paso 3.}
@@ -93,9 +76,6 @@ Es lo que abre cada tema: cambia el color de todo lo que viene debajo.
 % ------------------------------------------------------------------
 \newpage
 \titulo{BLOQUE 7}{Tablas}
-\codigo{\textbackslash begin\{tablaminimal\}\{ccc\} ... \textbackslash end\{tablaminimal\}}
-\codigo{\textbackslash begin\{tablacabecera\}\{cc\} ... \textbackslash end\{tablacabecera\}}
-\codigo{\textbackslash begin\{fichaclave\}\{4cm\} ... \textbackslash end\{fichaclave\}}
 \begin{tablaminimal}{lcc}
   \tablacab{Técnica} & \tablacab{Resolución} & \tablacab{¿Móvil?} \\
   \midrule
@@ -118,8 +98,6 @@ Es lo que abre cada tema: cambia el color de todo lo que viene debajo.
 % ------------------------------------------------------------------
 \newpage
 \titulo{BLOQUE 8}{Filas (imagen + contenido)}
-\codigo{\textbackslash filaimagen\{ancho\}\{imagen\}\{contenido\}}
-\codigo{\textbackslash filacontenido\{ancho\}\{contenido izq.\}\{contenido der.\}}
 \filaimagen{0.32\linewidth}{imagenes/ejemplo.png}
 {Texto a la derecha de la imagen.}
 \filacontenido{0.4\linewidth}{Contenido de la izquierda.}{Contenido de la derecha.}
@@ -127,13 +105,11 @@ Es lo que abre cada tema: cambia el color de todo lo que viene debajo.
 % ------------------------------------------------------------------
 \newpage
 \titulo{BLOQUE 9}{Emojis y símbolos}
-\codigo{\textbackslash caja\{🌐 Web 📚 Apuntes ✅ Hecho ⚠️ Cuidado ★ Destacado\}}
 \caja{🌐 Web  📚 Apuntes  ✅ Hecho  ⚠️ Cuidado  ★ Destacado  ♥ Importante  → Flecha  ✓ Correcto}
 
 % ------------------------------------------------------------------
 \newpage
 \titulo{BLOQUE 10}{Estilos de título (A-Q)}
-\codigo{\textbackslash tituloA\{...\}\{...\} ... \textbackslash tituloQ\{...\}}
 \tituloA{Estilo A}{Rotulador}
 \vspace{3mm}
 \tituloC{Estilo C}
@@ -147,9 +123,6 @@ Es lo que abre cada tema: cambia el color de todo lo que viene debajo.
 % ------------------------------------------------------------------
 \newpage
 \titulo{BLOQUE 11}{Paletas}
-\codigo{\textbackslash paletaOceano \textbackslash paletaRosa \textbackslash paletaLavanda ...}
-\codigo{\textbackslash mipaleta\{color\}\{acento\}\{texto\}}
-\codigo{\textbackslash colorapartado\{rosaA\}}
 \paletaRosa
 \titulo{PALETA}{Cambiada a rosa}
 \colorapartado{azulA}
@@ -158,8 +131,6 @@ Es lo que abre cada tema: cambia el color de todo lo que viene debajo.
 % ------------------------------------------------------------------
 \newpage
 \titulo{BLOQUE 12}{Fondo y pie de página}
-\codigo{\textbackslash usarfondo}
-\codigo{\textbackslash pagefoot\{Pie de página\}}
 El fondo de puntos aparece en toda la página y el pie es una píldora
 centrada con el color del apartado.
 \pagefoot{Apuntes -- Tema 01}
