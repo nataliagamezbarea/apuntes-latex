@@ -9,6 +9,7 @@
 *.fdb_latexmk
 *.xdv
 *.synctex.gz
+*synctex*
 *.bbl
 *.blg
 *.nav
