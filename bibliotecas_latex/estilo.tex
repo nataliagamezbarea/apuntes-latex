@@ -403,22 +403,23 @@
       boxsep=0pt, left=8pt, right=8pt, bottom=8pt, top=6pt,
       colbacktitle=#1, coltitle=white, fonttitle=\headingfontxb,
       attach boxed title to top left={xshift=0pt, yshift=0pt},
-      boxed title style={boxrule=0pt, arc=4pt},
-      title={\fontsize{10.5}{10.5}\selectfont #2}]
+      boxed title style={boxrule=0pt, arc=4pt, top=1.5pt, bottom=1.5pt,
+                         left=6pt, right=6pt},
+      title={\fontsize{9.5}{9.5}\selectfont #2}]
     \par\vspace{2mm}% <- separacion automatica Titulo-barra -> texto
     \RaggedRight\fontsize{9.6}{13.2}\selectfont\color{ink} #3
   \end{tcolorbox}%
 }
 % Dos tarjetas lado a lado (envuelve \typecard en minipages).
-% La PRIMERA usa el color del apartado (igual que el titulo de seccion);
-% la SEGUNDA usa un tono MAS OSCURO del mismo color, para que el par no
-% quede uniforme y no se confunda con el titulo.
-% Añade una separacion vertical PREDETERMINADA debajo del par.
+% NINGUNA tarjeta usa el color PLENO del apartado (asi no se confunden con
+% el titulo de la seccion): la izquierda usa un tono MEDIO y la derecha un
+% tono OSCURO del mismo color. Separa automaticamente el par del contenido.
 \newcommand{\typecardpair}[5][primary]{%
   \noindent
-  \colorlet{facilparej}{#1!58!black}%
-  \begin{minipage}[t]{0.485\linewidth}\typecard[#1]{#2}{#3}\end{minipage}\hfill%
-  \begin{minipage}[t]{0.485\linewidth}\typecard[facilparej]{#4}{#5}\end{minipage}\par
+  \colorlet{facilparejA}{#1!50!black}%
+  \colorlet{facilparejB}{#1!72!black}%
+  \begin{minipage}[t]{0.485\linewidth}\typecard[facilparejA]{#2}{#3}\end{minipage}\hfill%
+  \begin{minipage}[t]{0.485\linewidth}\typecard[facilparejB]{#4}{#5}\end{minipage}\par
   \vspace{4mm}%
 }
 \newcommand{\statbox}[3][primary]{%
