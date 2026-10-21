@@ -402,7 +402,7 @@
       colback=#1!8!white, colframe=#1!45!white, boxrule=1.1pt, arc=5pt,
       boxsep=0pt, left=8pt, right=8pt, bottom=8pt, top=6pt,
       colbacktitle=#1, coltitle=white, fonttitle=\headingfontxb,
-      attach boxed title to top left={xshift=0pt, yshift=0pt},
+      attach boxed title to top left={xshift=0pt, yshift=2mm},
       boxed title style={boxrule=0pt, arc=4pt, top=1.5pt, bottom=1.5pt,
                          left=6pt, right=6pt},
       title={\fontsize{9.5}{9.5}\selectfont #2}]
@@ -410,16 +410,20 @@
     \RaggedRight\fontsize{9.6}{13.2}\selectfont\color{ink} #3
   \end{tcolorbox}%
 }
-% Dos tarjetas lado a lado (envuelve \typecard en minipages).
+% Dos tarjetas lado a lado con ALTURAS IGUALES (raster + equal height):
+% si una tiene mas texto que la otra, ambas miden lo que mida la mas larga.
 % NINGUNA tarjeta usa el color PLENO del apartado (asi no se confunden con
-% el titulo de la seccion): la izquierda usa un tono MEDIO y la derecha un
-% tono OSCURO del mismo color. Separa automaticamente el par del contenido.
+% el titulo de la seccion): izquierda tono MEDIO, derecha tono OSCURO.
 \newcommand{\typecardpair}[5][primary]{%
   \noindent
   \colorlet{facilparejA}{#1!50!black}%
   \colorlet{facilparejB}{#1!72!black}%
-  \begin{minipage}[t]{0.485\linewidth}\typecard[facilparejA]{#2}{#3}\end{minipage}\hfill%
-  \begin{minipage}[t]{0.485\linewidth}\typecard[facilparejB]{#4}{#5}\end{minipage}\par
+  \begin{tcbraster}[enhanced, raster columns=2, raster column skip=6mm,
+      raster equal height=rows, nobeforeafter,
+      boxsep=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
+    \typecard[facilparejA]{#2}{#3}%
+    \typecard[facilparejB]{#4}{#5}%
+  \end{tcbraster}\par
   \vspace{4mm}%
 }
 \newcommand{\statbox}[3][primary]{%
