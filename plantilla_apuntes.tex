@@ -4,11 +4,11 @@
 %  ---------------------------------------------------------------------
 %  Este archivo es el CONTEXTO COMPLETO: aquí está TODO lo que se
 %  puede hacer con la librería, con su sintaxis exacta.
-%  Copia lo que necesites a tus apuntos.
+%  Copia lo que necesites a tus apuntes.
 %
 %  La librería (estilo/ + fuentes) se descarga de GitHub al compilar y
 %  se borra al terminar, así que siempre tienes la última versión.
-%  Compila con XeLaTeX y -shell-escape.
+%  Compila con XeLaTeX y -shell-escape (ya configurado en VS Code).
 % =====================================================================
 \documentclass[11pt,a4paper]{extarticle}
 
@@ -25,12 +25,11 @@
 \secciongrande{1. Apartado (el bloque grande)}
 % =====================================================================
 % \titulo[color]{ETIQUETA}{Título}
-% Cambia el color de todo lo que viene debajo.
+% Es lo que abre cada tema: cambia el color de todo lo que viene debajo.
 \titulo{TEMA 01}{Introducción al neuromarketing}
-\usarfondo
 
 \secciongrande{1.1. Secciones}
-% \seccion[color]{Título}      -> sección normal
+% \seccion[color]{Título}       -> sección normal
 % \secciongrande[color]{Título} -> sección grande
 \seccion{¿Qué es?}
 \secciongrande{Formas de desplegar una aplicación web}
@@ -38,10 +37,10 @@
 % =====================================================================
 \secciongrande{2. Texto y párrafos}
 % =====================================================================
-% \parrafo{texto}          -> párrafo con franja lateral de color
-% \hl[color]{texto}       -> resaltado de rotulador
-% \resalta{texto}          -> alias de \hl
-% **texto**                -> negrita automática (sin escribir \textbf)
+% \parrafo{texto}     -> párrafo con franja lateral de color
+% \hl[color]{texto}  -> resaltado de rotulador
+% \resalta{texto}     -> alias de \hl
+% **texto**           -> negrita automática (sin escribir \textbf)
 \parrafo{El \hl{neuromarketing} combina neurociencia y marketing para
 entender \emph{por qué} el cliente compra, no solo \emph{qué} compra.
 Escribir **negrita** dentro de cualquier bloque lo pone en negrita solo.}
@@ -51,12 +50,12 @@ Escribir **negrita** dentro de cualquier bloque lo pone en negrita solo.}
 % =====================================================================
 \secciongrande{3. Cajas}
 % =====================================================================
-% \caja[color]{texto}            -> caja de información
-% \cajadual[color]{T1}{T2}       -> dos cajas lado a lado
-% \nota[color]{Título}{Texto}    -> nota con borde lateral
-% \dato[color]{Título}{Texto}    -> dato destacado
-% \resumen[color]{texto}         -> caja resumen (ÚNICA con color pleno)
-% \pill[color]{texto}            -> píldora
+% \caja[color]{texto}         -> caja de información
+% \cajadual[color]{T1}{T2}    -> dos cajas lado a lado
+% \nota[color]{Título}{Texto} -> nota con borde lateral
+% \dato[color]{Título}{Texto} -> dato destacado
+% \resumen[color]{texto}      -> caja resumen (ÚNICA con color pleno)
+% \pill[color]{texto}         -> píldora
 \caja{**Idea clave:** las decisiones de compra son mayoritariamente
 \emph{inconscientes} y emocionales antes de ser racionales.}
 
@@ -79,7 +78,7 @@ inconscientes de la decisión de compra.}
 % \definicionpar[color]{Título}{Texto} -> UNA tarjeta (más compacta)
 % \rectangulosdoble[color]{T1}{X1}{T2}{X2} -> DOS tarjetas en fila
 % \rectangulos[color]{{T1}{X1} {T2}{X2} {T3}{X3} {T4}{X4}} -> 2, 3, 4... en fila
-% Las tarjetas de una fila miden TODAS la altura de la más alta.
+% Las tarjetas de una misma fila miden TODAS la altura de la más alta.
 % Ninguna usa el color pleno del apartado (solo \resumen lo usa).
 \definicion{Eye tracking}{Sigue la mirada del sujeto mientras mira un anuncio.}
 
@@ -143,7 +142,7 @@ también utilizan otros sitios.}
   \tablacabb{Concepto} & \tablacabb{Definición} \\
   \midrule
   Marca & Lo que el consumidor recuerda \\
- \Producto & El objeto que se compra \\
+  Producto & El objeto que se compra \\
 \end{tablacabecera}
 
 \begin{tablacuadricula}{|l|c|}
@@ -152,7 +151,7 @@ también utilizan otros sitios.}
   Pan     & 0,90€ \\ \hline
 \end{tablacuadricula}
 
-\begin{fichaclave}{l}
+\begin{fichaclave}{ll}
   \fichaitem{Paleta}{Oceano}
   \fichaitem{Tema}{Introducción}
 \end{fichaclave}
@@ -165,7 +164,7 @@ también utilizan otros sitios.}
 % \filaimagen{ancho}{imagen}{contenido}
 % \filaimagender{ancho}{imagen}{contenido}   (imagen a la derecha)
 % \filacontenido{ancho}{contenido izq.}{contenido der.}
-\filaimagen{0.32\linewidth}{ejemplo/apuntes/Acceso_a_Datos/temas/Tema1/imagenes/diagrama.png}
+\filaimagen{0.32\linewidth}{imagenes/ejemplo.png}
 {Texto a la derecha de la imagen.}
 
 \filacontenido{0.4\linewidth}{Contenido de la izquierda.}{Contenido de la derecha.}
@@ -176,27 +175,46 @@ también utilizan otros sitios.}
 % Salen solos, sin envolver nada: 🌐 ♥ ✓ → ★ ⚠️ ✅ 📚
 \caja{🌐 Web  📚 Apuntes  ✅ Hecho  ⚠️ Cuidado  ★ Destacado  ♥ Importante  → Flecha  ✓ Correcto}
 
+\pagefoot{Neuromarketing -- Catálogo}
+
 % =====================================================================
 \secciongrande{9. Estilos de título (A-Q)}
 % =====================================================================
 % Cada uno es un apartado distinto: elige el que más te guste.
 \tituloA{Introducción al neuromarketing}{Estilo A: rotulador}
+\vspace{4mm}
 \tituloB{Introducción al neuromarketing}{Estilo B}
+\vspace{4mm}
 \tituloC{Estilo C: Brush}
+\vspace{4mm}
 \tituloD{Estilo D}
+\vspace{4mm}
 \tituloE{ETIQUETA}{Estilo E: etiqueta + título}
+\vspace{4mm}
 \tituloF{Estilo F}
+\vspace{4mm}
 \tituloG{Título}{Subtítulo del estilo G}
+\vspace{4mm}
 \tituloH{Estilo H}
+\vspace{4mm}
 \tituloI{Estilo I}
+\vspace{4mm}
 \tituloJ{01}{Título con número grande}
+\vspace{4mm}
 \tituloK{Estilo K}
+\vspace{4mm}
 \tituloL{Estilo L}
+\vspace{4mm}
 \tituloM{Estilo M}
+\vspace{4mm}
 \tituloN{Estilo N}
+\vspace{4mm}
 \tituloO{ETIQUETA}{Estilo O}
+\vspace{4mm}
 \tituloP{Título}{Subtítulo del estilo P}
+\vspace{4mm}
 \tituloQ{Estilo Q}
+\vspace{4mm}
 
 % =====================================================================
 \secciongrande{10. Paletas (el color del apartado)}
@@ -220,8 +238,9 @@ también utilizan otros sitios.}
 % =====================================================================
 \secciongrande{11. Fondo y pie de página}
 % =====================================================================
-% \usarfondo            -> fondo de cuaderno (puntos)
-% \pagefoot[color]{Pie} -> pie de página (píldora centrada)
-\pagefoot{Neuromarketing -- Tema 01}
+% \usarfondo             -> fondo de cuaderno (puntos y franja lateral)
+% \pagefoot[color]{Pie}  -> pie de página (píldora centrada)
+% (el fondo de puntos se ve en todas las páginas de este catálogo)
+\pagefoot{Neuromarketing -- Catálogo}
 
 \end{document}

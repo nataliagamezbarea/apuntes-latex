@@ -14,7 +14,7 @@
     \int_if_even:nTF { \g_rect_pos_int }
       { \colorlet{rectactual}{rectbase!72!black} }
       { \colorlet{rectactual}{rectbase!55!black} }
-    \sbox\rectbox { \typecard[rectactual]{#1}{\negrita{#2}} }
+    \sbox\rectbox { \typecardlibre[rectactual]{#1}{\negrita{#2}} }
     \ifdim\ht\rectbox>\rectmaxheight
       \rectmaxheight=\ht\rectbox
     \fi
@@ -29,10 +29,10 @@
       { \colorlet{rectactual}{rectbase!55!black} }
     \ifnum\rectpairs>1
       \begin{minipage}[t][\rectmaxheight][t]{\rectcolwidth}
-        \typecard[rectactual]{#1}{\negrita{#2}}
+        \typecardalto[rectactual]{#1}{\negrita{#2}}
       \end{minipage}%
     \else
-      \typecard[rectactual]{#1}{\negrita{#2}}%
+      \typecardalto[rectactual]{#1}{\negrita{#2}}%
     \fi
     \tl_if_blank:nF {#3}
       { \hspace{\rectgap} \rect_typeset_aux:nw #3 \s_rect_stop }

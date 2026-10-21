@@ -1,5 +1,23 @@
 \newdimen\cardheight
-\newcommand{\typecard}[3][primary]{%
+\newcommand{\typecardbody}[2]{%
+  \par\vspace{2mm}%
+  \RaggedRight\fontsize{9.6}{13.2}\selectfont\color{ink} #2%
+}
+\newcommand{\typecardlibre}[3][primary]{%
+  \par\vspace{5mm}%
+  \begin{tcolorbox}[enhanced,
+      colback=#1!8!white, colframe=#1!45!white, boxrule=1.1pt, arc=5pt,
+      boxsep=0pt, left=8pt, right=8pt, bottom=8pt, top=6pt,
+      colbacktitle=#1, coltitle=white, fonttitle=\headingfontxb,
+      attach boxed title to top left={xshift=0pt, yshift=2mm},
+      boxed title style={boxrule=0pt, arc=4pt, top=1.5pt, bottom=1.5pt,
+                         left=6pt, right=6pt},
+      title={\fontsize{9.5}{9.5}\selectfont #2}]
+    \typecardbody{#2}{#3}
+  \end{tcolorbox}%
+}
+\newcommand{\typecardalto}[3][primary]{%
+  \par\vspace{5mm}%
   \begin{tcolorbox}[enhanced,
       colback=#1!8!white, colframe=#1!45!white, boxrule=1.1pt, arc=5pt,
       boxsep=0pt, left=8pt, right=8pt, bottom=8pt, top=6pt,
@@ -9,7 +27,13 @@
                          left=6pt, right=6pt},
       height=\cardheight,
       title={\fontsize{9.5}{9.5}\selectfont #2}]
-    \par\vspace{2mm}%
-    \RaggedRight\fontsize{9.6}{13.2}\selectfont\color{ink} #3
+    \typecardbody{#2}{#3}
   \end{tcolorbox}%
+}
+\newcommand{\typecard}[3][primary]{%
+  \ifdim\cardheight>0pt
+    \typecardalto[#1]{#2}{#3}%
+  \else
+    \typecardlibre[#1]{#2}{#3}%
+  \fi
 }
