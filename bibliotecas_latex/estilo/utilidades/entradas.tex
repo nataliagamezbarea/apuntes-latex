@@ -3,14 +3,21 @@
 %
 %  \inputcarpeta{ruta}
 %
-%  Por ejemplo, si en la carpeta "temas/Tema 2/Tema2.1" tienes:
+%  Mete los .tex de esa carpeta Y de sus subcarpetas, en orden.
+%
+%  Por ejemplo, si en la carpeta "Tema 2" tienes:
 %     1.1-maquina-y-servidor.tex
 %     1.1.1-localhost-y-servidor.tex
 %     1.2-formas-de-desplegar.tex
 %     1.2.1-tipos-de-despliegue.tex
-%  con \inputcarpeta{temas/Tema 2/Tema2.1} los mete TODOS, ordenados
-%  (1.1, 1.1.1, 1.2, 1.2.1...) y asi no escribes una linea \input
-%  por cada archivo.
+%     Tema2.1/
+%       1.1-maquina-y-servidor.tex
+%       1.2-formas-de-desplegar.tex
+%     Tema2.2/
+%       2.1-apartado.tex
+%
+%  con \inputcarpeta{Tema 2} los mete TODOS, ordenados (1.1, 1.2,
+%  2.1...) y asi no escribes una linea \input por cada archivo.
 %
 %  Las rutas se cuentan desde la RAIZ del documento (la carpeta donde
 %  compilas). Necesita -shell-escape (ya activado en VS Code).
@@ -19,7 +26,7 @@
 \newcommand{\inputcarpeta}[1]{%
   \begingroup
     \advance\apuntescontador by 1
-    \immediate\write18{ls -1 "#1"/*.tex 2>/dev/null | sort -V | sed 's/.*/\\input{&}/' > "/tmp/apuntes-entradas-\jobname-\the\apuntescontador.tex"}%
+    \immediate\write18{find "#1" -name "*.tex" 2>/dev/null | sort -V | sed 's/.*/\\input{&}/' > "/tmp/apuntes-entradas-\jobname-\the\apuntescontador.tex"}%
     \input{/tmp/apuntes-entradas-\jobname-\the\apuntescontador.tex}%
   \endgroup
 }
