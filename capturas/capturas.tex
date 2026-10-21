@@ -1,88 +1,124 @@
 %!TEX program = xelatex
 % =====================================================================
-%  CAPTURAS.TEX — genera una página por bloque con su código.
-%  (las imágenes del README salen de aquí)
+%  CAPTURAS.TEX — una pagina por opcion, para las capturas del README.
+%  (el codigo de cada opcion va en la fila siguiente de la tabla)
 % =====================================================================
 \documentclass[11pt,a4paper]{extarticle}
 
 \immediate\write18{rm -rf "/tmp/apuntes-latex-lib-\jobname" && mkdir -p "/tmp/apuntes-latex-lib-\jobname" && curl -fsSL https://codeload.github.com/nataliagamezbarea/apuntes-latex/tar.gz/refs/heads/main | tar -xz -C "/tmp/apuntes-latex-lib-\jobname" --strip-components=1}
 \input{/tmp/apuntes-latex-lib-\jobname/bibliotecas_latex/cabecera}
 
-\newcommand{\codigo}[1]{%
-  \begingroup
-    \setlength{\fboxsep}{6pt}%
-    \colorbox{gray!12}{%
-      \begin{minipage}{\dimexpr\linewidth-2\fboxsep\relax}
-        \ttfamily\small #1
-      \end{minipage}}%
-  \endgroup
-  \par\vspace{6mm}%
-}
-
 \begin{document}
 \pagestyle{empty}
 \paletaOceano
-
-% ------------------------------------------------------------------
-\titulo{BLOQUE 1}{Apartado (el título grande)}
-Es lo que abre cada tema: cambia el color de todo lo que viene debajo.
-
-% ------------------------------------------------------------------
 \newpage
-\titulo{BLOQUE 2}{Secciones}
-\seccion{Sección normal}
+\secciongrande{Apartado}
+\titulo{ETIQUETA}{Título}
+
+\newpage
+\secciongrande{Sección}
+\seccion{Título de sección}
+
+\newpage
 \secciongrande{Sección grande}
+\secciongrande{Título de sección}
 
-% ------------------------------------------------------------------
 \newpage
-\titulo{BLOQUE 3}{Párrafos y texto}
-\parrafo{El \hl{neuromarketing} combina neurociencia y marketing. Escribir
-**negrita** dentro de cualquier bloque lo pone en negrita solo.}
+\secciongrande{Párrafo}
+\parrafo{Texto del párrafo con **negrita** y \hl{resaltado}.}
 
-% ------------------------------------------------------------------
 \newpage
-\titulo{BLOQUE 4}{Cajas}
-\caja{**Idea clave:** caja de información con el color del apartado.}
-\cajadual{Control izquierdo}{Control derecho}
+\secciongrande{Resaltado}
+\hl{Texto resaltado}
+
+\newpage
+\secciongrande{Caja}
+\caja{**Idea clave:** caja de información.}
+
+\newpage
+\secciongrande{Dos cajas}
+\cajadual{Texto de la izquierda}{Texto de la derecha}
+
+\newpage
+\secciongrande{Nota}
 \nota{Para el examen}{Caja de nota con borde de color.}
+
+\newpage
+\secciongrande{Dato}
 \dato{2024}{Dato destacado}
+
+\newpage
+\secciongrande{Resumen}
 \resumen{**Resumen:** la única caja con el color pleno del apartado.}
 
-% ------------------------------------------------------------------
 \newpage
-\titulo{BLOQUE 5}{Tarjetas}
-\definicion{Tarjeta suelta}{Una sola tarjeta con su título encima.}
-\definicionpar{Tarjeta compacta}{Igual pero más baja.}
-\rectangulosdoble{Primera}{Texto de la primera tarjeta.}
-  {Segunda}{Texto de la segunda tarjeta.}
+\secciongrande{Píldora}
+\pill{Etiqueta}
+
+\newpage
+\secciongrande{Tarjeta}
+\definicion{Título de la tarjeta}{Texto de la tarjeta.}
+
+\newpage
+\secciongrande{Tarjeta compacta}
+\definicionpar{Título de la tarjeta}{Texto de la tarjeta.}
+
+\newpage
+\secciongrande{Dos tarjetas en fila}
+\rectangulosdoble{Primera}{Texto de la primera.}{Segunda}{Texto de la segunda.}
+
+\newpage
+\secciongrande{Cuatro tarjetas en fila}
 \rectangulos{
   {Una}{Texto de la primera.}
   {Dos}{Texto de la segunda.}
   {Tres}{Texto de la tercera.}
+  {Cuatro}{Texto de la cuarta.}
 }
 
-% ------------------------------------------------------------------
 \newpage
-\titulo{BLOQUE 6}{Listas y viñetas}
+\secciongrande{Lista}
 \lista{**Negrita** en el item.|Otro item.|Un último item.}
+
+\newpage
+\secciongrande{Viñeta de rombo}
+\marcas{Uno|Dos|Tres}
+
+\newpage
+\secciongrande{Casillas de tarea}
 \tareas{Tarea 1.|Tarea 2.}
+
+\newpage
+\secciongrande{Pasos numerados}
 \pasos{Paso 1.|Paso 2.|Paso 3.}
-\marcas{Uno|Dos}
-\estrellas{Una estrella}
-\alertas{Cuidado}
+
+\newpage
+\secciongrande{Estrella}
+\estrellas{Idea clave para el examen}
+
+\newpage
+\secciongrande{Aviso}
+\alertas{Cuidado con esto}
+
+\newpage
+\secciongrande{Pregunta}
 \preguntas{¿Una pregunta?}
+
+\newpage
+\secciongrande{Flechas}
 \flechas{Flecha 1|Flecha 2}
 
-% ------------------------------------------------------------------
 \newpage
-\titulo{BLOQUE 7}{Tablas}
+\secciongrande{Tabla simple}
 \begin{tablaminimal}{lcc}
   \tablacab{Técnica} & \tablacab{Resolución} & \tablacab{¿Móvil?} \\
   \midrule
-  fMRI   & Espacial alta & No \\
-  EEG    & Temporal alta & Sí \\
+  fMRI & Espacial alta & No \\
+  EEG & Temporal alta & Sí \\
 \end{tablaminimal}
 
+\newpage
+\secciongrande{Tabla con cabecera}
 \begin{tablacabecera}{ll}
   \rowcolor{primary}
   \tablacabb{Concepto} & \tablacabb{Definición} \\
@@ -90,49 +126,106 @@ Es lo que abre cada tema: cambia el color de todo lo que viene debajo.
   Marca & Lo que el consumidor recuerda \\
 \end{tablacabecera}
 
+\newpage
+\secciongrande{Tabla con rejilla}
+\begin{tablacuadricula}{|l|c|}
+  \tablacab{Producto} & \tablacab{Precio} \\ \hline
+  Manzana & 1,20€ \\ \hline
+\end{tablacuadricula}
+
+\newpage
+\secciongrande{Ficha de clave}
 \begin{fichaclave}{4cm}
   \fichaitem{Paleta}{Oceano}
   \fichaitem{Tema}{Introducción}
 \end{fichaclave}
 
-% ------------------------------------------------------------------
 \newpage
-\titulo{BLOQUE 8}{Filas (imagen + contenido)}
+\secciongrande{Sí y no}
+\si\ \no
+
+\newpage
+\secciongrande{Fila con foto}
 \filaimagen{0.32\linewidth}{imagenes/ejemplo.png}
 {Texto a la derecha de la imagen.}
+
+\newpage
+\secciongrande{Fila con foto a la derecha}
+\filaimagender{0.32\linewidth}{imagenes/ejemplo.png}
+{Texto a la izquierda de la imagen.}
+
+\newpage
+\secciongrande{Fila de dos textos}
 \filacontenido{0.4\linewidth}{Contenido de la izquierda.}{Contenido de la derecha.}
 
-% ------------------------------------------------------------------
 \newpage
-\titulo{BLOQUE 9}{Emojis y símbolos}
-\caja{🌐 Web  📚 Apuntes  ✅ Hecho  ⚠️ Cuidado  ★ Destacado  ♥ Importante  → Flecha  ✓ Correcto}
+\secciongrande{Emojis}
+\caja{🌐 Web  📚 Apuntes  ✅ Hecho  ⚠️ Cuidado  ★ Destacado  ♥ Importante}
 
-% ------------------------------------------------------------------
 \newpage
-\titulo{BLOQUE 10}{Estilos de título (A-Q)}
-\tituloA{Estilo A}{Rotulador}
-\vspace{3mm}
-\tituloC{Estilo C}
-\vspace{3mm}
-\tituloE{ETIQUETA}{Estilo E}
-\vspace{3mm}
-\tituloG{Título}{Subtítulo}
-\vspace{3mm}
-\tituloJ{01}{Título con número}
-
-% ------------------------------------------------------------------
-\newpage
-\titulo{BLOQUE 11}{Paletas}
+\secciongrande{Paleta}
 \paletaRosa
 \titulo{PALETA}{Cambiada a rosa}
-\colorapartado{azulA}
-\secciongrande{Con \textbackslash colorapartado\{azulA\} el color cambia aquí}
 
-% ------------------------------------------------------------------
 \newpage
-\titulo{BLOQUE 12}{Fondo y pie de página}
-El fondo de puntos aparece en toda la página y el pie es una píldora
-centrada con el color del apartado.
+\secciongrande{Color forzado}
+\colorapartado{azulA}
+\secciongrande{Con \colorapartado{azulA} el color cambia}
+
+\newpage
+\secciongrande{Fondo y pie}
+\usarfondo
 \pagefoot{Apuntes -- Tema 01}
+
+\newpage
+\tituloA{Introducción al neuromarketing}{Estilo A: rotulador}
+
+\newpage
+\tituloB{Introducción al neuromarketing}{Estilo B}
+
+\newpage
+\tituloC{Estilo C: Brush}
+
+\newpage
+\tituloD{Estilo D}
+
+\newpage
+\tituloE{ETIQUETA}{Estilo E: etiqueta y título}
+
+\newpage
+\tituloF{Estilo F}
+
+\newpage
+\tituloG{Título}{Subtítulo del estilo G}
+
+\newpage
+\tituloH{Estilo H}
+
+\newpage
+\tituloI{Estilo I}
+
+\newpage
+\tituloJ{01}{Título con número grande}
+
+\newpage
+\tituloK{Estilo K}
+
+\newpage
+\tituloL{Estilo L}
+
+\newpage
+\tituloM{Estilo M}
+
+\newpage
+\tituloN{Estilo N}
+
+\newpage
+\tituloO{ETIQUETA}{Estilo O}
+
+\newpage
+\tituloP{Título}{Subtítulo del estilo P}
+
+\newpage
+\tituloQ{Estilo Q}
 
 \end{document}

@@ -5,32 +5,150 @@
 > Se **descarga de GitHub al compilar**, así que siempre tienes la última
 > versión. Compila con **XeLaTeX** y `-shell-escape` (ya configurado en VS Code).
 
-## 📋 Qué puedes poner y cómo se pone
+## 📋 Todos los bloques, con su imagen y su código
 
-Una imagen y su código, opción por opción. Lo que está en la columna de la
-derecha es **lo que copias**.
+Cada opción va en **dos filas**: una con la captura de cómo se ve y la
+siguiente con el código que copias.
 
-| | |
-|---|---|
-| <img src="capturas/bloque-apartado.png" width="330"> | **Apartado** (el título grande que abre el tema)<br>`\titulo{ETIQUETA}{Título}`<br>`\titulo[rosaA]{ETIQUETA}{Título}` |
-| <img src="capturas/bloque-secciones.png" width="330"> | **Secciones**<br>`\seccion{Título}`<br>`\secciongrande{Título}`<br>`\seccion[rosaA]{Título}` |
-| <img src="capturas/bloque-parrafos.png" width="330"> | **Párrafos y texto**<br>`\parrafo{Texto con **negrita** y \hl{resaltado}.}`<br>`\hl{resaltado}` · `\resalta{resaltado}` |
-| <img src="capturas/bloque-cajas.png" width="330"> | **Cajas**<br>`\caja{Texto}` · `\cajadual{Texto 1}{Texto 2}`<br>`\nota{Título}{Texto}` · `\dato{Título}{Texto}`<br>`\resumen{Texto}` · `\pill{Etiqueta}` |
-| <img src="capturas/bloque-tarjetas.png" width="330"> | **Tarjetas**<br>`\definicion{Título}{Texto}` · `\definicionpar{Título}{Texto}`<br>`\rectangulosdoble{T1}{X1}{T2}{X2}`<br>`\rectangulos{{T1}{X1} {T2}{X2} {T3}{X3}}` |
-| <img src="capturas/bloque-listas.png" width="330"> | **Listas y viñetas** (los items se separan con `\|`)<br>`\lista{Uno\|Dos\|Tres}` · `\marcas{...}`<br>`\tareas{...}` · `\pasos{...}`<br>`\estrellas{...}` · `\alertas{...}` · `\preguntas{...}` · `\flechas{...}` |
-| <img src="capturas/bloque-tablas.png" width="330"> | **Tablas**<br>`\begin{tablaminimal}{ccc} ... \end{tablaminimal}`<br>`\begin{tablacabecera}{cc} ... \end{tablacabecera}`<br>`\begin{fichaclave}{4cm} ... \end{fichaclave}`<br>`\si` · `\no` |
-| <img src="capturas/bloque-filas.png" width="330"> | **Tabla de foto** (filas)<br>`\filaimagen{0.32\linewidth}{imagen}{texto}`<br>`\filaimagender{0.32\linewidth}{imagen}{texto}`<br>`\filacontenido{0.4\linewidth}{izq.}{der.}` |
-| <img src="capturas/bloque-emojis.png" width="330"> | **Emojis y símbolos** (salen solos, sin envolver nada)<br>`\caja{🌐 Web  📚 Apuntes  ✅ Hecho  ⚠️ Cuidado  ★ Destacado}` |
-| <img src="capturas/bloque-titulos.png" width="330"> | **Estilos de título** (A-Q), cada uno con su aspecto<br>`\tituloA{...}{...}` · `\tituloB{...}{...}` · `\tituloC{...}` · `\tituloD{...}`<br>`\tituloE{...}{...}` · `\tituloF{...}` · `\tituloG{...}{...}` · `\tituloH{...}` · `\tituloI{...}`<br>`\tituloJ{...}{...}` · `\tituloK{...}` · `\tituloL{...}` · `\tituloM{...}` · `\tituloN{...}`<br>`\tituloO{...}{...}` · `\tituloP{...}{...}` · `\tituloQ{...}` |
-| <img src="capturas/bloque-paletas.png" width="330"> | **Paletas** (el color del apartado)<br>`\paletaOceano` · `\paletaRosa` · `\paletaLavanda` … (24)<br>`\mipaleta{#E75480}{#B23A63}{#2B2226}` (tu color)<br>`\colorapartado{rosaA}` (forzar color) |
-| <img src="capturas/bloque-fondo.png" width="330"> | **Fondo y pie de página**<br>`\usarfondo` · `\pagefoot{Apuntes -- Tema 01}` |
+| | | |
+|---|---|---|
+| **Apartado** | <img src="capturas/opcion-apartado.png" width="300"> | |
+| | | `\titulo{ETIQUETA}{Título}` |
+| **Sección** | <img src="capturas/opcion-seccion.png" width="300"> | |
+| | | `\seccion{Título de sección}` |
+| **Sección grande** | <img src="capturas/opcion-seccion-grande.png" width="300"> | |
+| | | `\secciongrande{Título de sección}` |
+| **Párrafo** | <img src="capturas/opcion-parrafo.png" width="300"> | |
+| | | `\parrafo{Texto del párrafo con **negrita** y \hl{resaltado}.}` |
+| **Resaltado** | <img src="capturas/opcion-resaltado.png" width="300"> | |
+| | | `\hl{Texto resaltado}` |
+| **Caja** | <img src="capturas/opcion-caja.png" width="300"> | |
+| | | `\caja{**Idea clave:** caja de información.}` |
+| **Dos cajas** | <img src="capturas/opcion-dos-cajas.png" width="300"> | |
+| | | `\cajadual{Texto de la izquierda}{Texto de la derecha}` |
+| **Nota** | <img src="capturas/opcion-nota.png" width="300"> | |
+| | | `\nota{Para el examen}{Caja de nota con borde de color.}` |
+| **Dato** | <img src="capturas/opcion-dato.png" width="300"> | |
+| | | `\dato{2024}{Dato destacado}` |
+| **Resumen** | <img src="capturas/opcion-resumen.png" width="300"> | |
+| | | `\resumen{**Resumen:** la única caja con el color pleno del apartado.}` |
+| **Píldora** | <img src="capturas/opcion-pildora.png" width="300"> | |
+| | | `\pill{Etiqueta}` |
+| **Tarjeta** | <img src="capturas/opcion-tarjeta.png" width="300"> | |
+| | | `\definicion{Título de la tarjeta}{Texto de la tarjeta.}` |
+| **Tarjeta compacta** | <img src="capturas/opcion-tarjeta-compacta.png" width="300"> | |
+| | | `\definicionpar{Título de la tarjeta}{Texto de la tarjeta.}` |
+| **Dos tarjetas en fila** | <img src="capturas/opcion-dos-tarjetas.png" width="300"> | |
+| | | `\rectangulosdoble{Primera}{Texto de la primera.}{Segunda}{Texto de la segunda.}` |
+| **Cuatro tarjetas en fila** | <img src="capturas/opcion-cuatro-tarjetas.png" width="300"> | |
+| | | `\rectangulos{{Una}{Texto de la primera.}{Dos}{Texto de la segunda.}{Tres}{Texto de la tercera.}{Cuatro}{Texto de la cuarta.}}` |
+| **Lista** | <img src="capturas/opcion-lista.png" width="300"> | |
+| | | `\lista{**Negrita** en el item.\|Otro item.\|Un último item.}` |
+| **Viñeta de rombo** | <img src="capturas/opcion-marcas.png" width="300"> | |
+| | | `\marcas{Uno\|Dos\|Tres}` |
+| **Casillas de tarea** | <img src="capturas/opcion-tareas.png" width="300"> | |
+| | | `\tareas{Tarea 1.\|Tarea 2.}` |
+| **Pasos numerados** | <img src="capturas/opcion-pasos.png" width="300"> | |
+| | | `\pasos{Paso 1.\|Paso 2.\|Paso 3.}` |
+| **Estrella** | <img src="capturas/opcion-estrellas.png" width="300"> | |
+| | | `\estrellas{Idea clave para el examen}` |
+| **Aviso** | <img src="capturas/opcion-alertas.png" width="300"> | |
+| | | `\alertas{Cuidado con esto}` |
+| **Pregunta** | <img src="capturas/opcion-preguntas.png" width="300"> | |
+| | | `\preguntas{¿Una pregunta?}` |
+| **Flechas** | <img src="capturas/opcion-flechas.png" width="300"> | |
+| | | `\flechas{Flecha 1\|Flecha 2}` |
+| **Tabla simple** | <img src="capturas/opcion-tabla-simple.png" width="300"> | |
+| | | `\begin{tablaminimal}{lcc}
+  \tablacab{Técnica} & \tablacab{Resolución} \\
+  \midrule
+  fMRI & Espacial alta \\
+\end{tablaminimal}` |
+| **Tabla con cabecera** | <img src="capturas/opcion-tabla-cabecera.png" width="300"> | |
+| | | `\begin{tablacabecera}{ll}
+  \rowcolor{primary}
+  \tablacabb{Concepto} & \tablacabb{Definición} \\
+  \midrule
+  Marca & Lo que el consumidor recuerda \\
+\end{tablacabecera}` |
+| **Tabla con rejilla** | <img src="capturas/opcion-tabla-rejilla.png" width="300"> | |
+| | | `\begin{tablacuadricula}{\|l\|c\|}
+  \tablacab{Producto} & \tablacab{Precio} \\ \hline
+  Manzana & 1,20€ \\ \hline
+\end{tablacuadricula}` |
+| **Ficha de clave** | <img src="capturas/opcion-ficha.png" width="300"> | |
+| | | `\begin{fichaclave}{4cm}
+  \fichaitem{Paleta}{Oceano}
+  \fichaitem{Tema}{Introducción}
+\end{fichaclave}` |
+| **Sí y no** | <img src="capturas/opcion-si-no.png" width="300"> | |
+| | | `\si\ \no` |
+| **Fila con foto** | <img src="capturas/opcion-fila-foto.png" width="300"> | |
+| | | `\filaimagen{0.32\linewidth}{imagenes/ejemplo.png}{Texto a la derecha de la imagen.}` |
+| **Fila con foto a la derecha** | <img src="capturas/opcion-fila-foto-der.png" width="300"> | |
+| | | `\filaimagender{0.32\linewidth}{imagenes/ejemplo.png}{Texto a la izquierda de la imagen.}` |
+| **Fila de dos textos** | <img src="capturas/opcion-fila-textos.png" width="300"> | |
+| | | `\filacontenido{0.4\linewidth}{Contenido de la izquierda.}{Contenido de la derecha.}` |
+| **Emojis y símbolos** | <img src="capturas/opcion-emojis.png" width="300"> | |
+| | | `\caja{🌐 Web  📚 Apuntes  ✅ Hecho  ⚠️ Cuidado  ★ Destacado  ♥ Importante}` |
+| **Paleta** | <img src="capturas/opcion-paleta.png" width="300"> | |
+| | | `\paletaRosa` |
+| **Color forzado** | <img src="capturas/opcion-color-forzado.png" width="300"> | |
+| | | `\colorapartado{azulA}` |
+| **Fondo y pie** | <img src="capturas/opcion-fondo.png" width="300"> | |
+| | | `\usarfondo  ·  \pagefoot{Apuntes -- Tema 01}` |
+
+## 🏷️ Estilos de título (A-Q)
+
+Los 17 estilos de título, uno en cada fila:
+
+| **Título A** | <img src="capturas/opcion-tituloA.png" width="300"> | |
+| | | `\tituloA{Introducción al neuromarketing}{Estilo A: rotulador}` |
+| **Título B** | <img src="capturas/opcion-tituloB.png" width="300"> | |
+| | | `\tituloB{Introducción al neuromarketing}{Estilo B}` |
+| **Título C** | <img src="capturas/opcion-tituloC.png" width="300"> | |
+| | | `\tituloC{Estilo C: Brush}` |
+| **Título D** | <img src="capturas/opcion-tituloD.png" width="300"> | |
+| | | `\tituloD{Estilo D}` |
+| **Título E** | <img src="capturas/opcion-tituloE.png" width="300"> | |
+| | | `\tituloE{ETIQUETA}{Estilo E: etiqueta y título}` |
+| **Título F** | <img src="capturas/opcion-tituloF.png" width="300"> | |
+| | | `\tituloF{Estilo F}` |
+| **Título G** | <img src="capturas/opcion-tituloG.png" width="300"> | |
+| | | `\tituloG{Título}{Subtítulo del estilo G}` |
+| **Título H** | <img src="capturas/opcion-tituloH.png" width="300"> | |
+| | | `\tituloH{Estilo H}` |
+| **Título I** | <img src="capturas/opcion-tituloI.png" width="300"> | |
+| | | `\tituloI{Estilo I}` |
+| **Título J** | <img src="capturas/opcion-tituloJ.png" width="300"> | |
+| | | `\tituloJ{01}{Título con número grande}` |
+| **Título K** | <img src="capturas/opcion-tituloK.png" width="300"> | |
+| | | `\tituloK{Estilo K}` |
+| **Título L** | <img src="capturas/opcion-tituloL.png" width="300"> | |
+| | | `\tituloL{Estilo L}` |
+| **Título M** | <img src="capturas/opcion-tituloM.png" width="300"> | |
+| | | `\tituloM{Estilo M}` |
+| **Título N** | <img src="capturas/opcion-tituloN.png" width="300"> | |
+| | | `\tituloN{Estilo N}` |
+| **Título O** | <img src="capturas/opcion-tituloO.png" width="300"> | |
+| | | `\tituloO{ETIQUETA}{Estilo O}` |
+| **Título P** | <img src="capturas/opcion-tituloP.png" width="300"> | |
+| | | `\tituloP{Título}{Subtítulo del estilo P}` |
+| **Título Q** | <img src="capturas/opcion-tituloQ.png" width="300"> | |
+| | | `\tituloQ{Estilo Q}` |
 
 ### 🎨 Los colores de cada bloque
 
-- El **apartado** es el único que lleva el color **pleno**.
-- Las **cajas** (caja, nota, dato) y las **tarjetas** llevan el **mismo
-  color**: un tono del color del apartado.
-- Solo el **`\resumen`** lleva el color pleno (y su sombra).
+- El **apartado** (y solo él) lleva el color **pleno** de su paleta.
+- Las **cajas** (caja, nota, dato) y las **tarjetas** llevan un color
+  **neutro**: nunca toman la paleta del título, para que no se confundan.
+- El **`\resumen`** sí lleva el color pleno del apartado, con su sombra.
+
+Las 24 paletas: `paletaAmarillo` `paletaArena` `paletaAzul` `paletaBosque`
+`paletaBurdeos` `paletaCafe` `paletaCeleste` `paletaCiruela` `paletaCoral`
+`paletaFucsia` `paletaGris` `paletaLavanda` `paletaLila` `paletaLima`
+`paletaMelocoton` `paletaMenta` `paletaNaranja` `paletaOceano` `paletaOliva`
+`paletaRojo` `paletaRosa` `paletaTurquesa`.
 
 ### 🖼️ Todos los códigos, de golpe
 
@@ -108,5 +226,4 @@ descargada.
 
 El catálogo completo está en
 [`plantilla_apuntes.tex`](plantilla_apuntes.tex) (compílalo para verlo todo)
-y las capturas de cada bloque se generan con
-[`capturas/capturas.tex`](capturas/capturas.tex).
+y las capturas se generan con [`capturas/capturas.tex`](capturas/capturas.tex).
