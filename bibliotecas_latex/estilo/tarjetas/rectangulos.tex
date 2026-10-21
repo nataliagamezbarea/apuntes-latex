@@ -16,6 +16,7 @@
       { \colorlet{rectactual}{rectbase!55!black} }
     \group_begin:
       \hsize=\rectcolwidth
+      \linewidth=\rectcolwidth
       \sbox\rectbox { \typecardlibre[rectactual]{#1}{\negrita{#2}} }
     \group_end:
     \ifdim\ht\rectbox>\rectmaxheight
