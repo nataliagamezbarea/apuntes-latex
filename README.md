@@ -12,21 +12,32 @@ así que siempre tienes la última versión. Compila con **XeLaTeX** y
 ```
 apuntes/
   <asignatura>/
-    Temas.tex                 -> el documento: enlaza cada tema
+    Temas.tex                    -> el documento: enlaza cada tema
     temas/
-      TemaX.tex                -> enlaza cada apartado del tema
+      TemaX.tex                  -> enlaza los apartados del tema
       TemaX/
-        ApartadoY.tex          -> enlaza cada subapartado
-        ApartadoY/
-          SubapartadoZ.tex     -> aqui va el texto
-          SubapartadoZ/        -> aqui van las imagenes del subapartado
+        1.1-apartado.tex         -> el apartado (con su \secciongrande)
+        1.1.1-subapartado.tex    -> el subapartado
+        1.2-apartado.tex
+        1.2.1-subapartado.tex
+        imagenes/                -> las imágenes del tema
 ```
+
+Los apartados y subapartados llevan la numeración académica (1.1, 1.1.1...)
+en el nombre del archivo, y **todos van en la carpeta del tema**. Las
+imágenes van en la carpeta `imagenes` de ese tema.
 
 Los `Temas.tex` se enlazan entre si con `\input` y las rutas se escriben
 **desde la raíz del documento** (la carpeta donde compilas).
 
 En la carpeta `ejemplo/` tienes un ejemplo completo de esta estructura
 con dos asignaturas, dos temas, apartados, subapartados e imágenes.
+
+## Plantilla / catálogo
+
+`plantilla_apuntes.tex` es el **catálogo completo** de la librería: cada
+comando con su sintaxis y un ejemplo. Compílalo para ver todo lo que
+puedes hacer (y copia lo que necesites).
 
 ## La librería de estilos, dividida
 
