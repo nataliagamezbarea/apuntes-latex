@@ -17,7 +17,7 @@
 *.pdf
 
 # Los apuntes son tuyos: no se suben
-apuntes
+/apuntes
 
 # Vistas previas generadas
 vista-*.png
