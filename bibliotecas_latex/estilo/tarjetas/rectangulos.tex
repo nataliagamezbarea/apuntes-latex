@@ -14,7 +14,10 @@
     \int_if_even:nTF { \g_rect_pos_int }
       { \colorlet{rectactual}{rectbase!72!black} }
       { \colorlet{rectactual}{rectbase!55!black} }
-    \sbox\rectbox { \typecardlibre[rectactual]{#1}{\negrita{#2}} }
+    \group_begin:
+      \hsize=\rectcolwidth
+      \sbox\rectbox { \typecardlibre[rectactual]{#1}{\negrita{#2}} }
+    \group_end:
     \ifdim\ht\rectbox>\rectmaxheight
       \rectmaxheight=\ht\rectbox
     \fi
