@@ -1,126 +1,126 @@
 {
   "latex": {
     "Lista con viñeta circular": {
-      "prefix": "\\lista",
+      "prefix": "lista",
       "body": [
         "\\lista{${1:item}|${2:item}}"
       ],
       "description": "Lista con viñeta circular (los items se separan con |)"
     },
     "Lista con rombo": {
-      "prefix": "\\marcas",
+      "prefix": "marcas",
       "body": [
         "\\marcas{${1:item}|${2:item}}"
       ],
       "description": "Lista con viñeta de rombo"
     },
     "Lista de casillas (tareas)": {
-      "prefix": "\\tareas",
+      "prefix": "tareas",
       "body": [
         "\\tareas{${1:Tarea 1.}|${2:Tarea 2.}}"
       ],
       "description": "Lista con casillas de tarea"
     },
     "Pasos numerados": {
-      "prefix": "\\pasos",
+      "prefix": "pasos",
       "body": [
         "\\pasos{${1:Paso 1.}|${2:Paso 2.}}"
       ],
       "description": "Lista de pasos numerados"
     },
     "Lista con estrella": {
-      "prefix": "\\estrellas",
+      "prefix": "estrellas",
       "body": [
         "\\estrellas{${1:Idea clave para el examen}}"
       ],
       "description": "Lista con estrella"
     },
     "Lista de avisos": {
-      "prefix": "\\alertas",
+      "prefix": "alertas",
       "body": [
         "\\alertas{${1:Cuidado con esto}}"
       ],
       "description": "Lista con triángulo de aviso"
     },
     "Lista de preguntas": {
-      "prefix": "\\preguntas",
+      "prefix": "preguntas",
       "body": [
         "\\preguntas{${1:¿Una pregunta?}}"
       ],
       "description": "Lista con signo de interrogación"
     },
     "Lista con flechas": {
-      "prefix": "\\flechas",
+      "prefix": "flechas",
       "body": [
         "\\flechas{${1:Flecha 1}|${2:Flecha 2}}"
       ],
       "description": "Lista con flechas"
     },
     "Lista con letras": {
-      "prefix": "\\letras",
+      "prefix": "letras",
       "body": [
         "\\letras{${1:Uno}|${2:Dos}}"
       ],
       "description": "Lista con letras a), b), c)..."
     },
     "Caja de información": {
-      "prefix": "\\caja",
+      "prefix": "caja",
       "body": [
         "\\caja{${1:**Idea clave:** texto de la caja.}}"
       ],
       "description": "Caja de información"
     },
     "Dos cajas lado a lado": {
-      "prefix": "\\cajadual",
+      "prefix": "cajadual",
       "body": [
         "\\cajadual{${1:Texto izquierda}}{${2:Texto derecha}}"
       ],
       "description": "Dos cajas lado a lado"
     },
     "Nota para el examen": {
-      "prefix": "\\nota",
+      "prefix": "nota",
       "body": [
         "\\nota{${1:Para el examen}}{${2:Texto de la nota.}}"
       ],
       "description": "Nota con borde lateral"
     },
     "Dato destacado": {
-      "prefix": "\\dato",
+      "prefix": "dato",
       "body": [
         "\\dato{${1:2024}}{${2:Dato destacado}}"
       ],
       "description": "Dato destacado"
     },
     "Resumen": {
-      "prefix": "\\resumen",
+      "prefix": "resumen",
       "body": [
         "\\resumen{${1:**Resumen:** texto del resumen.}}"
       ],
       "description": "Caja resumen (la única con el color pleno del apartado)"
     },
     "Píldora": {
-      "prefix": "\\pill",
+      "prefix": "pill",
       "body": [
         "\\pill{${1:Etiqueta}}"
       ],
       "description": "Píldora (etiqueta redonda)"
     },
     "Tarjeta": {
-      "prefix": "\\definicion",
+      "prefix": "definicion",
       "body": [
         "\\definicion{${1:Título}}{${2:Texto de la tarjeta.}}"
       ],
       "description": "Tarjeta con título"
     },
     "Tarjeta compacta": {
-      "prefix": "\\definicionpar",
+      "prefix": "definicionpar",
       "body": [
         "\\definicionpar{${1:Título}}{${2:Texto de la tarjeta.}}"
       ],
       "description": "Tarjeta compacta con párrafo"
     },
     "Dos tarjetas en fila": {
-      "prefix": "\\rectangulosdoble",
+      "prefix": "rectangulosdoble",
       "body": [
         "\\rectangulosdoble{${1:Primera}}{${2:Texto de la primera.}}",
         "  {${3:Segunda}}{${4:Texto de la segunda.}}"
@@ -128,7 +128,7 @@
       "description": "Dos tarjetas en fila (misma altura)"
     },
     "Rectángulos en fila": {
-      "prefix": "\\rectangulos",
+      "prefix": "rectangulos",
       "body": [
         "\\rectangulos{",
         "  {${1:Una}}{${2:Texto de la primera.}}",
@@ -138,203 +138,203 @@
       "description": "Dos, tres o cuatro tarjetas en fila"
     },
     "Apartado (título con etiqueta)": {
-      "prefix": "\\titulo",
+      "prefix": "titulo",
       "body": [
         "\\titulo{${1:ETIQUETA}}{${2:Título}}"
       ],
       "description": "Apartado: abre el tema y cambia el color de lo que viene debajo"
     },
     "Sección": {
-      "prefix": "\\seccion",
+      "prefix": "seccion",
       "body": [
         "\\seccion{${1:Título de sección}}"
       ],
       "description": "Sección normal"
     },
     "Sección grande": {
-      "prefix": "\\secciongrande",
+      "prefix": "secciongrande",
       "body": [
         "\\secciongrande{${1:Título de sección}}"
       ],
       "description": "Sección grande"
     },
     "Título A": {
-      "prefix": "\\tituloA",
+      "prefix": "tituloA",
       "body": [
         "\\tituloA{${1:Título}}"
       ],
       "description": "Estilo de título A"
     },
     "Título B": {
-      "prefix": "\\tituloB",
+      "prefix": "tituloB",
       "body": [
         "\\tituloB{${1:Título}}"
       ],
       "description": "Estilo de título B"
     },
     "Título C": {
-      "prefix": "\\tituloC",
+      "prefix": "tituloC",
       "body": [
         "\\tituloC{${1:Título}}"
       ],
       "description": "Estilo de título C"
     },
     "Título D": {
-      "prefix": "\\tituloD",
+      "prefix": "tituloD",
       "body": [
         "\\tituloD{${1:Título}}"
       ],
       "description": "Estilo de título D"
     },
     "Título E": {
-      "prefix": "\\tituloE",
+      "prefix": "tituloE",
       "body": [
         "\\tituloE{${1:ETIQUETA}}{${2:Título}}"
       ],
       "description": "Estilo de título E"
     },
     "Título F": {
-      "prefix": "\\tituloF",
+      "prefix": "tituloF",
       "body": [
         "\\tituloF{${1:Título}}"
       ],
       "description": "Estilo de título F"
     },
     "Título G": {
-      "prefix": "\\tituloG",
+      "prefix": "tituloG",
       "body": [
         "\\tituloG{${1:Título}}"
       ],
       "description": "Estilo de título G"
     },
     "Título H": {
-      "prefix": "\\tituloH",
+      "prefix": "tituloH",
       "body": [
         "\\tituloH{${1:Título}}"
       ],
       "description": "Estilo de título H"
     },
     "Título I": {
-      "prefix": "\\tituloI",
+      "prefix": "tituloI",
       "body": [
         "\\tituloI{${1:Título}}"
       ],
       "description": "Estilo de título I"
     },
     "Título J": {
-      "prefix": "\\tituloJ",
+      "prefix": "tituloJ",
       "body": [
         "\\tituloJ{${1:01}}{${2:Título}}"
       ],
       "description": "Estilo de título J"
     },
     "Título K": {
-      "prefix": "\\tituloK",
+      "prefix": "tituloK",
       "body": [
         "\\tituloK{${1:Título}}"
       ],
       "description": "Estilo de título K"
     },
     "Título L": {
-      "prefix": "\\tituloL",
+      "prefix": "tituloL",
       "body": [
         "\\tituloL{${1:Título}}"
       ],
       "description": "Estilo de título L"
     },
     "Título M": {
-      "prefix": "\\tituloM",
+      "prefix": "tituloM",
       "body": [
         "\\tituloM{${1:Título}}"
       ],
       "description": "Estilo de título M"
     },
     "Título N": {
-      "prefix": "\\tituloN",
+      "prefix": "tituloN",
       "body": [
         "\\tituloN{${1:Título}}"
       ],
       "description": "Estilo de título N"
     },
     "Título O": {
-      "prefix": "\\tituloO",
+      "prefix": "tituloO",
       "body": [
         "\\tituloO{${1:ETIQUETA}}{${2:Título}}"
       ],
       "description": "Estilo de título O"
     },
     "Título P": {
-      "prefix": "\\tituloP",
+      "prefix": "tituloP",
       "body": [
         "\\tituloP{${1:Título}}"
       ],
       "description": "Estilo de título P"
     },
     "Título Q": {
-      "prefix": "\\tituloQ",
+      "prefix": "tituloQ",
       "body": [
         "\\tituloQ{${1:Título}}"
       ],
       "description": "Estilo de título Q"
     },
     "Párrafo con franja": {
-      "prefix": "\\parrafo",
+      "prefix": "parrafo",
       "body": [
         "\\parrafo{${1:Texto del párrafo con **negrita** y \\hl{resaltado}.}}"
       ],
       "description": "Párrafo con franja lateral de color"
     },
     "Resaltado": {
-      "prefix": "\\hl",
+      "prefix": "hl",
       "body": [
         "\\hl{${1:Texto resaltado}}"
       ],
       "description": "Texto resaltado"
     },
     "Resalta": {
-      "prefix": "\\resalta",
+      "prefix": "resalta",
       "body": [
         "\\resalta{${1:Texto resaltado}}"
       ],
       "description": "Alias de \\hl"
     },
     "Imagen": {
-      "prefix": "\\imagen",
+      "prefix": "imagen",
       "body": [
         "\\imagen{${1:nombre.png}}"
       ],
       "description": "Imagen centrada (la busca en imagenes_explicativas)"
     },
     "Imagen con ancho": {
-      "prefix": "\\imagenancho",
+      "prefix": "imagenancho",
       "body": [
         "\\imagen[${1:0.5\\linewidth}]{${2:nombre.png}}"
       ],
       "description": "Imagen centrada con ancho a medida"
     },
     "Fila con foto": {
-      "prefix": "\\filaimagen",
+      "prefix": "filaimagen",
       "body": [
         "\\filaimagen{${1:0.32\\linewidth}}{${2:imagen.png}}{${3:Texto a la derecha.}}"
       ],
       "description": "Fila con imagen a la izquierda y texto a la derecha"
     },
     "Fila con foto a la derecha": {
-      "prefix": "\\filaimagender",
+      "prefix": "filaimagender",
       "body": [
         "\\filaimagender{${1:0.32\\linewidth}}{${2:imagen.png}}{${3:Texto a la izquierda.}}"
       ],
       "description": "Fila con texto a la izquierda e imagen a la derecha"
     },
     "Fila de dos textos": {
-      "prefix": "\\filacontenido",
+      "prefix": "filacontenido",
       "body": [
         "\\filacontenido{${1:0.4\\linewidth}}{${2:Contenido izquierdo.}}{${3:Contenido derecho.}}"
       ],
       "description": "Fila con dos textos"
     },
     "Tabla simple": {
-      "prefix": "\\begin{tablaminimal}",
+      "prefix": "{tablaminimal",
       "body": [
         "\\begin{tablaminimal}{${1:lcc}}",
         "  \\tablacab{${2:Cabecera}} & \\tablacab{${3:Cabecera}} \\\\",
@@ -345,7 +345,7 @@
       "description": "Tabla sin líneas verticales"
     },
     "Tabla con cabecera de color": {
-      "prefix": "\\begin{tablacabecera}",
+      "prefix": "{tablacabecera",
       "body": [
         "\\begin{tablacabecera}{${1:ll}}",
         "  \\rowcolor{primary}",
@@ -357,7 +357,7 @@
       "description": "Tabla con cabecera de color"
     },
     "Tabla con rejilla": {
-      "prefix": "\\begin{tablacuadricula}",
+      "prefix": "{tablacuadricula",
       "body": [
         "\\begin{tablacuadricula}{|${1:l}|${2:c}|}",
         "  \\tablacab{${3:Producto}} & \\tablacab{${4:Precio}} \\\\ \\hline",
@@ -367,7 +367,7 @@
       "description": "Tabla con rejilla completa"
     },
     "Ficha de clave y valor": {
-      "prefix": "\\begin{fichaclave}",
+      "prefix": "{fichaclave",
       "body": [
         "\\begin{fichaclave}{${1:4cm}}",
         "  \\fichaitem{${2:Paleta}}{${3:Oceano}}",
@@ -377,56 +377,56 @@
       "description": "Ficha de clave/valor"
     },
     "Paleta": {
-      "prefix": "\\paleta",
+      "prefix": "paleta",
       "body": [
         "\\paleta${1:Oceano}"
       ],
       "description": "Paleta del apartado: \\paletaOceano, \\paletaAzul, \\paletaMenta..."
     },
     "Color propio": {
-      "prefix": "\\mipaleta",
+      "prefix": "mipaleta",
       "body": [
         "\\mipaleta{${1:#E75480}}{${2:#B23A63}}{${3:#2B2226}}"
       ],
       "description": "Crear tu propia paleta (principal, acento, texto)"
     },
     "Forzar color": {
-      "prefix": "\\colorapartado",
+      "prefix": "colorapartado",
       "body": [
         "\\colorapartado{${1:rosaA}}"
       ],
       "description": "Forzar el color de un bloque"
     },
     "Fondo de página": {
-      "prefix": "\\usarfondo",
+      "prefix": "usarfondo",
       "body": [
         "\\usarfondo"
       ],
       "description": "Fondo de cuaderno (puntos y franja lateral)"
     },
     "Pie de página": {
-      "prefix": "\\pagefoot",
+      "prefix": "pagefoot",
       "body": [
         "\\pagefoot{${1:Apuntes -- Tema 01}}"
       ],
       "description": "Pie de página (píldora centrada)"
     },
     "Entrada de carpeta": {
-      "prefix": "\\inputcarpeta",
+      "prefix": "inputcarpeta",
       "body": [
         "\\inputcarpeta{${1:Tema2.1}}"
       ],
       "description": "Mete todos los .tex de una carpeta en orden"
     },
     "Enlazar archivo": {
-      "prefix": "\\input",
+      "prefix": "input",
       "body": [
         "\\input{${1:temas/Tema2.1/1.1-apartado.tex}}"
       ],
       "description": "Enlazar un archivo .tex"
     },
     "Cargar la librería": {
-      "prefix": "\\input{carga.tex}",
+      "prefix": "input{carga.tex}",
       "body": [
         "\\input{carga.tex}"
       ],

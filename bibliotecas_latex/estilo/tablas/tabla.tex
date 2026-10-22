@@ -1,0 +1,153 @@
+% =====================================================================
+%  TABLA — atajos para escribir tablas sin \begin...\end
+%
+%  \tabla{contenido}                -> tabla normal (tablaminimal)
+%  \tabla[lcc]{contenido}           -> con las columnas fijadas
+%  \tablacolor{contenido}           -> tabla con cabecera de color
+%  \tablarejilla{contenido}         -> tabla con rejilla completa
+%  \ficha{contenido}                -> ficha de clave/valor
+%
+%  Las columnas se detectan solas (contando las "&" de las filas), asi
+%  que normalmente no hay que escribir nada mas:
+%
+%     \tabla{
+%       \tablacab{Característica} & \tablacab{VPS} & \tablacab{IaaS} \\
+%       \midrule
+%       Contratación & Cuota fija & Pago por uso \\
+%     }
+% =====================================================================
+
+\ExplSyntaxOn
+
+\tl_new:N \l__tabla_spec_tl
+\int_new:N \l__tabla_int
+\int_new:N \l__tabla_amp_int
+\int_new:N \l__tabla_filas_int
+\newcount\tabladivisor
+\seq_new:N \l__tabla_amp_seq
+\seq_new:N \l__tabla_filas_seq
+
+% --- cuenta los items de una secuencia ---
+\cs_new_protected:Npn \tabla_contar:nn #1 #2
+  {
+    \int_zero:N \l__tabla_int
+    \seq_map_inline:Nn #1 { \int_incr:N \l__tabla_int }
+    \int_set:Nn #2 { \l__tabla_int }
+  }
+
+% --- nº de columnas (deja el especifico en \l__tabla_spec_tl) ---
+\cs_new_protected:Npn \tabla_columnas:n #1
+  {
+    % las celdas se separan por "&" y las filas por "\\" (el mismo token
+    % en modo normal y en modo expl3)
+    \seq_set_split:Nnn \l__tabla_amp_seq { & } { #1 }
+    \seq_set_split:Nnn \l__tabla_filas_seq { \\ } { #1 }
+    \tabla_contar:nn \l__tabla_amp_seq \l__tabla_amp_int
+    \tabla_contar:nn \l__tabla_filas_seq \l__tabla_filas_int
+    % las "&" de menos (la primera celda no lleva "&")
+    \int_sub:Nn \l__tabla_amp_int { 1 }
+    % las filas de menos (la ultima puede no cerrar con "\\")
+    \int_sub:Nn \l__tabla_filas_int { 1 }
+    % columnas = "&" por fila + 1  (con \divide, que es de TeX puro)
+    \tabladivisor=\int_use:N \l__tabla_amp_int
+    \divide\tabladivisor by \int_use:N \l__tabla_filas_int
+    \advance\tabladivisor by 1
+    \ifnum\tabladivisor<1 \tabladivisor=1 \fi
+    % primera columna a la izquierda, las demas centradas
+    \tl_clear:N \l__tabla_spec_tl
+    \tl_put_right:Nn \l__tabla_spec_tl { l }
+    \loop
+      \tl_put_right:Nn \l__tabla_spec_tl { c }
+      \advance\tabladivisor by -1
+    \ifnum\tabladivisor>1
+    \repeat
+  }
+
+% --- \tablaimpl{columnas}{contenido} ---
+\cs_new_protected:Npn \tablaimpl #1 #2
+  {
+    \group_begin:
+      \tl_set:Nn \l__tabla_spec_tl { #1 }
+      \tl_if_blank:eTF { \l__tabla_spec_tl }
+        { \tabla_columnas:n {#2} }
+        { }
+      \edef\tablaenv{ \noexpand\begin{tablaminimal}{ \l__tabla_spec_tl } }
+      \tablaenv
+        #2%
+      \end{tablaminimal}
+    \group_end:
+  }
+
+% --- \tablacolorimpl{columnas}{contenido} ---
+\cs_new_protected:Npn \tablacolorimpl #1 #2
+  {
+    \group_begin:
+      \tl_set:Nn \l__tabla_spec_tl { #1 }
+      \tl_if_blank:eTF { \l__tabla_spec_tl }
+        { \tabla_columnas:n {#2} }
+        { }
+      \edef\tablaenv{ \noexpand\begin{tablacabecera}{ \l__tabla_spec_tl } }
+      \tablaenv
+        #2%
+      \end{tablacabecera}
+    \group_end:
+  }
+
+% --- \tablarejillaimpl{columnas}{contenido} ---
+\cs_new_protected:Npn \tablarejillaimpl #1 #2
+  {
+    \group_begin:
+      \tl_set:Nn \l__tabla_spec_tl { #1 }
+      \tl_if_blank:eTF { \l__tabla_spec_tl }
+        { \tabla_columnas:n {#2} }
+        { }
+      \edef\tablaenv{ \noexpand\begin{tablacuadricula}{ | \l__tabla_spec_tl | } }
+      \tablaenv
+        #2%
+      \end{tablacuadricula}
+    \group_end:
+  }
+
+% --- \fichaimpl{ancho}{contenido} ---
+\cs_new_protected:Npn \fichaimpl #1 #2
+  {
+    \group_begin:
+      \tl_set:Nn \l__tabla_spec_tl { #1 }
+      \tl_if_blank:eTF { \l__tabla_spec_tl }
+        { \tl_set:Nn \l__tabla_spec_tl { 4cm } }
+        { }
+      \edef\tablaenv{ \noexpand\begin{fichaclave}{ \l__tabla_spec_tl } }
+      \tablaenv
+        #2%
+      \end{fichaclave}
+    \group_end:
+  }
+
+% alias sin dos puntos, para poder llamarlos desde el modo normal
+\cs_new_eq:NN \tablaImpl        \tablaimpl
+\cs_new_eq:NN \tablacolorImpl   \tablacolorimpl
+\cs_new_eq:NN \tablarejillaImpl \tablarejillaimpl
+\cs_new_eq:NN \fichaImpl        \fichaimpl
+
+\ExplSyntaxOff
+
+% --- los comandos que se escriben (con argumento opcional) ---
+\newcommand{\tabla}[2][]{%
+  \begingroup
+  \tablaImpl{#1}{#2}%
+  \endgroup}
+
+\newcommand{\tablacolor}[2][]{%
+  \begingroup
+  \tablacolorImpl{#1}{#2}%
+  \endgroup}
+
+\newcommand{\tablarejilla}[2][]{%
+  \begingroup
+  \tablarejillaImpl{#1}{#2}%
+  \endgroup}
+
+\newcommand{\ficha}[2][]{%
+  \begingroup
+  \fichaImpl{#1}{#2}%
+  \endgroup}

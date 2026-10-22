@@ -102,9 +102,10 @@
 % ---------------------------------------------------------------------
 \newcommand{\imagen}[2][]{%
   \begingroup
-    % --- ancho ---
+    % --- ancho (y alto maximo, para que la imagen no se coma la pagina) ---
     \def\imagenancho{#1}%
     \ifx\imagenancho\imagenvacio\def\imagenancho{\linewidth}\fi
+    \def\imagenalto{0.68\textheight}%
     % --- buscar la imagen ---
     \buscarimagen{#2}%
     % --- meterla ---
@@ -113,7 +114,7 @@
         % graphicx no expande el nombre del fichero: hay que pasarlo
         % "escapado" (detokenize) para que los _ y otros signos valgan.
         \edef\imagenrutadetok{\expandafter\detokenize\expandafter{\imagenruta}}%
-        \edef\imagenllamada{\noexpand\includegraphics[width=\imagenancho,keepaspectratio]{\imagenrutadetok}}%
+        \edef\imagenllamada{\noexpand\includegraphics[width=\imagenancho,height=\imagenalto,keepaspectratio]{\imagenrutadetok}}%
         \imagenllamada
       \end{center}%
     }{}%

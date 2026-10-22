@@ -1,2 +1,25 @@
-\newcommand{\resumen}[2][\coloractual]{\shadowbox[#1]{\negrita{#2}}\par\vspace{4mm}}
-
+% =====================================================================
+%  RESUMEN — la caja de resumen.
+%
+%  Es la UNICA caja con el color PLENO de la paleta y el texto en
+%  blanco, para que destaque de las demas.
+%
+%  \resumen{**Resumen:** el texto del resumen.}
+%  \resumen[accent]{...}          <- con otro color
+% =====================================================================
+\newcommand{\resumen}[2][\coloractual]{%
+  \begin{center}
+  \begin{tikzpicture}
+    \node[draw=#1!55!ink, line width=0.9pt, fill=#1,
+      rounded corners=1.5pt, text=white,
+      text width=16.4cm, align=left, inner sep=13pt] (box) {
+      \fontsize{11}{15.5}\selectfont\color{white} \negrita{#2}
+    };
+    \begin{pgfonlayer}{background}
+      \node[fill=#1!65!ink, rounded corners=5pt, fit=(box), inner sep=0pt,
+        xshift=0.28cm, yshift=-0.28cm] (shadow) {};
+    \end{pgfonlayer}
+  \end{tikzpicture}
+  \end{center}
+  \par\vspace{4mm}%
+}
