@@ -6,6 +6,16 @@
   //      descarga de la libreria lo necesitan)
   //    * dos pasadas, para que los indices y las referencias queden bien
   // ===================================================================
+  "files.associations": {
+    "*.tex": "latex",
+    "*.ltx": "latex"
+  },
+  "editor.quickSuggestions": {
+    "other": "on",
+    "comments": "off",
+    "strings": "off"
+  },
+  "editor.suggestOnTriggerCharacters": true,
   "latex-workshop.latex.magic.args": [
     "-synctex=1",
     "-interaction=nonstopmode",
