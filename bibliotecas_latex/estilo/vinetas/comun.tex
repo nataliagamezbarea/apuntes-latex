@@ -36,11 +36,16 @@
 
 % ---------------------------------------------------------------------
 %  NEGRITA AUTOMATICA:  **texto**  ->  \textbf{texto}
+%
+%  OJO: tiene que ser un comando ROBUSTO.  Si no, dentro de un \item
+%  (que es un argumento movil) se expande en el contexto de expansion
+%  de LaTeX, y ahi el regex de expl3 convierte los ":" en \char58 y
+%  deja el patron roto: sale "Undefined control sequence \char58".
 % ---------------------------------------------------------------------
-\long\protected\def\negrita #1
+\DeclareRobustCommand{\negrita}[1]
   {
     \tl_set:Nn \l_tmpa_tl {#1}
-    \regex_replace_all:nnN { \*\* (.*?) \*\* } { \c{textbf} \cB\{ \1 \cE\} } \l_tmpa_tl
+    \regex_replace_all:nnN { \*\* (.*?) \*\* } { \c{textbf} \{\1\} } { \l_tmpa_tl }
     \tl_use:N \l_tmpa_tl
   }
 
@@ -54,17 +59,17 @@
 %
 %  El **negrita** de siempre sigue funcionando (y manda si esta).
 % ---------------------------------------------------------------------
-\long\protected\def\negritaetiqueta #1
+\DeclareRobustCommand{\negritaetiqueta}[1]
   {
     \tl_set:Nn \l_tmpa_tl {#1}
     % primero el **negrita** de siempre
-    \regex_replace_all:nnN { \*\* (.*?) \*\* } { \c{textbf} \cB\{ \1 \cE\} } \l_tmpa_tl
+    \regex_replace_all:nnN { \*\* (.*?) \*\* } { \c{textbf} \{\1\} } { \l_tmpa_tl }
     % y despues lo que va antes del primer ":"
     % (solo si el texto es "limpio": sin llaves ni barras invertidas)
     % el ":" se queda fuera de la negrita y con su catcode normal
     \regex_replace_once:nnN
       { \A([^:{}\\]+): }
-      { \c{textbf} \cB\{ \1 \cE\}\c{itemsdospuntos} }
+      { \c{textbf} \{\1\}\c{itemsdospuntos} }
       \l_tmpa_tl
     \tl_use:N \l_tmpa_tl
   }
