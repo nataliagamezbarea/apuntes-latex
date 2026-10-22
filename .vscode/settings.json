@@ -151,6 +151,6 @@
     "\\typecardbody": "\\typecardbody{{$1}{$2}}",
     "\\typecardlibre": "\\typecardlibre{{$1}{$2}{$3}}",
     "\\typecardpair": "\\typecardpair{{$1}{$2}{$3}{$4}{$5}}",
-    "\\usarfondo": "\\usarfondo",
+    "\\usarfondo": "\\usarfondo"
   }
 }
