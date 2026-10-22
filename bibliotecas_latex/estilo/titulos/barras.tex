@@ -13,17 +13,19 @@
 \newlength{\bartextlen}
 \newlength{\barrightlen}
 
-\newcommand{\sectionheader}[3][primary]{
+% \sectionheader[color]{barra}{texto}{tamano}
+%   el tamano de letra es lo que diferencia una seccion de una subseccion
+\newcommand{\sectionheader}[4][primary]{
   \setlength{\barleftlen}{#2}
   % se mide EXACTAMENTE lo que se escribe (con el espacio del color),
   % si no la barra de la derecha se sale de la pagina (Overfull \hbox)
-  \settowidth{\bartextlen}{\headingfontxb\Large\color{#1} #3}
+  \settowidth{\bartextlen}{\headingfontxb#4\color{#1} #3}
   \setlength{\barrightlen}{\linewidth}
   \addtolength{\barrightlen}{-\barleftlen}
   \addtolength{\barrightlen}{-\bartextlen}
   \addtolength{\barrightlen}{-0.9cm}
   % si el titulo es muy largo, la barra de la derecha se deja a 0
   \ifdim\barrightlen<0pt\setlength{\barrightlen}{0pt}\fi
-  \noindent\barrule[#1]{\barleftlen}\hspace{4mm}{\headingfontxb\Large\color{#1} #3}\hspace{4mm}\barrule[#1]{\barrightlen}\par
+  \noindent\barrule[#1]{\barleftlen}\hspace{4mm}{\headingfontxb#4\color{#1} #3}\hspace{4mm}\barrule[#1]{\barrightlen}\par
 }
 
