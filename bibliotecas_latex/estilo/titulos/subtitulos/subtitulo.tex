@@ -8,6 +8,7 @@
 \newcommand{\subtitulo}[1]{%
   \Needspace{3\baselineskip}%
   \par\vspace{4mm}%
-  {\headingfontxb\large\color{\subtitulocolor}#1}\par
+  \edef\subtituloreal{\subtitulocolor}%
+  {\headingfontxb\large\color{\subtituloreal}#1}\par
   \vspace{1.5mm}%
 }
