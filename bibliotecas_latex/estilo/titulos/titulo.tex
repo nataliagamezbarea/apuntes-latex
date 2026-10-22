@@ -3,7 +3,7 @@
 \newcommand{\titulo}[3][primary]{
   \gdef\coloractual{#1}
   \gdef\colorseccion{#1}
-  \gdef\colorcaja{ink}
+  \gdef\colorcaja{\coloractual}
   \setcolorpale
   \setcounter{numerosec}{0}
   \vspace{2mm}
@@ -15,12 +15,12 @@
 \newcommand{\sigseccion}{
   \pickcolor{\coloractual}
   \pickcolor{\coloracento}
-  \gdef\colorcaja{ink}
+  \gdef\colorcaja{\coloractual}
   \setcolorpale}
 
 \newcommand{\setcolorapartado}[1]{
   \gdef\coloractual{#1}
-  \gdef\colorcaja{ink}
+  \gdef\colorcaja{\coloractual}
   \colorlet{tonoacento}{#1!55!black}
   \gdef\coloracento{tonoacento}
   \setcolorpale}
