@@ -76,7 +76,13 @@
     \def\imagenancho{#1}%
     \ifx\imagenancho\imagenvacio\def\imagenancho{\linewidth}\fi
     \buscarimagen{#2}%
-    \IfFileExists{\imagenruta}{%
+    % OJO: el \begin{center} va FUERA de la rama del \IfFileExists.
+    % LaTeX lee las dos ramas del \IfFileExists como grupos, y si dentro
+    % hay un entorno se desbarajustan los grupos: salen los errores
+    % "(\begin{document} ended by \end{center})" y "Too many }'s".
+    \def\imagenhay\SI
+    \IfFileExists{\imagenruta}{\def\imagenhay\NO}{}%
+    \ifx\imagenhay\NO
       \begin{center}%
         % graphicx no expande el nombre del fichero: hay que pasarlo
         % "escapado" (detokenize) para que los _ y otros signos valgan.
@@ -84,6 +90,6 @@
         \edef\imagenllamada{\noexpand\includegraphics[width=\imagenancho,keepaspectratio]{\imagenrutadetok}}%
         \imagenllamada
       \end{center}%
-    }%
+    \fi
   \endgroup
 }

@@ -43,6 +43,27 @@
   }
 
 % ---------------------------------------------------------------------
+%  NEGRITA DE ETIQUETA (solo en los items de las listas)
+%
+%  Si el item lleva ":", todo lo de antes del ":" se pone en negrita
+%  solo.  Asi no hay que escribir \textbf{...} en cada item:
+%
+%     \lista{Funciona solo en tu ordenador:|Dejar de estar disponible}
+%
+%  El **negrita** de siempre sigue funcionando (y manda si esta).
+% ---------------------------------------------------------------------
+\long\protected\def\negritaetiqueta #1
+  {
+    \tl_set:Nn \l_tmpa_tl {#1}
+    % primero el **negrita** de siempre
+    \regex_replace_all:nnN { \*\* (.*?) \*\* } { \c{textbf} \cB\{ \1 \cE\} } \l_tmpa_tl
+    % y despues lo que va antes del primer ":"
+    % (solo si el texto es "limpio": sin llaves ni barras invertidas)
+    \regex_replace_all:nnN { \A([^:{}\\]+)(?=:) } { \c{textbf} \cB\{ \1 \cE\} } \l_tmpa_tl
+    \tl_use:N \l_tmpa_tl
+  }
+
+% ---------------------------------------------------------------------
 %  \itemsnuevos{contenido}
 %
 %  Parte el contenido en items (por "|" y por lineas en blanco) y llama
@@ -65,8 +86,8 @@
 % ---------------------------------------------------------------------
 %  Los tres tipos de item.  Todos con negrita automatica.
 % ---------------------------------------------------------------------
-\long\def\itembullet#1{\item \negrita{#1}}
+\long\def\itembullet#1{\item \negritaetiqueta{#1}}
 
-\long\def\itemcheck#1{\item \negrita{#1}}
+\long\def\itemcheck#1{\item \negritaetiqueta{#1}}
 
-\long\def\itemstep#1{\item \negrita{#1}}
+\long\def\itemstep#1{\item \negritaetiqueta{#1}}
