@@ -3,7 +3,7 @@
     \buscarimagen{#2}%
     \noindent
     \begin{minipage}[t]{#1}
-      \IfFileExists{\imagenruta}{\includegraphics[width=\linewidth]{\imagenruta}}{}
+      \IfFileExists{\imagenruta}{\meterimagen{\linewidth}}{}
     \end{minipage}\hfill
     \begin{minipage}[t]{\dimexpr\linewidth-#1-6mm\relax}
       #3

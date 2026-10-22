@@ -21,6 +21,13 @@ if [ -z "$nombre" ] || [ -z "$destino" ]; then
   exit 1
 fi
 
+# --- los espacios de mas se ignoran (\imagen{ nube.png } funciona) ---
+nombre=$(echo "$nombre" | sed 's,^ *,,; s, *$,,')
+
+# el destino se borra antes: si no, un fichero viejo haria que TeX
+# creyese que la imagen existe
+rm -f "$destino"
+
 # --- 1) la carpeta "imagenes_explicativas" (y subcarpetas) ---
 for d in ../.. . .. ../../..; do
   if [ -d "$d/imagenes_explicativas" ]; then
