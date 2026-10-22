@@ -1,5 +1,6 @@
 \newcommand{\seccion}[2][]{
-  \if\relax\detokenize{#1}\relax\sigseccion\else\setcolorapartado{#1}\fi
+  % una subseccion NO cambia de color: se queda con el de su seccion
+  \if\relax\detokenize{#1}\relax\else\setcolorapartado{#1}\fi
   \vspace{4mm}
   \sectionheader[\coloractual]{0.4cm}{#2}{\large}\vspace{2mm}}
 
