@@ -51,7 +51,8 @@
   \IfFileExists{\imagenficheroesc}{%
     \edef\imagenruta{\imagenficheroesc}%
   }{%
-    % --- 2 y 3) buscar por el nombre en el proyecto ---
+    % --- 2) "imagenes_explicativas" del proyecto (y subcarpetas) ---
+    % --- 3) y si no, por el nombre en todo el proyecto ---
     \immediate\write18{mkdir -p "\imagentmpdir" && sh "\bibliotecasDir/estilo/filas/buscarimagen.sh" "\imagenficheroesc" "\imagentmpfile"}%
     \IfFileExists{\imagentmpfile}{%
       \edef\imagenruta{\imagentmpfile}%
@@ -75,14 +76,10 @@
     % --- ancho ---
     \def\imagenancho{#1}%
     \ifx\imagenancho\imagenvacio\def\imagenancho{\linewidth}\fi
+    % --- buscar la imagen ---
     \buscarimagen{#2}%
-    % OJO: el \begin{center} va FUERA de la rama del \IfFileExists.
-    % LaTeX lee las dos ramas del \IfFileExists como grupos, y si dentro
-    % hay un entorno se desbarajustan los grupos: salen los errores
-    % "(\begin{document} ended by \end{center})" y "Too many }'s".
-    \def\imagenhay\SI
-    \IfFileExists{\imagenruta}{\def\imagenhay\NO}{}%
-    \ifx\imagenhay\NO
+    % --- meterla ---
+    \IfFileExists{\imagenruta}{%
       \begin{center}%
         % graphicx no expande el nombre del fichero: hay que pasarlo
         % "escapado" (detokenize) para que los _ y otros signos valgan.
@@ -90,6 +87,6 @@
         \edef\imagenllamada{\noexpand\includegraphics[width=\imagenancho,keepaspectratio]{\imagenrutadetok}}%
         \imagenllamada
       \end{center}%
-    \fi
+    }{}%
   \endgroup
 }

@@ -22,7 +22,11 @@ if [ -z "$nombre" ] || [ -z "$destino" ]; then
 fi
 
 # --- los espacios de mas se ignoran (\imagen{ nube.png } funciona) ---
+# Se recortan el nombre Y el destino: TeX, al comprobar si el fichero
+# existe, ignora los espacios del final, asi que el destino tiene que
+# estar recortado tambien.
 nombre=$(echo "$nombre" | sed 's,^ *,,; s, *$,,')
+destino=$(echo "$destino" | sed 's,^ *,,; s, *$,,')
 
 # el destino se borra antes: si no, un fichero viejo haria que TeX
 # creyese que la imagen existe

@@ -26,6 +26,8 @@
 
 \def\itemvacio{}
 \def\itemnulo{}
+% el ":" con su catcode normal (asi no se come el espacio de despues)
+\def\itemsdospuntos{:}
 
 \ExplSyntaxOn
 
@@ -59,7 +61,11 @@
     \regex_replace_all:nnN { \*\* (.*?) \*\* } { \c{textbf} \cB\{ \1 \cE\} } \l_tmpa_tl
     % y despues lo que va antes del primer ":"
     % (solo si el texto es "limpio": sin llaves ni barras invertidas)
-    \regex_replace_all:nnN { \A([^:{}\\]+)(?=:) } { \c{textbf} \cB\{ \1 \cE\} } \l_tmpa_tl
+    % el ":" se queda fuera de la negrita y con su catcode normal
+    \regex_replace_once:nnN
+      { \A([^:{}\\]+): }
+      { \c{textbf} \cB\{ \1 \cE\}\c{itemsdospuntos} }
+      \l_tmpa_tl
     \tl_use:N \l_tmpa_tl
   }
 
