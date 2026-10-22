@@ -134,6 +134,7 @@
 |---|---|---|
 | **Caja** | <img src="imagenes_explicativas/cajas/caja.png" width="420"> | |
 | | | `\caja{**Idea clave:** caja de información.}` |
+| | | `\recuadro{...}` (sinónimo de `\caja`) |
 | **Dos cajas** | <img src="imagenes_explicativas/cajas/dos-cajas.png" width="420"> | |
 | | | `\cajadual{Texto de la izquierda}{Texto de la derecha}` |
 | **Nota** | <img src="imagenes_explicativas/cajas/nota.png" width="420"> | |
@@ -200,8 +201,15 @@ asterisco**`, sin escribir `\textbf`.
 
 ### 📊 Tablas
 
+**Atajo**: `\tabla{...}` escribe la tabla entera (sin `\begin`/`\end`) y
+**detecta las columnas solo**. También `\tablacolor{...}`,
+`\tablarejilla{...}` y `\ficha{...}`.
+
 | | | Código |
 |---|---|---|
+| **Tabla (atajo)** | | |
+| | | `\tabla{`\tablacab{A} & \tablacab{B} \\ 1 & 2 \\}` |
+| | | `\tabla[lcc]{...}` (para fijar las columnas) |
 | **Tabla simple** | <img src="imagenes_explicativas/tablas/tabla-simple.png" width="420"> | |
 | | | `\begin{tablaminimal}{lcc}
   \tablacab{Técnica} & \tablacab{Resolución} \\
