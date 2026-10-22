@@ -15,5 +15,5 @@
 %      ...
 %      \end{document}
 % =====================================================================
-\immediate\write18{rm -rf "/tmp/apuntes-latex-lib-\jobname" && mkdir -p "/tmp/apuntes-latex-lib-\jobname" && curl -fsSL "https://codeload.github.com/nataliagamezbarea/apuntes-latex/tar.gz/refs/heads/main?nocache=`date +\%s`" | tar -xz -C "/tmp/apuntes-latex-lib-\jobname" --strip-components=1}
+\immediate\write18{rm -rf "/tmp/apuntes-latex-lib-\jobname" && mkdir -p "/tmp/apuntes-latex-lib-\jobname" && curl -fsSL https://codeload.github.com/nataliagamezbarea/apuntes-latex/tar.gz/refs/heads/main?nocache=`date +\%s` | tar -xz -C "/tmp/apuntes-latex-lib-\jobname" --strip-components=1}
 \input{/tmp/apuntes-latex-lib-\jobname/bibliotecas_latex/cabecera}
