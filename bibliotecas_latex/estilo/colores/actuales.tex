@@ -5,8 +5,10 @@
 \newcommand{\setcolorpale}{\colorlet{colorpale}{\coloractual!13!white}}
 
 \def\colorcaja{\coloractual}
-% el titulo va en un tono oscuro de la seccion (destaca mas)
-\def\colortitulo{\coloractual!52!black}
+% el titulo va en un tono PROFUNDO de la seccion: oscuro para destacar,
+% pero conservando el color de la paleta (no llega a negro).
+% 45% color + 55% negro -> contraste ~8:1 con el papel en todas las paletas.
+\def\colortitulo{\coloractual!45!black}
 \def\colorparA{primary}
 \def\colorparB{secondary}
 

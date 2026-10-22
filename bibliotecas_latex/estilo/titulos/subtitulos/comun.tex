@@ -5,9 +5,12 @@
 %
 %  Su color:
 %    * es de la MISMA paleta que el titulo (el color de la seccion)
-%    * pero mas suave (mezclado con blanco), para que se vea bien y
-%      a la vez destaque menos que el color PRINCIPAL
+%    * pero un escalon mas claro que el titulo, sin llegar a lavarse:
+%      se oscurece con negro en vez de aclararse con blanco, porque
+%      mezclar con blanco dejaba los subtitulos casi invisibles en las
+%      paletas claras (celeste, amarillo, lima...).
+%    * 68% color + 32% negro -> contraste ~4,5:1 o mas con el papel.
 % =====================================================================
 
-% el color del subtitulo = el de la seccion, pero mas claro
-\newcommand{\subtitulocolor}{\coloractual!82!white}
+% el color del subtitulo = el de la seccion, un escalon mas claro
+\newcommand{\subtitulocolor}{\coloractual!68!black}
