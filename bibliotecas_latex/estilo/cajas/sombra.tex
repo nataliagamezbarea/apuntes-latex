@@ -1,14 +1,20 @@
+% =====================================================================
+%  SOMBRA — el recuadro del \resumen.
+%
+%  Todo en pastel: fondo clarito, borde suave y sombra pastel (nada de
+%  color fuerte).  El texto va en el color de tinta.
+% =====================================================================
 \newcommand{\shadowbox}[2][\coloractual]{
   \begin{center}
   \begin{tikzpicture}
-    \node[draw=\coloractual!60!ink, line width=0.9pt, fill=\coloractual!7!white,
-      rounded corners=1.5pt,
-      text width=16.6cm, align=left, inner sep=12pt] (box) {
+    \node[draw=#1!50!white, line width=1.1pt, fill=#1!9!white,
+      rounded corners=4pt,
+      text width=16.4cm, align=left, inner sep=12pt] (box) {
       \fontsize{11}{15.5}\selectfont\color{ink} #2
     };
     \begin{pgfonlayer}{background}
-      \node[fill=#1, rounded corners=5pt, fit=(box), inner sep=0pt,
-        xshift=0.28cm, yshift=-0.28cm] (shadow) {};
+      \node[fill=#1!28!white, rounded corners=6pt, fit=(box), inner sep=0pt,
+        xshift=0.22cm, yshift=-0.22cm] (shadow) {};
     \end{pgfonlayer}
   \end{tikzpicture}
   \end{center}
@@ -16,4 +22,3 @@
 }
 
 \newcommand{\closingbars}{}
-
