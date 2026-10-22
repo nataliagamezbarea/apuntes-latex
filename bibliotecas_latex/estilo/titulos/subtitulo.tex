@@ -10,9 +10,9 @@
 %  \subtitulo[otrocolor]{Titulo}
 % =====================================================================
 \newcommand{\subtitulo}[2][]{%
-  \if\relax\detokenize{#1}\relax
+  \if\relax\detokenize{#1}\relax%
     \colorlet\subtitulocolor}{secondary}%
-  \else
+  \else%
     \colorlet\subtitulocolor}{#1}%
   \fi
   \par\vspace{4mm}%
