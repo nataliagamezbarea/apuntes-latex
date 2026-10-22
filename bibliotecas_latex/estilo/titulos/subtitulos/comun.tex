@@ -2,8 +2,10 @@
 %  COMUN.TEX — lo que comparten los subtitulos.
 %
 %  Un subtitulo va DENTRO de una seccion: por eso no lleva las barras
-%  de \seccion y su color es FIJO (no cambia de seccion en seccion).
+%  de \seccion.  Su color es el de la seccion en la que esta (cambia
+%  al cambiar de seccion, pero dentro de la misma seccion todos los
+%  subtitulos tienen el mismo).
 % =====================================================================
 
-% el color fijo de los subtitulos
-\colorlet{subtitulocolor}{secondary}
+% el color del subtitulo = el color de la seccion actual
+\newcommand{\subtitulocolor}{\coloractual}
