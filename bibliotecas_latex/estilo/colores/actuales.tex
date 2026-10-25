@@ -1,0 +1,14 @@
+\def\coloractual{primary}
+\def\coloracento{accent}
+
+\colorlet{colorpale}{primary!12!white}
+\newcommand{\setcolorpale}{\colorlet{colorpale}{\coloractual!13!white}}
+
+\def\colorcaja{\coloractual}
+% el titulo va en el COLOR de la seccion, solo un poco mas oscuro
+% (nada de negro: se tiene que seguir viendo el color de la paleta)
+\def\colortitulo{\coloractual!68!black}
+\def\colorparA{primary}
+\def\colorparB{secondary}
+
+\newcommand{\colorapartado}[1]{\gdef\coloractual{#1}\gdef\colorseccion{#1}\setcolorpale}

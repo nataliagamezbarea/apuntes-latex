@@ -1,0 +1,22 @@
+\ExplSyntaxOn
+
+% El orden NO es por familias: va alternando frio/calido para que dos
+% secciones seguidas nunca tengan un color parecido.
+% (Cada seccion consume UN color; ver \sigseccion en titulos/titulo.tex.)
+\clist_new:N \g_pool_cl
+\clist_gset:Nn \g_pool_cl
+  { azulA, naraA, turqA, fucsA, mentA, amarA, oceA, coralA, limaA, lilaA,
+    bosqueA, rosaA, olivA, lavA, celeA, melcA, ciruA, arenaA, past04, past10 }
+
+\int_new:N \g_last_int
+% -1 para que la primera seccion coja el primer color de la lista
+\int_gset:Nn \g_last_int { -1 }
+\cs_new_protected:Npn \pickcolor #1
+  {
+    \int_set:Nn \l_tmpa_int
+      { \int_mod:nn { \g_last_int + 1 }
+                    { \clist_count:N \g_pool_cl } }
+    \int_gset_eq:NN \g_last_int \l_tmpa_int
+    \tl_set:Nx #1 { \clist_item:Nn \g_pool_cl { \l_tmpa_int + 1 } }
+  }
+\ExplSyntaxOff

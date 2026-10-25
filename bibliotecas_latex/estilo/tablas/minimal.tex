@@ -1,0 +1,18 @@
+\newenvironment{tablaminimal}[1]{
+  \begingroup
+  \arrayrulecolor{primary}
+  \renewcommand{\arraystretch}{1.15}
+  \rowcolors{2}{white}{pale}
+  \begin{center}
+  \fontsize{10.2}{13}\selectfont\color{texto}
+  \begin{tabular}{#1}
+  \toprule[1.1pt]
+}{
+  \bottomrule[1.1pt]
+  \end{tabular}
+  \end{center}
+  \endgroup
+}
+
+\newcommand{\tablacab}[1]{{\headingfontxb\color{primary}\fontsize{10.2}{13}\selectfont #1}}
+

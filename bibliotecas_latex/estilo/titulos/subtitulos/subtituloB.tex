@@ -1,0 +1,11 @@
+% =====================================================================
+%  SUBTITULOB — el subtitulo en cursiva (mas discreto).
+%
+%  \subtituloB{Titulo}
+% =====================================================================
+\newcommand{\subtituloB}[1]{%
+  \par\vspace{4mm}%
+  \edef\subtituloreal{\subtitulocolor}%
+  {\headingfont\fontsize{13.5}{16.5}\selectfont\color{\subtituloreal}#1}\par
+  \vspace{1.5mm}%
+}

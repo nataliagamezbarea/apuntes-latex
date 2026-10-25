@@ -1,0 +1,104 @@
+% =====================================================================
+%  COMUN.TEX — lo que comparten TODAS las viñetas y listas.
+%
+%  ---- SINTAXIS ----
+%  Los items se separan con "|" (barra vertical):
+%
+%     \lista{Primero|Segundo|Tercero}
+%
+%  La "|" del FINAL es OPCIONAL: cuando terminas el item ya esta.
+%  Tambien vale una linea en blanco para separar items:
+%
+%     \lista{
+%       Primero
+%
+%       Segundo
+%|
+%       Tercero
+%|     }
+%
+%  La negrita se pone con **doble asterisco**, sin escribir \textbf:
+%
+%     \lista{**Importante:** esto va en negrita|Otro item}
+%
+%  (Escribir \textbf{...} tambien funciona: es texto normal de LaTeX).
+% =====================================================================
+
+\def\itemvacio{}
+\def\itemnulo{}
+% el ":" con su catcode normal (asi no se come el espacio de despues)
+\def\itemsdospuntos{:}
+
+\ExplSyntaxOn
+
+\seq_new:N \l__items_seq
+\seq_new:N \l__items_subseq
+
+% ---------------------------------------------------------------------
+%  NEGRITA AUTOMATICA:  **texto**  ->  \textbf{texto}
+%
+%  OJO: tiene que ser un comando ROBUSTO.  Si no, dentro de un \item
+%  (que es un argumento movil) se expande en el contexto de expansion
+%  de LaTeX, y ahi el regex de expl3 convierte los ":" en \char58 y
+%  deja el patron roto: sale "Undefined control sequence \char58".
+% ---------------------------------------------------------------------
+\DeclareRobustCommand{\negrita}[1]
+  {
+    \tl_set:Nn \l_tmpa_tl {#1}
+    \regex_replace_all:nnN { \*\* (.*?) \*\* } { \c{textbf} \{\1\} } { \l_tmpa_tl }
+    \tl_use:N \l_tmpa_tl
+  }
+
+% ---------------------------------------------------------------------
+%  NEGRITA DE ETIQUETA (solo en los items de las listas)
+%
+%  Si el item lleva ":", todo lo de antes del ":" se pone en negrita
+%  solo.  Asi no hay que escribir \textbf{...} en cada item:
+%
+%     \lista{Funciona solo en tu ordenador:|Dejar de estar disponible}
+%
+%  El **negrita** de siempre sigue funcionando (y manda si esta).
+% ---------------------------------------------------------------------
+\DeclareRobustCommand{\negritaetiqueta}[1]
+  {
+    \tl_set:Nn \l_tmpa_tl {#1}
+    % primero el **negrita** de siempre
+    \regex_replace_all:nnN { \*\* (.*?) \*\* } { \c{textbf} \{\1\} } { \l_tmpa_tl }
+    % y despues lo que va antes del primer ":"
+    % (solo si el texto es "limpio": sin llaves ni barras invertidas)
+    % el ":" se queda fuera de la negrita y con su catcode normal
+    \regex_replace_once:nnN
+      { \A([^:{}\\]+): }
+      { \c{textbf} \{\1\}\c{itemsdospuntos} }
+      \l_tmpa_tl
+    \tl_use:N \l_tmpa_tl
+  }
+
+% ---------------------------------------------------------------------
+%  \itemsnuevos{contenido}
+%
+%  Parte el contenido en items (por "|" y por lineas en blanco) y llama
+%  a \itemtipo con cada uno.  Nada se expande: el texto del item llega
+%  tal cual, asi que \textbf, \emph, \hl... funcionan sin problemas.
+% ---------------------------------------------------------------------
+\cs_new_protected:Npn \itemsnuevos #1
+  {
+    \seq_set_split:Nnn \l__items_seq { | } { #1 }
+    \seq_map_inline:Nn \l__items_seq
+      {
+        \seq_set_split:Nnn \l__items_subseq { \par } { ##1 }
+        \seq_map_inline:Nn \l__items_subseq
+          { \tl_if_blank:nF { ####1 } { \itemtipo { ####1 } } }
+      }
+  }
+
+\ExplSyntaxOff
+
+% ---------------------------------------------------------------------
+%  Los tres tipos de item.  Todos con negrita automatica.
+% ---------------------------------------------------------------------
+\long\def\itembullet#1{\item \negritaetiqueta{#1}}
+
+\long\def\itemcheck#1{\item \negritaetiqueta{#1}}
+
+\long\def\itemstep#1{\item \negritaetiqueta{#1}}

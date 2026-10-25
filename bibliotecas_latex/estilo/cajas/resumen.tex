@@ -1,0 +1,23 @@
+% =====================================================================
+%  RESUMEN — la caja de resumen.
+%
+%  Es del COLOR DEL TITULO (el de la sección), pero todo en pastel:
+%  fondo clarito, borde suave y sombra pastel.  El texto va en el color
+%  de tinta (no en blanco), para que no pese tanto.
+% =====================================================================
+\newcommand{\resumen}[2][\coloractual]{%
+  \begin{center}
+  \begin{tikzpicture}
+    \node[draw=#1!50!white, line width=1.1pt, fill=#1!12!white,
+      rounded corners=4pt,
+      text width=16.4cm, align=left, inner sep=12pt] (box) {
+      \fontsize{11}{15.5}\selectfont\color{texto} \negrita{#2}
+    };
+    \begin{pgfonlayer}{background}
+      \node[fill=#1!30!white, rounded corners=6pt, fit=(box), inner sep=0pt,
+        xshift=0.22cm, yshift=-0.22cm] (shadow) {};
+    \end{pgfonlayer}
+  \end{tikzpicture}
+  \end{center}
+  \par\vspace{4mm}%
+}

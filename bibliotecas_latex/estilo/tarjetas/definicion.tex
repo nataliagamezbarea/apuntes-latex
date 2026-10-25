@@ -1,0 +1,18 @@
+\newcommand{\definicion}[3][]{
+  \if\relax\detokenize{#1}\relax
+    \colorlet{tarjetacolor}{\colorcaja}
+  \else
+    \colorlet{tarjetacolor}{#1}
+  \fi
+  \par\vspace{5mm}%
+  \typecard[tarjetacolor]{#2}{\negrita{#3}}\par\vspace{4mm}}
+
+\newcommand{\definicionpar}[3][]{
+  \if\relax\detokenize{#1}\relax
+    \colorlet{tarjetacolor}{\colorcaja}
+  \else
+    \colorlet{tarjetacolor}{#1}
+  \fi
+  \par\vspace{5mm}%
+  \typecard[tarjetacolor]{#2}{\negrita{#3}}\par\vspace{3mm}}
+

@@ -1,0 +1,12 @@
+% =====================================================================
+%  NOTA — caja con barra de color a la izquierda.
+%
+%  Usa el color de ACENTO de la paleta (no el principal), para que
+%  cada tipo de caja tenga un color distinto.
+%
+%  \nota{Título}{Texto de la nota}
+%  \nota[primary]{Título}{Texto}     <- con otro color
+% =====================================================================
+\newcommand{\nota}[3][]{%
+  \if\relax\detokenize{#1}\relax\else\gdef\colorcaja{#1}\fi
+  \tipbox[\colorcaja]{#2}{\negrita{#3}}\par\vspace{3mm}}

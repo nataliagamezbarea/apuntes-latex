@@ -1,0 +1,31 @@
+\newcounter{numerosec}
+
+\newcommand{\titulo}[3][primary]{
+  \gdef\coloractual{#1}
+  \gdef\colorseccion{#1}
+  \gdef\colorcaja{\coloractual}
+  \setcolorpale
+  \setcounter{numerosec}{0}
+  \vspace{2mm}
+  \pill[#1]{#2}\par
+  \vspace{4mm}
+  \edef\colortituloreal{\colortitulo}%
+  {\headingfontxb\fontsize{23}{23}\selectfont\color{\colortituloreal} #3}\par
+  \vspace{6mm}}
+
+\newcommand{\sigseccion}{
+  % una seccion = un color de la paleta (el acento se deriva de el, para
+  % no gastar otro color y que no se repitan colores entre secciones)
+  \pickcolor{\coloractual}
+  \colorlet{tonoacento}{\coloractual!60!black}
+  \gdef\coloracento{tonoacento}
+  \gdef\colorcaja{\coloractual}
+  \setcolorpale}
+
+\newcommand{\setcolorapartado}[1]{
+  \gdef\coloractual{#1}
+  \gdef\colorcaja{\coloractual}
+  \colorlet{tonoacento}{#1!55!black}
+  \gdef\coloracento{tonoacento}
+  \setcolorpale}
+

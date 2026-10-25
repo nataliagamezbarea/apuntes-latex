@@ -1,0 +1,30 @@
+# Archivos generados por LaTeX (solo se generan; no se suben)
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.xdv
+*.synctex.gz
+*synctex*
+*.bbl
+*.blg
+*.nav
+*.snm
+*.vrb
+*.pdf
+
+# Los apuntes y sus imagenes viven en el repo PRIVADO apuntes-privados:
+# aqui no se suben (cada imagen esta dentro de su tema, por ejemplo
+# apuntes/DIW/Tema 1/Tema1.1/imagenes/nube.png).
+/apuntes
+
+# Copias de seguridad hechas a mano
+/apuntes.zip
+
+# Vistas previas generadas
+vista-*.png
+preview-*.png

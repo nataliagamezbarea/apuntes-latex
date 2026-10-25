@@ -1,0 +1,14 @@
+\newcommand{\diamanteicon}{
+  \tikz[baseline=-0.55ex]{
+    \fill[\coloractual] (0,0) -- (3.1pt,3.1pt) -- (6.2pt,0) -- (3.1pt,-3.1pt) -- cycle;
+    \fill[\coloracento]  (3.1pt,0) -- (4.5pt,1.4pt) -- (6.2pt,0) -- (4.5pt,-1.4pt) -- cycle;
+  }
+}
+
+\newlist{marcalist}{itemize}{1}
+\setlist[marcalist]{leftmargin=7mm, itemsep=7pt, topsep=2pt,
+  label={\diamanteicon}, font=\fontsize{10.6}{14.8}\selectfont\color{texto}}
+
+\newcommand{\marcas}[1]{
+  \begin{marcalist}\let\itemtipo\itembullet\itemsnuevos{#1}\end{marcalist}}
+

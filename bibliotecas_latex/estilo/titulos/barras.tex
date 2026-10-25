@@ -1,0 +1,33 @@
+\newcommand{\barrule}[2][primary]{%
+  \begin{tikzpicture}[baseline={([yshift=-3.2pt]current bounding box.center)}]
+    % \useasboundingbox fija el ancho EXACTO de la barra. Sin esto, la
+    % coordenada "current bounding box.center" del baseline agranda el
+    % dibujo 5.65pt y la linea se sale de la pagina (Overfull \hbox).
+    \useasboundingbox (0,0.06) rectangle (#2,0.34);
+    \fill[#1]        (0,0.20) rectangle (#2,0.34);
+    \fill[#1!45!white](0,0.06) rectangle (#2,0.14);
+  \end{tikzpicture}%
+}
+
+\newlength{\barleftlen}
+\newlength{\bartextlen}
+\newlength{\barrightlen}
+
+% \sectionheader[color]{barra}{texto}{tamano}
+%   el tamano de letra es lo que diferencia una seccion de una subseccion
+\newcommand{\sectionheader}[4][primary]{
+  % se expande el color: xcolor solo expande un nivel
+  \edef\sectionheadercolor{#1}%
+  \setlength{\barleftlen}{#2}
+  % se mide EXACTAMENTE lo que se escribe (con el espacio del color),
+  % si no la barra de la derecha se sale de la pagina (Overfull \hbox)
+  \settowidth{\bartextlen}{\headingfontxb#4\color{\sectionheadercolor} #3}
+  \setlength{\barrightlen}{\linewidth}
+  \addtolength{\barrightlen}{-\barleftlen}
+  \addtolength{\barrightlen}{-\bartextlen}
+  \addtolength{\barrightlen}{-0.9cm}
+  % si el titulo es muy largo, la barra de la derecha se deja a 0
+  \ifdim\barrightlen<0pt\setlength{\barrightlen}{0pt}\fi
+  \noindent\barrule[\sectionheadercolor]{\barleftlen}\hspace{4mm}{\headingfontxb#4\color{\sectionheadercolor} #3}\hspace{4mm}\barrule[\sectionheadercolor]{\barrightlen}\par
+}
+

@@ -1,0 +1,12 @@
+\newcommand{\tituloQ}[1]{
+  \begin{center}
+  \begin{tikzpicture}
+    \node (t) [text width=15cm, align=center] {{\headingfontxb\fontsize{18}{22}\selectfont\color{ink} #1}};
+    \draw[primary, line width=1.4pt, decorate,
+      decoration={coil, aspect=0, segment length=6.5pt, amplitude=1.3pt}]
+      ($(t.south west)+(0,-0.14)$) -- ($(t.south east)+(0,-0.14)$);
+  \end{tikzpicture}
+  \end{center}
+  \vspace{6mm}
+}
+

@@ -1,0 +1,14 @@
+\newcommand{\tituloL}[1]{
+  \begin{center}
+  \begin{tikzpicture}
+    \node (t) [text width=15cm, align=center, inner xsep=12pt, inner ysep=8pt]
+      {\headingfontxb\fontsize{18}{22}\selectfont\color{ink} #1};
+    \draw[primary, line width=1.1pt] (t.north west) -- ++(0.35,0) (t.north west) -- ++(0,-0.35);
+    \draw[primary, line width=1.1pt] (t.north east) -- ++(-0.35,0) (t.north east) -- ++(0,-0.35);
+    \draw[primary, line width=1.1pt] (t.south west) -- ++(0.35,0) (t.south west) -- ++(0,0.35);
+    \draw[primary, line width=1.1pt] (t.south east) -- ++(-0.35,0) (t.south east) -- ++(0,0.35);
+  \end{tikzpicture}
+  \end{center}
+  \vspace{5mm}
+}
+

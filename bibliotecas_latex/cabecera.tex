@@ -1,0 +1,9 @@
+\providecommand{\bibliotecasDir}{/tmp/apuntes-latex-lib-\jobname/bibliotecas_latex}
+\input{\bibliotecasDir/estilo}
+\usepackage[spanish]{babel}
+% OJO: aqui NO se borra /tmp/apuntes-latex-lib-<job>.
+% Ese "borrado al final" en segundo plano hacia que xelatex se quedara
+% esperando ~90 s en cada compilacion (el trabajo en segundo plano
+% mantiene abierta la tuberia de \write18) y que una compilacion
+% borrase la libreria que otra estaba usando.
+% La libreria se refresca al principio de cada compilacion (carga.tex).

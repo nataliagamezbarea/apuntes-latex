@@ -1,0 +1,156 @@
+{
+  // ===================================================================
+  //  LaTeX Workshop — compilar SIEMPRE igual:
+  //    * XeLaTeX (fuentes del sistema, emojis y acentos)
+  //    * -shell-escape (imprescindible: \imagen, \inputcarpeta y la
+  //      descarga de la libreria lo necesitan)
+  //    * dos pasadas, para que los indices y las referencias queden bien
+  // ===================================================================
+  "files.associations": {
+    "*.tex": "latex",
+    "*.ltx": "latex"
+  },
+  "editor.quickSuggestions": {
+    "other": "on",
+    "comments": "off",
+    "strings": "off"
+  },
+  "editor.suggestOnTriggerCharacters": true,
+  "latex-workshop.latex.magic.args": [
+    "-synctex=1",
+    "-interaction=nonstopmode",
+    "-file-line-error",
+    "-shell-escape",
+    "%DOC%"
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "xelatex",
+      "command": "xelatex",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-shell-escape",
+        "%DOC%"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "xelatex (shell-escape) x2",
+      "tools": ["xelatex", "xelatex"]
+    },
+    {
+      "name": "xelatex (shell-escape)",
+      "tools": ["xelatex"]
+    }
+  ],
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  "latex-workshop.view.pdf.viewer": "tab",
+
+  // Los comandos de la libreria, como sugerencias de LaTeX Workshop.
+  // Los genera .vscode/generar_sugerencias.py (no lo edites a mano).
+  "latex-workshop.intellisense.command.user": {
+    "\\alertaicon": "\\alertaicon",
+    "\\alertas": "\\alertas{$1}",
+    "\\caja": "\\caja{{$1}{$2}}",
+    "\\cajadual": "\\cajadual{{$1}{$2}{$3}}",
+    "\\casillaicon": "\\casillaicon",
+    "\\closingbars": "\\closingbars",
+    "\\colorapartado": "\\colorapartado{$1}",
+    "\\dato": "\\dato{{$1}{$2}{$3}}",
+    "\\definicion": "\\definicion{{$1}{$2}{$3}}",
+    "\\definiciondoble": "\\definiciondoble{{$1}{$2}{$3}{$4}{$5}}",
+    "\\definicionpar": "\\definicionpar{{$1}{$2}{$3}}",
+    "\\diamanteicon": "\\diamanteicon",
+    "\\estrellaicon": "\\estrellaicon",
+    "\\estrellas": "\\estrellas{$1}",
+    "\\fichaitem": "\\fichaitem{{$1}{$2}}",
+    "\\filacontenido": "\\filacontenido{{$1}{$2}{$3}}",
+    "\\filaimagen": "\\filaimagen{{$1}{$2}{$3}}",
+    "\\filaimagender": "\\filaimagender{{$1}{$2}{$3}}",
+    "\\flechaicon": "\\flechaicon",
+    "\\flechas": "\\flechas{$1}",
+    "\\highlightpar": "\\highlightpar{{$1}{$2}}",
+    "\\hl": "\\hl{{$1}{$2}}",
+    "\\infobox": "\\infobox{{$1}{$2}}",
+    "\\infoboxdup": "\\infoboxdup{{$1}{$2}{$3}}",
+    "\\inputcarpeta": "\\inputcarpeta{$1}",
+    "\\letras": "\\letras{$1}",
+    "\\lista": "\\lista{$1}",
+    "\\marcas": "\\marcas{$1}",
+    "\\mipaleta": "\\mipaleta{{$1}{$2}{$3}}",
+    "\\no": "\\no",
+    "\\nota": "\\nota{{$1}{$2}{$3}}",
+    "\\pagefoot": "\\pagefoot{{$1}{$2}}",
+    "\\paletaAmarillo": "\\paletaAmarillo",
+    "\\paletaArena": "\\paletaArena",
+    "\\paletaAzul": "\\paletaAzul",
+    "\\paletaBosque": "\\paletaBosque",
+    "\\paletaBurdeos": "\\paletaBurdeos",
+    "\\paletaCafe": "\\paletaCafe",
+    "\\paletaCeleste": "\\paletaCeleste",
+    "\\paletaCiruela": "\\paletaCiruela",
+    "\\paletaCoral": "\\paletaCoral",
+    "\\paletaFucsia": "\\paletaFucsia",
+    "\\paletaGris": "\\paletaGris",
+    "\\paletaLavanda": "\\paletaLavanda",
+    "\\paletaLila": "\\paletaLila",
+    "\\paletaLima": "\\paletaLima",
+    "\\paletaMelocoton": "\\paletaMelocoton",
+    "\\paletaMenta": "\\paletaMenta",
+    "\\paletaNaranja": "\\paletaNaranja",
+    "\\paletaOceano": "\\paletaOceano",
+    "\\paletaOliva": "\\paletaOliva",
+    "\\paletaRojo": "\\paletaRojo",
+    "\\paletaRosa": "\\paletaRosa",
+    "\\paletaTurquesa": "\\paletaTurquesa",
+    "\\parrafo": "\\parrafo{$1}",
+    "\\pasos": "\\pasos{$1}",
+    "\\pill": "\\pill{{$1}{$2}}",
+    "\\preguntaicon": "\\preguntaicon",
+    "\\preguntas": "\\preguntas{$1}",
+    "\\rectangulos": "\\rectangulos",
+    "\\rectangulosdoble": "\\rectangulosdoble{{$1}{$2}{$3}{$4}{$5}}",
+    "\\resalta": "\\resalta{$1}",
+    "\\resumen": "\\resumen{{$1}{$2}}",
+    "\\seccion": "\\seccion{{$1}{$2}}",
+    "\\secciongrande": "\\secciongrande{{$1}{$2}}",
+    "\\setcolorapartado": "\\setcolorapartado{$1}",
+    "\\setcolorpale": "\\setcolorpale",
+    "\\shadowbox": "\\shadowbox{{$1}{$2}}",
+    "\\si": "\\si",
+    "\\sigseccion": "\\sigseccion",
+    "\\statbox": "\\statbox{{$1}{$2}{$3}}",
+    "\\stepcircle": "\\stepcircle{$1}",
+    "\\tablacab": "\\tablacab{$1}",
+    "\\tablacabb": "\\tablacabb{$1}",
+    "\\tareas": "\\tareas{$1}",
+    "\\tipbox": "\\tipbox{{$1}{$2}{$3}}",
+    "\\titulo": "\\titulo{{$1}{$2}{$3}}",
+    "\\tituloA": "\\tituloA{{$1}{$2}}",
+    "\\tituloB": "\\tituloB{{$1}{$2}}",
+    "\\tituloC": "\\tituloC{$1}",
+    "\\tituloD": "\\tituloD{$1}",
+    "\\tituloE": "\\tituloE{{$1}{$2}}",
+    "\\tituloF": "\\tituloF{$1}",
+    "\\tituloG": "\\tituloG{{$1}{$2}}",
+    "\\tituloH": "\\tituloH{$1}",
+    "\\tituloI": "\\tituloI{$1}",
+    "\\tituloJ": "\\tituloJ{{$1}{$2}}",
+    "\\tituloK": "\\tituloK{$1}",
+    "\\tituloL": "\\tituloL{$1}",
+    "\\tituloM": "\\tituloM{$1}",
+    "\\tituloN": "\\tituloN{$1}",
+    "\\tituloO": "\\tituloO{{$1}{$2}}",
+    "\\tituloP": "\\tituloP{{$1}{$2}}",
+    "\\tituloQ": "\\tituloQ{$1}",
+    "\\typecard": "\\typecard{{$1}{$2}{$3}}",
+    "\\typecardalto": "\\typecardalto{{$1}{$2}{$3}}",
+    "\\typecardbody": "\\typecardbody{{$1}{$2}}",
+    "\\typecardlibre": "\\typecardlibre{{$1}{$2}{$3}}",
+    "\\typecardpair": "\\typecardpair{{$1}{$2}{$3}{$4}{$5}}",
+    "\\usarfondo": "\\usarfondo"
+  }
+}

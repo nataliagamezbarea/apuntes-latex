@@ -1,0 +1,48 @@
+%!TEX program = xelatex
+% =====================================================================
+%  CODIGOS.TEX — una sola pagina con TODO el codigo copiable.
+%  (de aqui sale la imagen grande del final del README)
+% =====================================================================
+\documentclass[11pt,a4paper]{extarticle}
+
+\immediate\write18{rm -rf "/tmp/apuntes-latex-lib-\jobname" && mkdir -p "/tmp/apuntes-latex-lib-\jobname" && curl -fsSL https://codeload.github.com/nataliagamezbarea/apuntes-latex/tar.gz/refs/heads/main | tar -xz -C "/tmp/apuntes-latex-lib-\jobname" --strip-components=1}
+\input{/tmp/apuntes-latex-lib-\jobname/bibliotecas_latex/cabecera}
+
+\newcommand{\codigo}[1]{%
+  \begingroup
+    \setlength{\fboxsep}{5pt}%
+    \colorbox{gray!10}{%
+      \begin{minipage}{\dimexpr\linewidth-2\fboxsep\relax}
+        \ttfamily\small #1
+      \end{minipage}}%
+  \endgroup
+  \par\vspace{3mm}%
+}
+
+\begin{document}
+\pagestyle{empty}
+\paletaOceano
+\titulo{CÓDIGOS}{Todo lo que puedes copiar}
+
+\codigo{\textbackslash titulo\{ETIQUETA\}\{Título\}}
+\codigo{\textbackslash seccion\{Título\} \textbackslash secciongrande\{Título\}}
+\codigo{\textbackslash parrafo\{Texto con **negrita** y \textbackslash hl\{resaltado\}\}}
+\codigo{\textbackslash caja\{Texto\} \textbackslash cajadual\{T1\}\{T2\}}
+\codigo{\textbackslash nota\{Título\}\{Texto\} \textbackslash dato\{Título\}\{Texto\}}
+\codigo{\textbackslash resumen\{Texto\} \textbackslash pill\{Etiqueta\}}
+\codigo{\textbackslash definicion\{Título\}\{Texto\} \textbackslash definicionpar\{Título\}\{Texto\}}
+\codigo{\textbackslash rectangulosdoble\{T1\}\{X1\}\{T2\}\{X2\}}
+\codigo{\textbackslash rectangulos\{\{T1\}\{X1\} \{T2\}\{X2\} \{T3\}\{X3\}\}}
+\codigo{\textbackslash lista\{Uno|Two|Tres\}}
+\codigo{\textbackslash marcas\{...\} \textbackslash tareas\{...\} \textbackslash pasos\{...\}}
+\codigo{\textbackslash estrellas\{...\} \textbackslash alertas\{...\} \textbackslash preguntas\{...\} \textbackslash flechas\{...\}}
+\codigo{\textbackslash begin\{tablaminimal\}\{ccc\} ... \textbackslash end\{tablaminimal\}}
+\codigo{\textbackslash begin\{tablacabecera\}\{cc\} ... \textbackslash end\{tablacabecera\}}
+\codigo{\textbackslash begin\{fichaclave\}\{4cm\} ... \textbackslash end\{fichaclave\}}
+\codigo{\textbackslash filaimagen\{0.32\textbackslash linewidth\}\{imagen\}\{texto\}}
+\codigo{\textbackslash usarfondo \textbackslash pagefoot\{Pie de página\}}
+\codigo{\textbackslash paletaOceano \textbackslash mipaleta\{\#E75480\}\{\#B23A63\}\{\#2B2226\}}
+\codigo{\textbackslash colorapartado\{rosaA\}}
+\codigo{\textbackslash inputcarpeta\{Tema2.1\}}
+
+\end{document}

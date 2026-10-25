@@ -1,0 +1,12 @@
+\newcommand{\casillaicon}{
+  \tikz[baseline=-0.1em]{\draw[\coloractual, line width=1.1pt, rounded corners=0.6pt]
+    (0,0) rectangle (8.5pt,8.5pt);}
+}
+
+\newlist{tarealist}{itemize}{1}
+\setlist[tarealist]{leftmargin=7.5mm, itemsep=8pt, topsep=2pt,
+  label={\casillaicon}, font=\fontsize{10.6}{14.8}\selectfont\color{texto}}
+
+\newcommand{\tareas}[1]{
+  \begin{tarealist}\let\itemtipo\itemcheck\itemsnuevos{#1}\end{tarealist}}
+

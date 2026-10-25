@@ -1,0 +1,29 @@
+% ---------------------------------------------------------------------
+%  \meterimagen{ancho}
+%  Mete la imagen que hay en \imagenruta.
+%
+%  OJO: graphicx NO expande el nombre del fichero (para poder escribir
+%  nombres con espacios), asi que hay que expandirlo antes y pasarlo
+%  "escapado" (detokenize), o los _ y otros signos dan problemas.
+%
+%  Se define aqui (y no en imagen.tex) porque \filaimagen lo usa y este
+%  fichero se carga antes.
+% ---------------------------------------------------------------------
+\newcommand{\meterimagen}[1]{%
+  \edef\imagenrutadetok{\expandafter\detokenize\expandafter{\imagenruta}}%
+  \edef\imagenllamada{\noexpand\includegraphics[width=#1,keepaspectratio]{\imagenrutadetok}}%
+  \imagenllamada
+}
+
+\newcommand{\filaimagen}[3]{%
+  \begingroup
+    \buscarimagen{#2}%
+    \noindent
+    \begin{minipage}[t]{#1}
+      \IfFileExists{\imagenruta}{\meterimagen{\linewidth}}{}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{\dimexpr\linewidth-#1-6mm\relax}
+      #3
+    \end{minipage}\par
+  \endgroup
+}

@@ -1,0 +1,12 @@
+\newcommand{\filaimagender}[3]{%
+  \begingroup
+    \buscarimagen{#2}%
+    \noindent
+    \begin{minipage}[t]{\dimexpr\linewidth-#1-6mm\relax}
+      #3
+    \end{minipage}\hfill
+    \begin{minipage}[t]{#1}
+      \IfFileExists{\imagenruta}{\meterimagen{\linewidth}}{}
+    \end{minipage}\par
+  \endgroup
+}

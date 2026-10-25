@@ -1,0 +1,37 @@
+% =====================================================================
+%  ENTRADA DE CARPETAS: mete todos los .tex de una carpeta, en orden.
+%
+%  \inputcarpeta{ruta}
+%
+%  Mete los .tex de esa carpeta Y de sus subcarpetas, en orden.
+%
+%  Por ejemplo, si en la carpeta "Tema 2" tienes:
+%     1.1-maquina-y-servidor.tex
+%     1.1.1-localhost-y-servidor.tex
+%     1.2-formas-de-desplegar.tex
+%     1.2.1-tipos-de-despliegue.tex
+%     Tema2.1/
+%       1.1-maquina-y-servidor.tex
+%       1.2-formas-de-desplegar.tex
+%     Tema2.2/
+%       2.1-apartado.tex
+%
+%  con \inputcarpeta{Tema 2} los mete TODOS, ordenados (1.1, 1.2,
+%  2.1...) y asi no escribes una linea \input por cada archivo.
+%
+%  Las rutas se cuentan desde la RAIZ del documento (la carpeta donde
+%  compilas). Necesita -shell-escape (ya activado en VS Code).
+% =====================================================================
+\newcount\apuntescontador
+\newcommand{\inputcarpeta}[1]{%
+  \begingroup
+    % \advance dentro de un grupo es local: con \global el contador
+    % sube de verdad y cada carpeta usa su propio fichero temporal.
+    \global\advance\apuntescontador by 1
+    % la carpeta en la que estamos: la usan \imagen y \filaimagen
+    % para encontrar las imagenes (imagenes/ de este tema).
+    \def\apuntescarpeta{#1}%
+    \immediate\write18{find "#1" -name "*.tex" 2>/dev/null | sort -V | sed 's/.*/\\input{&}/' > "/tmp/apuntes-entradas-\jobname-\the\apuntescontador.tex"}%
+    \input{/tmp/apuntes-entradas-\jobname-\the\apuntescontador.tex}%
+  \endgroup
+}

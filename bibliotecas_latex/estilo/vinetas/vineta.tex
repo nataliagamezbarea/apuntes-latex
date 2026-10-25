@@ -1,0 +1,9 @@
+\newlist{bulletlist}{itemize}{1}
+\setlist[bulletlist]{leftmargin=7mm, itemsep=8pt, topsep=2pt,
+  label={\raisebox{0.5pt}{\tikz\fill[\coloractual] (0,0) circle (2.6pt);}},
+  font=\fontsize{10.6}{14.8}\selectfont\color{texto}}
+
+\newcommand{\lista}[1]{
+  \begin{bulletlist}\let\itemtipo\itembullet\itemsnuevos{#1}\end{bulletlist}%
+  \par\vspace{2mm}}
+

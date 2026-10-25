@@ -1,0 +1,15 @@
+\newtcolorbox{infoboxenv}[1][secondary]{
+  colback=#1!10!white, colframe=#1!70!white, boxrule=1.2pt, arc=4pt,
+  boxsep=1pt, left=8pt, right=8pt, top=7pt, bottom=7pt
+}
+
+\newcommand{\infobox}[2][secondary]{
+  \begin{infoboxenv}[#1]\RaggedRight\fontsize{10.6}{14.5}\selectfont\color{texto} #2\end{infoboxenv}
+}
+
+\newcommand{\infoboxdup}[3][secondary]{
+  \noindent
+  \begin{minipage}[t]{0.485\linewidth}\infobox[#1]{#2}\end{minipage}\hfill
+  \begin{minipage}[t]{0.485\linewidth}\infobox[primary]{#3}\end{minipage}
+}
+

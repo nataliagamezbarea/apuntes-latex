@@ -1,0 +1,14 @@
+% =====================================================================
+%  SUBTITULO — el subtitulo normal.
+%
+%  Sin barras y con el color fijo de la paleta (secondary).
+%
+%  \subtitulo{Titulo}
+% =====================================================================
+\newcommand{\subtitulo}[1]{%
+  \Needspace{3\baselineskip}%
+  \par\vspace{4mm}%
+  \edef\subtituloreal{\subtitulocolor}%
+  {\headingfontxb\fontsize{13.5}{16.5}\selectfont\color{\subtituloreal}#1}\par
+  \vspace{1.5mm}%
+}

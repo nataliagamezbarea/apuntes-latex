@@ -1,0 +1,14 @@
+\newenvironment{tablacuadricula}[1]{
+  \begingroup
+  \arrayrulecolor{tertiary}
+  \renewcommand{\arraystretch}{1.35}
+  \begin{center}
+  \fontsize{10.2}{13}\selectfont\color{texto}
+  \begin{tabular}{#1}
+  \hline
+}{
+  \end{tabular}
+  \end{center}
+  \endgroup
+}
+

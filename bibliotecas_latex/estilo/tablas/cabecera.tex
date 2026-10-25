@@ -1,0 +1,17 @@
+\newenvironment{tablacabecera}[1]{
+  \begingroup
+  \arrayrulecolor{tertiary}
+  \renewcommand{\arraystretch}{1.3}
+  \rowcolors{2}{white}{pale}
+  \begin{center}
+  \fontsize{10.2}{13}\selectfont\color{texto}
+  \begin{tabular}{#1}
+}{
+  \bottomrule[0.8pt]
+  \end{tabular}
+  \end{center}
+  \endgroup
+}
+
+\newcommand{\tablacabb}[1]{{\headingfontxb\color{white}\fontsize{10.2}{13}\selectfont #1}}
+

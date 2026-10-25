@@ -1,0 +1,12 @@
+\newcommand{\preguntaicon}{
+  \tikz[baseline=-0.3ex]{\node[circle, fill=\coloractual, text=white, inner sep=0pt,
+    minimum size=13pt, font=\bfseries\fontsize{7.3}{7.3}\selectfont] {?};}
+}
+
+\newlist{preguntalist}{itemize}{1}
+\setlist[preguntalist]{leftmargin=7.5mm, itemsep=8pt, topsep=2pt,
+  label={\preguntaicon}, font=\fontsize{10.6}{14.8}\selectfont\color{texto}}
+
+\newcommand{\preguntas}[1]{
+  \begin{preguntalist}\let\itemtipo\itembullet\itemsnuevos{#1}\end{preguntalist}}
+

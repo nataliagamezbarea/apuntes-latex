@@ -1,0 +1,122 @@
+% =====================================================================
+%  IMAGEN — poner una imagen sola, centrada.
+%
+%  \imagen{nube.png}                 <- ancho automatico (\linewidth)
+%  \imagen[0.5\linewidth]{nube.png}  <- ancho a medida
+%
+%  El nombre puede ir con espacios: \imagen{ nube.png } funciona.
+%
+%  DONDE BUSCA LA IMAGEN (en este orden):
+%
+%    1. La ruta tal cual, desde la carpeta donde compilas.
+%       \imagen{Tema1.1/imagenes/nube.png}
+%
+%    2. La carpeta "imagenes_explicativas" del proyecto (y sus
+%       subcarpetas).  Se busca por el NOMBRE del fichero, asi que da
+%       igual en que subcarpeta este:
+%       \imagen{Tema1.1/imagenes/nube.png}
+%
+%    3. Si no aparece en ningun sitio, se busca por el nombre en todo
+%       el proyecto (carpeta actual y las de arriba).
+%
+%  Pon siempre la extension del fichero (nube.png, nube.jpg...).
+%  Las rutas se cuentan desde la RAIZ del documento (la carpeta donde
+%  compilas). Necesita -shell-escape (ya activado en VS Code).
+% =====================================================================
+
+% macro vacia para comparar con \ifx (\@empty no sirve aqui)
+\def\imagenvacio{}
+
+% ---------------------------------------------------------------------
+%  Estas dos van en modo normal (fuera de \ExplSyntaxOn) porque
+%  necesitan espacios de verdad: el comando del shell y el mensaje
+%  de error.
+% ---------------------------------------------------------------------
+%  #1 = carpeta donde se deja la copia
+%  #2 = nombre del fichero que se busca
+%  #3 = ruta del fichero copiado
+%  #4 = ruta del script que hace la busqueda
+\newcommand{\imagenbuscar}[4]{%
+  \immediate\write18{mkdir -p "#1" && sh "#4" "#2" "#3"}}
+
+\newcommand{\imagenerror}[1]{%
+  \PackageError{imagen}{No se encuentra la imagen "#1"}{%
+    Ponla en la carpeta "imagenes" del tema (por ejemplo
+    apuntes/DIW/Tema 1/Tema1.1/imagenes/) o escribe la ruta completa desde
+    la raiz del documento. No olvides la extension del fichero (por
+    ejemplo .png).}}
+
+% ---------------------------------------------------------------------
+%  \buscarimagen{fichero}
+%
+%  Busca la imagen y deja la ruta buena en \imagenruta.
+%  La usan tambien \filaimagen y \filaimagender.
+%
+%  OJO: \IfFileExists solo entiende el nombre si es UN solo macro (o
+%  texto plano).  Por eso las rutas se montan antes en \imagentmpdir
+%  y \imagentmpfile, que son solo caracteres.
+%
+%  OJO 2: la busqueda la hace el script buscarimagen.sh, porque en
+%  TeX el ";" es un caracter de comentario y un \write18 con ";" se
+%  cortaba a la mitad.
+% ---------------------------------------------------------------------
+\ExplSyntaxOn
+
+\tl_new:N \l__imagen_nombre_tl
+
+\cs_new_protected:Npn \buscarimagen #1
+  {
+    % --- el nombre del fichero, sin espacios en los extremos ---
+    \tl_set:Nn \l__imagen_nombre_tl { #1 }
+    \tl_trim_spaces:N \l__imagen_nombre_tl
+    % --- rutas "escapadas" (solo caracteres) ---
+    \edef\imagenficheroesc { \tl_to_str:N \l__imagen_nombre_tl }
+    \edef\imagenjobesc { \expandafter\detokenize\expandafter{ \jobname } }
+    \edef\imagentmpdir { /tmp/apuntes-imagen-\imagenjobesc }
+    \edef\imagentmpfile { \imagentmpdir/\imagenficheroesc }
+    % --- 1) la ruta tal cual, sin buscar ---
+    \IfFileExists { \imagenficheroesc }
+      { \edef\imagenruta { \imagenficheroesc } }
+      {
+        % --- 2) "imagenes_explicativas" del proyecto (y subcarpetas) ---
+        % --- 3) y si no, por el nombre en todo el proyecto ---
+        \imagenbuscar
+          { \imagentmpdir }
+          { \imagenficheroesc }
+          { \imagentmpfile }
+          { \bibliotecasDir/estilo/filas/buscarimagen.sh }
+        \IfFileExists { \imagentmpfile }
+          { \edef\imagenruta { \imagentmpfile } }
+          {
+            % --- 4) no esta en ninguna parte ---
+            \edef\imagenruta { \imagenficheroesc }
+            \imagenerror { \imagenficheroesc }
+          }
+      }
+  }
+
+\ExplSyntaxOff
+
+% ---------------------------------------------------------------------
+%  \imagen[ancho]{fichero}
+% ---------------------------------------------------------------------
+\newcommand{\imagen}[2][]{%
+  \begingroup
+    % --- ancho (y alto maximo, para que la imagen no se coma la pagina) ---
+    \def\imagenancho{#1}%
+    \ifx\imagenancho\imagenvacio\def\imagenancho{\linewidth}\fi
+    \def\imagenalto{0.68\textheight}%
+    % --- buscar la imagen ---
+    \buscarimagen{#2}%
+    % --- meterla ---
+    \IfFileExists{\imagenruta}{%
+      \begin{center}%
+        % graphicx no expande el nombre del fichero: hay que pasarlo
+        % "escapado" (detokenize) para que los _ y otros signos valgan.
+        \edef\imagenrutadetok{\expandafter\detokenize\expandafter{\imagenruta}}%
+        \edef\imagenllamada{\noexpand\includegraphics[width=\imagenancho,height=\imagenalto,keepaspectratio]{\imagenrutadetok}}%
+        \imagenllamada
+      \end{center}%
+    }{}%
+  \endgroup
+}

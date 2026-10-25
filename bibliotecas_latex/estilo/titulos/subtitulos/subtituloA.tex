@@ -1,0 +1,13 @@
+% =====================================================================
+%  SUBTITULOA — el subtitulo con un punto de color delante.
+%
+%  \subtituloA{Titulo}
+% =====================================================================
+\newcommand{\subtituloA}[1]{%
+  \par\vspace{4mm}%
+  \noindent
+  \edef\subtituloreal{\subtitulocolor}%
+  \raisebox{0.6ex}{\tikz\fill[\subtituloreal] (0,0) circle (2.2pt);}%
+  \hspace{3mm}{\headingfontxb\fontsize{13.5}{16.5}\selectfont\color{\subtituloreal}#1}\par
+  \vspace{1.5mm}%
+}

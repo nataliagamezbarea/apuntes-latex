@@ -1,0 +1,22 @@
+% =====================================================================
+%  CARGA.TEX — carga la libreria de estilos de los apuntes.
+%
+%  1) Si esta la libreria en este repo (carpeta ../bibliotecas_latex), se usa esa:
+%     es la ultima version y no depende de internet.
+%  2) Si no, se descarga de GitHub (con cache-buster para que no
+%     sirva una version antigua).
+%  3) Si tampoco se puede, se avisa con un error claro.
+% =====================================================================
+\def\apuntesrutalib{../bibliotecas_latex}
+\IfFileExists{\apuntesrutalib/cabecera.tex}{%
+  \def\bibliotecasDir{\apuntesrutalib}%
+  \input{\apuntesrutalib/cabecera}%
+}{%
+  \providecommand{\bibliotecasDir}{/tmp/apuntes-latex-lib-\jobname/bibliotecas_latex}%
+  \immediate\write18{rm -rf "/tmp/apuntes-latex-lib-\jobname" && mkdir -p "/tmp/apuntes-latex-lib-\jobname" && curl -fsSL https://codeload.github.com/nataliagamezbarea/apuntes-latex/tar.gz/refs/heads/main?nocache=`date +\%s` | tar -xz -C "/tmp/apuntes-latex-lib-\jobname" --strip-components=1}%
+  \IfFileExists{/tmp/apuntes-latex-lib-\jobname/bibliotecas_latex/cabecera.tex}%
+    {\input{/tmp/apuntes-latex-lib-\jobname/bibliotecas_latex/cabecera}}%
+    {\PackageError{apuntes}{No se encuentra la libreria de estilos}{%
+      No se pudo descargar de GitHub. Copia la carpeta "bibliotecas_latex"
+      de este repo junto a tus apuntes y vuelve a compilar.}}%
+}

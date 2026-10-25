@@ -1,0 +1,15 @@
+\newenvironment{fichaclave}[1]{
+  \begingroup
+  \arrayrulecolor{pale}
+  \renewcommand{\arraystretch}{1.6}
+  \begin{center}
+  \fontsize{10.4}{14}\selectfont\color{texto}
+  \begin{tabular}{@{}>{\raggedright\arraybackslash}m{#1}@{\hspace{4mm}}l@{}}
+}{
+  \end{tabular}
+  \end{center}
+  \endgroup
+}
+
+\newcommand{\fichaitem}[2]{{\headingfontxb\color{primary} #1} & #2 \\ \hline}
+

@@ -1,0 +1,69 @@
+\newcount\rectcount
+\newdimen\rectmaxheight
+\newdimen\rectcolwidth
+\newdimen\rectgap
+\newbox\rectbox
+
+\ExplSyntaxOn
+\int_new:N \g_rect_pos_int
+\int_new:N \g_rect_count_int
+
+\long\protected\def\rect_measure_aux:nw #1#2#3 \s_rect_stop
+  {
+    \int_gincr:N \g_rect_pos_int
+    \int_if_even:nTF { \g_rect_pos_int }
+      { \colorlet{rectactual}{rectbase} }
+      { \colorlet{rectactual}{rectbase} }
+    \group_begin:
+      \hsize=\rectcolwidth
+      \linewidth=\rectcolwidth
+      \global\setbox\rectbox=\vbox{ \typecardlibre[rectactual]{#1}{\negrita{#2}} }
+    \group_end:
+    \dim_set:Nn \l_tmpa_dim { \ht\rectbox }
+    \dim_add:Nn \l_tmpa_dim { \dp\rectbox }
+    \ifdim\l_tmpa_dim>\rectmaxheight
+      \rectmaxheight=\l_tmpa_dim
+    \fi
+    \tl_if_blank:nF {#3} { \rect_measure_aux:nw #3 \s_rect_stop }
+  }
+
+\long\protected\def\rect_typeset_aux:nw #1#2#3 \s_rect_stop
+  {
+    \int_gincr:N \g_rect_pos_int
+    \int_if_even:nTF { \g_rect_pos_int }
+      { \colorlet{rectactual}{rectbase} }
+      { \colorlet{rectactual}{rectbase} }
+    \ifnum\rectpairs>1
+      \begin{minipage}[t][\rectmaxheight][t]{\rectcolwidth}
+        \typecardalto[rectactual]{#1}{\negrita{#2}}
+      \end{minipage}%
+    \else
+      \typecardalto[rectactual]{#1}{\negrita{#2}}%
+    \fi
+    \tl_if_blank:nF {#3}
+      { \hspace{\rectgap} \rect_typeset_aux:nw #3 \s_rect_stop }
+  }
+
+\NewDocumentCommand{\rectangulos}{O{\colorcaja} +m}
+  {
+    \colorlet{rectbase}{#1}
+    \int_gset:Nn \g_rect_count_int { \tl_count:n {#2} }
+    \edef\rectpairs{\number\numexpr\int_use:N \g_rect_count_int/2\relax}
+    \rectgap=6mm
+    \edef\rectcolwidth{\the\dimexpr(\linewidth-6mm*(\rectpairs-1))/\rectpairs\relax}
+    \rectmaxheight=0pt
+    \int_zero:N \g_rect_pos_int
+    \rect_measure_aux:nw #2 \s_rect_stop
+    \int_zero:N \g_rect_pos_int
+    \cardheight=\rectmaxheight
+    \ifnum\rectpairs>1
+      \par\vspace{5mm}%
+      \noindent
+    \fi
+    \rect_typeset_aux:nw #2 \s_rect_stop
+    \cardheight=0pt
+    \par\vspace{4mm}
+  }
+\ExplSyntaxOff
+\newcommand{\rectangulosdoble}[5][\colorcaja]{\rectangulos[#1]{{#2}{#3}{#4}{#5}}}
+\newcommand{\definiciondoble}[5][\colorcaja]{\rectangulosdoble[#1]{#2}{#3}{#4}{#5}}

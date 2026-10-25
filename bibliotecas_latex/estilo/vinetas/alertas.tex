@@ -1,0 +1,16 @@
+\newcommand{\alertaicon}{
+  \tikz[baseline=-0.15em]{
+    \draw[\coloracento, line width=1.1pt, line join=round]
+      (0,0) -- (4.7pt,8.5pt) -- (9.4pt,0) -- cycle;
+    \fill[\coloracento] (4.35pt,2.6pt) rectangle (5.05pt,5.4pt);
+    \fill[\coloracento] (4.35pt,1.2pt) rectangle (5.05pt,1.9pt);
+  }
+}
+
+\newlist{alertalist}{itemize}{1}
+\setlist[alertalist]{leftmargin=7.5mm, itemsep=7pt, topsep=2pt,
+  label={\alertaicon}, font=\fontsize{10.6}{14.8}\selectfont\color{texto}}
+
+\newcommand{\alertas}[1]{
+  \begin{alertalist}\let\itemtipo\itembullet\itemsnuevos{#1}\end{alertalist}}
+
