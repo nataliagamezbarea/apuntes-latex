@@ -1,6 +1,8 @@
 \newcommand{\secciongrandeindice}{section}
 \newcommand{\secciongrandeestilo}{\Large}
 \newcommand{\secciongrandelongitud}{1.1cm}
+\newcommand{\secciongrandedisplay}[1]{%
+  \sectionheader[\colortitulo]{\secciongrandelongitud}{#1}{\secciongrandeestilo}}
 
 \newcommand{\seccion}[2][]{
   % una subseccion NO cambia de color: se queda con el de su seccion
@@ -14,6 +16,6 @@
   \Needspace{12\baselineskip}%
   \vspace{7mm}
   \ifdefined\phantomsection\phantomsection\fi
-  \sectionheader[\colortitulo]{\secciongrandelongitud}{#2}{\secciongrandeestilo}%
+  \secciongrandedisplay{#2}%
   \addcontentsline{toc}{\secciongrandeindice}{#2}%
   \vspace{2.5mm}}

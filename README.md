@@ -82,7 +82,7 @@
 | | | `\seccion{Título de sección}` |
 | **Sección grande** | <img src="imagenes_explicativas/titulos/seccion-grande.png" width="420"> | |
 | | | `\secciongrande{Título de sección}` |
-| | | Las secciones grandes se añaden automáticamente al índice. Por defecto aparecen como secciones; para mostrarlas como subsecciones dentro de bloques temáticos, usa `\renewcommand{\secciongrandeindice}{subsection}` antes del contenido. Puedes ajustar su estilo con `\renewcommand{\secciongrandeestilo}{\large}` y `\renewcommand{\secciongrandelongitud}{0.4cm}`. Para mostrar el índice, incluye `\tableofcontents`. |
+| | | Las secciones grandes se añaden automáticamente al índice. Por defecto aparecen como secciones; para mostrarlas como subsecciones dentro de bloques temáticos, usa `\renewcommand{\secciongrandeindice}{subsection}` antes del contenido. Puedes cambiar su presentación redefiniendo `\secciongrandedisplay` y el tamaño con `\secciongrandeestilo`. Para mostrar el índice, incluye `\tableofcontents`. |
 | **Título A** | <img src="imagenes_explicativas/titulos/tituloA.png" width="420"> | |
 | | | `\tituloA{Texto}` |
 | **Título B** | <img src="imagenes_explicativas/titulos/tituloB.png" width="420"> | |
