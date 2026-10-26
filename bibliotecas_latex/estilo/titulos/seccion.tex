@@ -7,7 +7,9 @@
 
 \newcommand{\secciongrande}[2][]{
   \if\relax\detokenize{#1}\relax\sigseccion\else\setcolorapartado{#1}\fi
-  \Needspace{7\baselineskip}%
+  \Needspace{12\baselineskip}%
   \vspace{7mm}
-  \sectionheader[\colortitulo]{1.1cm}{#2}{\Large}\vspace{2.5mm}}
-
+  \ifdefined\phantomsection\phantomsection\fi
+  \sectionheader[\colortitulo]{1.1cm}{#2}{\Large}%
+  \addcontentsline{toc}{section}{#2}%
+  \vspace{2.5mm}}

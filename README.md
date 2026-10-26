@@ -82,6 +82,7 @@
 | | | `\seccion{Título de sección}` |
 | **Sección grande** | <img src="imagenes_explicativas/titulos/seccion-grande.png" width="420"> | |
 | | | `\secciongrande{Título de sección}` |
+| | | Las secciones grandes se añaden automáticamente al índice. Para mostrarlo, incluye `\tableofcontents` en el documento. |
 | **Título A** | <img src="imagenes_explicativas/titulos/tituloA.png" width="420"> | |
 | | | `\tituloA{Texto}` |
 | **Título B** | <img src="imagenes_explicativas/titulos/tituloB.png" width="420"> | |
