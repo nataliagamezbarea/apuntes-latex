@@ -1,3 +1,5 @@
+\newcommand{\secciongrandeindice}{section}
+
 \newcommand{\seccion}[2][]{
   % una subseccion NO cambia de color: se queda con el de su seccion
   \if\relax\detokenize{#1}\relax\else\setcolorapartado{#1}\fi
@@ -11,5 +13,5 @@
   \vspace{7mm}
   \ifdefined\phantomsection\phantomsection\fi
   \sectionheader[\colortitulo]{1.1cm}{#2}{\Large}%
-  \addcontentsline{toc}{section}{#2}%
+  \addcontentsline{toc}{\secciongrandeindice}{#2}%
   \vspace{2.5mm}}
