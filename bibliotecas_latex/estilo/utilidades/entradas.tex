@@ -22,6 +22,28 @@
 %  Las rutas se cuentan desde la RAIZ del documento (la carpeta donde
 %  compilas). Necesita -shell-escape (ya activado en VS Code).
 % =====================================================================
+% ---------------------------------------------------------------------
+%  Etiqueta de la carpeta para el fichero temporal.
+%
+%  OJO: antes el temporal se llamaba solo /tmp/apuntes-entradas-<jobname>-<n>.tex.
+%  Dos documentos distintos con el mismo \jobname (por ejemplo
+%  DAW/Tema 2/tema2.tex y DIW/Tema 2/tema2.tex, los dos "tema2")
+%  escribian EL MISMO fichero: si se compilaban a la vez (autoguardado +
+%  play, dos ventanas...), uno leia la lista de apartados del otro y salia
+%  "File `Tema 2.1/...tex' not found".
+%  Ahora el nombre incluye la carpeta, asi que cada documento tiene el suyo.
+% ---------------------------------------------------------------------
+\ExplSyntaxOn
+\cs_new_protected:Npn \apuntesetiquetaset #1
+  {
+    \tl_set:Nn \l_tmpa_tl {#1}
+    % todo lo que no sea letra o numero pasa a "-":
+    % "Tema 2.1" -> "Tema-2-1", "Tema2.1" -> "Tema2-1"
+    \regex_replace_all:nnN { [^A-Za-z0-9]+ } { - } \l_tmpa_tl
+  }
+\cs_new:Npn \apuntesetiqueta { \tl_use:N \l_tmpa_tl }
+\ExplSyntaxOff
+
 \newcount\apuntescontador
 \newcommand{\inputcarpeta}[1]{%
   \begingroup
@@ -31,7 +53,9 @@
     % la carpeta en la que estamos: la usan \imagen y \filaimagen
     % para encontrar las imagenes (imagenes/ de este tema).
     \def\apuntescarpeta{#1}%
-    \immediate\write18{find "#1" -name "*.tex" 2>/dev/null | sort -V | sed 's/.*/\\input{&}/' > "/tmp/apuntes-entradas-\jobname-\the\apuntescontador.tex"}%
-    \input{/tmp/apuntes-entradas-\jobname-\the\apuntescontador.tex}%
+    \apuntesetiquetaset{#1}%
+    \edef\apuntesentradasfile{/tmp/apuntes-entradas-\jobname-\the\apuntescontador-\apuntesetiqueta.tex}%
+    \immediate\write18{find "#1" -name "*.tex" 2>/dev/null | sort -V | sed 's/.*/\\input{&}/' > "\apuntesentradasfile"}%
+    \input{\apuntesentradasfile}%
   \endgroup
 }
